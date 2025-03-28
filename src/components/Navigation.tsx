@@ -74,14 +74,6 @@ export default function Navigation() {
             {/* Основное меню */}
             <div className="hidden md:flex items-center space-x-6">
               <button 
-                onClick={() => scrollToSection('gallery')}
-                className={`transition-colors ${
-                  isScrolled ? 'text-brown-900 hover:text-brown-600' : 'text-brown-900 hover:text-brown-600'
-                }`}
-              >
-                Галерея
-              </button>
-              <button 
                 onClick={() => scrollToSection('process')}
                 className={`transition-colors ${
                   isScrolled ? 'text-brown-900 hover:text-brown-600' : 'text-brown-900 hover:text-brown-600'
@@ -190,21 +182,6 @@ export default function Navigation() {
           {/* Основное меню */}
           <nav className="flex-1 overflow-y-auto">
             <div className="space-y-1 px-6">
-              <button 
-                onClick={() => {
-                  scrollToSection('gallery');
-                  setIsMobileMenuOpen(false);
-                }}
-                className="block w-full text-left py-4 text-xl font-medium text-brown-900 hover:text-brown-600 transition-colors relative group"
-              >
-                <span className="relative z-10 flex items-center">
-                  <svg className="w-5 h-5 mr-3 text-brown-400 group-hover:text-brown-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  Галерея
-                </span>
-                <span className="absolute inset-0 bg-brown-50/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left rounded-lg"></span>
-              </button>
               <button 
                 onClick={() => {
                   scrollToSection('process');
