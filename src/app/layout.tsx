@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  colorScheme: 'light',
+  themeColor: '#ffffff',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://littlebarista.ru'),
@@ -12,6 +17,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Little Barista" }],
   creator: "Little Barista",
   publisher: "Little Barista",
+  icons: {
+    icon: '/images/favicon.png',
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png'
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -63,6 +73,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      <head>
+        {/* Add any additional head elements here */}
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
