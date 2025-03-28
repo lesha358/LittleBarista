@@ -16,6 +16,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +32,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Ошибка при отправке формы');
+        throw new Error(data.error || 'Ошибка при отправке формы');
       }
 
       setSubmitStatus('success');
@@ -45,6 +48,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
+      // Показываем более подробное сообщение об ошибке
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -163,7 +172,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           )}
           {submitStatus === 'error' && (
             <div className="p-3 sm:p-4 bg-red-50 text-red-700 rounded-lg text-sm sm:text-base">
-              Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.
+              {errorMessage}
             </div>
           )}
 

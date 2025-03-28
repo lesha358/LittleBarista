@@ -30,19 +30,9 @@ export default function Hero() {
       {/* Фоновое изображение с параллакс эффектом */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-cream-50 via-cream-100 to-cream-200" />
-        <div 
-          className="absolute inset-0 bg-[url('/images/coffee-pattern.png')] opacity-5"
-          style={{
-            transform: `translateY(${isScrolled ? '20%' : '0'})`,
-            transition: 'transform 0.5s ease-out'
-          }}
-        />
         {/* Декоративные элементы */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-brown-200/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-brown-300/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        {/* Добавляем декоративные элементы кофейных зерен */}
-        <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-[url('/images/coffee-bean.png')] opacity-10 rotate-12" />
-        <div className="absolute bottom-1/4 left-1/4 w-32 h-32 bg-[url('/images/coffee-bean.png')] opacity-10 -rotate-12" />
       </div>
 
       {/* Контент */}
@@ -155,13 +145,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Скролл-индикатор */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <div className="w-6 h-10 border-2 border-brown-300/30 rounded-full p-1">
-          <div className="w-1.5 h-1.5 bg-brown-600 rounded-full mx-auto animate-bounce" />
         </div>
       </div>
 
