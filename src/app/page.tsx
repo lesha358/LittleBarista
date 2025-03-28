@@ -28,6 +28,9 @@ export default function Home() {
       <section id="why-us">
         <WhyUs />
       </section>
+      <section id="contact-form">
+        <ContactForm />
+      </section>
       <section id="contacts">
         <Contacts />
       </section>

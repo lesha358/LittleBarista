@@ -49,115 +49,119 @@ export default function ContactForm() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
-    <section className="py-24 bg-brown-50">
-      <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">Оставить заявку</h2>
-          <p className="text-gray-700 text-lg">
-            Свяжемся с вами в течение 60 минут и рассчитаем точную стоимость услуги
-          </p>
+    <section className="section-container section-padding gradient-section">
+      <div className="container">
+        <div className="section-title">
+          <h2>Оставить заявку</h2>
+          <p>Заполните форму, и мы свяжемся с вами в ближайшее время</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              Как к вам обращаться?
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-              placeholder="Ваше имя"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-              Номер телефона
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-              placeholder="+7 (___) ___-__-__"
-              pattern="[0-9+\s()-]*"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-              placeholder="example@email.com"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-              Сообщение (необязательно)
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-              rows={4}
-              placeholder="Расскажите о вашем мероприятии"
-            />
-          </div>
-
-          {/* Статус отправки */}
-          {submitStatus === 'success' && (
-            <div className="p-4 bg-green-50 text-green-700 rounded-lg">
-              Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.
+        <div className="max-w-2xl mx-auto">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  Ваше имя
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
+                  placeholder="Иван Иванов"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Телефон
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
+                  placeholder="+7 (999) 123-45-67"
+                />
+              </div>
             </div>
-          )}
-          {submitStatus === 'error' && (
-            <div className="p-4 bg-red-50 text-red-700 rounded-lg">
-              {errorMessage}
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                Email (необязательно)
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
+                placeholder="example@email.com"
+              />
             </div>
-          )}
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className={`w-full bg-brown-600 text-white py-4 px-8 rounded-lg font-semibold transition-colors ${
-              isSubmitting 
-                ? 'bg-brown-400 cursor-not-allowed' 
-                : 'hover:bg-brown-700'
-            }`}
-          >
-            {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
-          </button>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                Сообщение
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
+                placeholder="Опишите ваше мероприятие..."
+              />
+            </div>
 
-          <p className="mt-4 text-sm text-gray-600 text-center">
-            Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных
-          </p>
-        </form>
+            {/* Статус отправки */}
+            {submitStatus === 'success' && (
+              <div className="p-4 bg-green-50 text-green-700 rounded-lg">
+                Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="p-4 bg-red-50 text-red-700 rounded-lg">
+                {errorMessage}
+              </div>
+            )}
+
+            <div className="text-center">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`button-primary text-lg px-8 py-4 group ${
+                  isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
+              >
+                <span className="relative z-10 text-white">
+                  {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                </span>
+                <div className="absolute inset-0 bg-brown-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              </button>
+            </div>
+
+            <p className="text-sm text-gray-600 text-center">
+              Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных
+            </p>
+          </form>
+        </div>
       </div>
     </section>
   );
