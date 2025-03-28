@@ -33,11 +33,11 @@
   }
 
   .section-padding {
-    @apply py-16 sm:py-24;
+    @apply pt-24 pb-16 sm:pt-32 sm:pb-24;
   }
 
   .section-container {
-    @apply relative overflow-hidden scroll-mt-24 md:scroll-mt-20;
+    @apply relative overflow-hidden scroll-mt-32 md:scroll-mt-24;
   }
 
   .section-content {

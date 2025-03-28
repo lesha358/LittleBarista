@@ -28,7 +28,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 md:pt-24">
       {/* Фоновое изображение с размытием */}
       <div className="fixed inset-0 -z-10">
         <Image
@@ -46,7 +46,7 @@ export default function Hero() {
       </div>
 
       {/* Контент */}
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-0">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Левая колонка с текстом */}
           <div className={`space-y-6 lg:space-y-8 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000`}>

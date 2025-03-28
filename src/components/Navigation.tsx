@@ -100,7 +100,8 @@ export default function Navigation() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-brown-900 hover:text-brown-600 transition-colors"
+                className="text-brown-900 hover:text-brown-600 transition-colors p-2 rounded-lg hover:bg-brown-50 relative z-[60]"
+                aria-label="Открыть меню"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   {isMobileMenuOpen ? (
@@ -110,38 +111,75 @@ export default function Navigation() {
                   )}
                 </svg>
               </button>
-              {isMobileMenuOpen && (
-                <div className="absolute top-full left-0 right-0 bg-white shadow-lg py-4 px-6 space-y-4">
-                  <a href="#cooperation" className="block text-brown-900 hover:text-brown-600 transition-colors">
-                    Сотрудничество
-                  </a>
-                  <a href="#process" className="block text-brown-900 hover:text-brown-600 transition-colors">
-                    Как мы работаем
-                  </a>
-                  <a href="#pricing" className="block text-brown-900 hover:text-brown-600 transition-colors">
-                    Примеры расчета
-                  </a>
-                  <a href="#why-us" className="block text-brown-900 hover:text-brown-600 transition-colors">
-                    Почему мы
-                  </a>
-                  <a href="#contacts" className="block text-brown-900 hover:text-brown-600 transition-colors">
-                    Контакты
-                  </a>
-                  <button 
-                    onClick={() => {
-                      setIsModalOpen(true);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full py-2 px-4 rounded-full bg-brown-600 text-white transition-all duration-300 hover:bg-brown-700 hover:shadow-md shadow-sm"
-                  >
-                    Заказать
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>
       </nav>
+
+      {/* Мобильное меню */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Затемнение фона */}
+          <div 
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          {/* Мобильное меню */}
+          <div className="fixed inset-x-0 top-20 z-50 bg-white shadow-xl rounded-b-2xl transform transition-all duration-300 ease-in-out">
+            <div className="p-6 space-y-6">
+              <div className="flex flex-col space-y-4">
+                <a 
+                  href="#cooperation" 
+                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Сотрудничество
+                </a>
+                <a 
+                  href="#process" 
+                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Как мы работаем
+                </a>
+                <a 
+                  href="#pricing" 
+                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Примеры расчета
+                </a>
+                <a 
+                  href="#why-us" 
+                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Почему мы
+                </a>
+                <a 
+                  href="#contacts" 
+                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Контакты
+                </a>
+              </div>
+              
+              <div className="pt-4 border-t border-brown-100">
+                <button 
+                  onClick={() => {
+                    setIsModalOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full py-3 px-6 rounded-full bg-brown-600 text-white transition-all duration-300 hover:bg-brown-700 hover:shadow-md shadow-sm text-lg font-medium"
+                >
+                  Заказать
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Модальное окно */}
       <ContactModal 
