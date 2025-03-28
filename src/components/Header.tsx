@@ -13,7 +13,52 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white">
+    <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Логотип */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Little Barista"
+              width={40}
+              height={40}
+              className="w-10 h-10"
+            />
+            <span className="ml-2 text-xl font-bold text-brown-600">Little Barista</span>
+          </Link>
+
+          {/* Кнопка открытия меню */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          {/* Десктопное меню */}
+          <nav className="hidden lg:flex items-center space-x-8">
+            {menuItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-gray-700 hover:text-brown-600 transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <a
+              href="tel:+79001234567"
+              className="btn-primary"
+            >
+              Заказать
+            </a>
+          </nav>
+        </div>
+      </div>
+
       {/* Мобильное меню */}
       <div className={`fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col h-full">
