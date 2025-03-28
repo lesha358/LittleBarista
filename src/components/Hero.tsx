@@ -85,7 +85,7 @@ export default function Hero() {
           </div>
 
           {/* Правая колонка с преимуществами */}
-          <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000 delay-300`}>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-16 lg:mt-24 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000 delay-300`}>
             <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 text-brown-900 border border-brown-200/50 hover:border-brown-300 transition-all group hover:bg-white shadow-sm">
               <h3 className="text-xl font-semibold mb-3">Выставки</h3>
               <p className="text-brown-700/80 text-base">Профессиональное обслуживание на ваших мероприятиях</p>
@@ -94,7 +94,7 @@ export default function Hero() {
               <h3 className="text-xl font-semibold mb-3">Конференции</h3>
               <p className="text-brown-700/80 text-base">Свежий кофе и закуски для участников</p>
             </div>
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 text-brown-900 border border-brown-200/50 hover:border-brown-300 transition-all group hover:bg-white shadow-sm">
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 text-brown-900 border border-brown-200/50 hover:border-brown-300 transition-all group hover:bg-white shadow-sm sm:col-span-2">
               <h3 className="text-xl font-semibold mb-3">Кофе-брейки</h3>
               <p className="text-brown-700/80 text-base">Организация перерывов на мероприятиях</p>
             </div>
