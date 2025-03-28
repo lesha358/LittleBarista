@@ -1,6 +1,5 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import EventGallery from '@/components/EventGallery';
 import WorkProcess from '@/components/WorkProcess';
 import Cooperation from '@/components/Cooperation';
 import PriceExamples from '@/components/PriceExamples';
@@ -14,9 +13,6 @@ export default function Home() {
       <Navigation />
       <section id="hero">
         <Hero />
-      </section>
-      <section id="gallery">
-        <EventGallery />
       </section>
       <section id="process">
         <WorkProcess />

@@ -45,16 +45,48 @@ export default function WorkProcess() {
           <h2>Как мы работаем</h2>
         </div>
         
-        <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {steps.map((step, index) => (
-            <div key={index} className="card card-hover text-center">
-              <div className="flex justify-center mb-4">
-                {step.icon}
+        <div className="relative max-w-6xl mx-auto">
+          {/* Линия, соединяющая все этапы */}
+          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-brown-200 hidden md:block" />
+          
+          <div className="grid md:grid-cols-4 gap-8 relative">
+            {steps.map((step, index) => (
+              <div key={index} className="relative flex flex-col">
+                <div className="card card-hover text-center relative z-10 flex-1 flex flex-col">
+                  <div className="flex justify-center mb-6">
+                    <div className="w-16 h-16 bg-brown-50 rounded-full flex items-center justify-center">
+                      {step.icon}
+                    </div>
+                  </div>
+                  <div className="flex-1 flex flex-col">
+                    <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                    <p className="text-gray-600 flex-1">{step.description}</p>
+                  </div>
+                </div>
+                
+                {/* Стрелочка */}
+                {index < steps.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 z-20 transform -translate-y-1/2">
+                    <div className="w-8 h-8 bg-white rounded-full border-2 border-brown-200 flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                      <svg 
+                        className="w-5 h-5 text-brown-600" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth="2" 
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
-              <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-              <p className="text-gray-600">{step.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
