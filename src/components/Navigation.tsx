@@ -85,9 +85,6 @@ export default function Navigation() {
               <a href="#why-us" className="text-brown-900 hover:text-brown-600 transition-colors">
                 Почему мы
               </a>
-              <a href="#contact-form" className="text-brown-900 hover:text-brown-600 transition-colors">
-                Оставить заявку
-              </a>
               <a href="#contacts" className="text-brown-900 hover:text-brown-600 transition-colors">
                 Контакты
               </a>
@@ -126,9 +123,6 @@ export default function Navigation() {
                   </a>
                   <a href="#why-us" className="block text-brown-900 hover:text-brown-600 transition-colors">
                     Почему мы
-                  </a>
-                  <a href="#contact-form" className="block text-brown-900 hover:text-brown-600 transition-colors">
-                    Оставить заявку
                   </a>
                   <a href="#contacts" className="block text-brown-900 hover:text-brown-600 transition-colors">
                     Контакты
