@@ -2,7 +2,7 @@ export default function WhyUs() {
   const advantages = [
     {
       title: 'Специализация',
-      description: 'Растем и специализируемся только в кофейном направлении. Наш бизнес включает кофеин на мероприятия, сеть кофеен самообслуживания, кофейню ту-гоу в Москве.',
+      description: 'Растем и специализируемся только в кофейном направлении. Наш бизнес включает кофейни на мероприятия, сеть кофеен самообслуживания, кофейню ту-гоу в Москве.',
       icon: (
         <svg className="w-12 h-12 text-brown-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -61,18 +61,20 @@ export default function WhyUs() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {advantages.map((advantage, index) => (
-            <div key={index} className="card card-hover text-center">
-              <div className="flex justify-center mb-4">
-                {advantage.icon}
+            <div key={index} className="card card-hover text-center flex flex-col items-center justify-between h-full p-6">
+              <div className="flex flex-col items-center">
+                <div className="flex justify-center mb-4">
+                  {advantage.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3">{advantage.title}</h3>
+                <p className="text-gray-600">{advantage.description}</p>
               </div>
-              <h3 className="text-xl font-bold mb-2">{advantage.title}</h3>
-              <p className="text-gray-600">{advantage.description}</p>
             </div>
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-          <div className="card card-hover">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+          <div className="card card-hover p-6">
             <h3 className="text-2xl font-bold mb-6">Наши клиенты</h3>
             <ul className="space-y-4">
               {clients.map((client, index) => (
