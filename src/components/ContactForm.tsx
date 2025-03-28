@@ -6,13 +6,46 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Здесь будет логика отправки формы
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Ошибка при отправке формы');
+      }
+
+      setSubmitStatus('success');
+      setFormData({ name: '', phone: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -32,8 +65,8 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white rounded-2xl p-8 shadow-lg">
-          <div className="mb-6">
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
+          <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
               Как к вам обращаться?
             </label>
@@ -49,7 +82,7 @@ export default function ContactForm() {
             />
           </div>
 
-          <div className="mb-6">
+          <div>
             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
               Номер телефона
             </label>
@@ -61,11 +94,28 @@ export default function ContactForm() {
               onChange={handleChange}
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brown-500 focus:border-transparent"
               placeholder="+7 (___) ___-__-__"
+              pattern="[0-9+\s()-]*"
               required
             />
           </div>
 
-          <div className="mb-6">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brown-500 focus:border-transparent"
+              placeholder="example@email.com"
+              required
+            />
+          </div>
+
+          <div>
             <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
               Сообщение (необязательно)
             </label>
@@ -80,11 +130,28 @@ export default function ContactForm() {
             />
           </div>
 
+          {/* Статус отправки */}
+          {submitStatus === 'success' && (
+            <div className="p-4 bg-green-50 text-green-700 rounded-lg">
+              Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.
+            </div>
+          )}
+          {submitStatus === 'error' && (
+            <div className="p-4 bg-red-50 text-red-700 rounded-lg">
+              {errorMessage}
+            </div>
+          )}
+
           <button
             type="submit"
-            className="w-full bg-brown-600 text-white py-4 px-8 rounded-lg font-semibold hover:bg-brown-700 transition-colors"
+            disabled={isSubmitting}
+            className={`w-full bg-brown-600 text-white py-4 px-8 rounded-lg font-semibold transition-colors ${
+              isSubmitting 
+                ? 'bg-brown-400 cursor-not-allowed' 
+                : 'hover:bg-brown-700'
+            }`}
           >
-            Отправить заявку
+            {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
           </button>
 
           <p className="mt-4 text-sm text-gray-600 text-center">
