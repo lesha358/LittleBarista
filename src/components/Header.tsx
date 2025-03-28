@@ -60,7 +60,7 @@ const Header = () => {
       </div>
 
       {/* Мобильное меню */}
-      <div className={`fixed inset-0 bg-white z-50 transform transition-all duration-500 ease-in-out ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
+      <div className={`fixed inset-0 bg-white z-50 ${isMenuOpen ? 'animate-fade-in' : 'animate-slide-in'}`}>
         <div className="flex flex-col h-full bg-gradient-to-b from-white to-gray-50">
           {/* Верхняя часть с логотипом и кнопкой закрытия */}
           <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-white shadow-sm">
