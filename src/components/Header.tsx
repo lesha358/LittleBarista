@@ -60,10 +60,10 @@ const Header = () => {
       </div>
 
       {/* Мобильное меню */}
-      <div className={`fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed inset-0 bg-white z-50 transform transition-all duration-500 ease-in-out ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
         <div className="flex flex-col h-full">
           {/* Верхняя часть с логотипом и кнопкой закрытия */}
-          <div className="flex items-center justify-between p-4 border-b">
+          <div className="flex items-center justify-between p-6 border-b border-gray-100">
             <Link href="/" className="flex items-center">
               <Image
                 src="/logo.png"
@@ -72,7 +72,7 @@ const Header = () => {
                 height={40}
                 className="w-10 h-10"
               />
-              <span className="ml-2 text-xl font-bold text-brown-600">Little Barista</span>
+              <span className="ml-3 text-2xl font-bold text-brown-600">Little Barista</span>
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}
@@ -85,16 +85,17 @@ const Header = () => {
           </div>
 
           {/* Основное меню */}
-          <nav className="flex-1 overflow-y-auto py-6">
-            <ul className="space-y-4 px-4">
+          <nav className="flex-1 overflow-y-auto py-8">
+            <ul className="space-y-2 px-6">
               {menuItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block py-3 text-lg font-medium text-gray-800 hover:text-brown-600 transition-colors"
+                    className="block py-4 text-xl font-medium text-gray-800 hover:text-brown-600 transition-colors relative group"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    {item.label}
+                    <span className="relative z-10">{item.label}</span>
+                    <span className="absolute inset-0 bg-brown-50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                   </Link>
                 </li>
               ))}
@@ -102,27 +103,31 @@ const Header = () => {
           </nav>
 
           {/* Нижняя часть с контактами */}
-          <div className="p-4 border-t bg-gray-50">
-            <div className="space-y-3">
+          <div className="p-6 border-t border-gray-100 bg-gray-50/50">
+            <div className="space-y-4">
               <a
                 href="tel:+79001234567"
-                className="flex items-center text-gray-700 hover:text-brown-600 transition-colors"
+                className="flex items-center text-lg text-gray-700 hover:text-brown-600 transition-colors group"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                +7 (900) 123-45-67
+                <div className="w-10 h-10 rounded-full bg-brown-50 flex items-center justify-center mr-3 group-hover:bg-brown-100 transition-colors">
+                  <svg className="w-5 h-5 text-brown-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <span>+7 (900) 123-45-67</span>
               </a>
               <a
                 href="mailto:info@littlebarista.ru"
-                className="flex items-center text-gray-700 hover:text-brown-600 transition-colors"
+                className="flex items-center text-lg text-gray-700 hover:text-brown-600 transition-colors group"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                info@littlebarista.ru
+                <div className="w-10 h-10 rounded-full bg-brown-50 flex items-center justify-center mr-3 group-hover:bg-brown-100 transition-colors">
+                  <svg className="w-5 h-5 text-brown-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <span>info@littlebarista.ru</span>
               </a>
             </div>
           </div>
