@@ -5,49 +5,39 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
-  colorScheme: 'light',
   themeColor: '#ffffff',
+  colorScheme: 'light',
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://littlebarista.ru'),
-  title: "Little Barista | Профессиональные кофейные мероприятия",
-  description: "Организация кофейных мероприятий, мастер-классов и дегустаций. Профессиональные бариста, современное оборудование и незабываемый опыт.",
-  keywords: "кофейные мероприятия, мастер-классы, дегустации кофе, бариста, кофейные события, кофейные фестивали",
-  authors: [{ name: "Little Barista" }],
-  creator: "Little Barista",
-  publisher: "Little Barista",
+  title: "Little Barista - Кофейные мероприятия",
+  description: "Организация кофейных мероприятий, мастер-классов и дегустаций. Профессиональное кофейное оборудование и бариста для ваших событий.",
+  keywords: "кофейные мероприятия, мастер-классы, дегустации, кофейное оборудование, бариста, кофе, мероприятия, организация мероприятий",
   icons: {
     icon: '/images/favicon.png',
-    shortcut: '/images/favicon.png',
-    apple: '/images/favicon.png'
-  },
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
   },
   openGraph: {
-    type: "website",
-    locale: "ru_RU",
-    url: "https://littlebarista.ru",
-    siteName: "Little Barista",
-    title: "Little Barista | Профессиональные кофейные мероприятия",
-    description: "Организация кофейных мероприятий, мастер-классов и дегустаций. Профессиональные бариста, современное оборудование и незабываемый опыт.",
+    title: "Little Barista - Кофейные мероприятия",
+    description: "Организация кофейных мероприятий, мастер-классов и дегустаций. Профессиональное кофейное оборудование и бариста для ваших событий.",
+    url: 'https://littlebarista.ru',
+    siteName: 'Little Barista',
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Little Barista - Кофейные мероприятия",
+        url: '/images/logo.png',
+        width: 800,
+        height: 600,
+        alt: 'Little Barista Logo',
       },
     ],
+    locale: 'ru_RU',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Little Barista | Профессиональные кофейные мероприятия",
-    description: "Организация кофейных мероприятий, мастер-классов и дегустаций. Профессиональные бариста, современное оборудование и незабываемый опыт.",
-    images: ["/og-image.jpg"],
+    card: 'summary_large_image',
+    title: "Little Barista - Кофейные мероприятия",
+    description: "Организация кофейных мероприятий, мастер-классов и дегустаций. Профессиональное кофейное оборудование и бариста для ваших событий.",
+    images: ['/images/logo.png'],
   },
   robots: {
     index: true,
@@ -55,14 +45,14 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   verification: {
-    google: "ваш-код-верификации-google",
-    yandex: "ваш-код-верификации-yandex",
+    google: 'ваш-код-верификации-google',
+    yandex: 'ваш-код-верификации-yandex',
   },
 };
 
@@ -73,9 +63,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <head>
-        {/* Add any additional head elements here */}
-      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
