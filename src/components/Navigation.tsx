@@ -126,44 +126,53 @@ export default function Navigation() {
 
         {/* Мобильное меню */}
         <div className={`md:hidden transition-all duration-300 ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isMobileMenuOpen ? 'max-h-[calc(100vh-5rem)] opacity-100' : 'max-h-0 opacity-0'
         } overflow-hidden bg-white/95 backdrop-blur-md`}>
-          <div className="container mx-auto px-4 py-4 space-y-4">
+          <div className="container mx-auto px-4 py-6 space-y-4">
             <button 
               onClick={() => scrollToSection('gallery')}
-              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-2"
+              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-3 text-lg"
             >
               Галерея
             </button>
             <button 
               onClick={() => scrollToSection('process')}
-              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-2"
+              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-3 text-lg"
             >
               Как мы работаем
             </button>
             <button 
               onClick={() => scrollToSection('cooperation')}
-              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-2"
+              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-3 text-lg"
             >
               Сотрудничество
             </button>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-2"
+              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-3 text-lg"
             >
               Стоимость
             </button>
             <button 
               onClick={() => scrollToSection('why-us')}
-              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-2"
+              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-3 text-lg"
             >
               Почему мы
             </button>
             <button 
               onClick={() => scrollToSection('contacts')}
-              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-2"
+              className="block w-full text-left text-brown-900 hover:text-brown-600 transition-colors py-3 text-lg"
             >
               Контакты
+            </button>
+            <button 
+              className="w-full mt-4 px-6 py-3 rounded-full bg-brown-600 text-white transition-all duration-300 hover:bg-brown-700 hover:shadow-md text-lg"
+              onClick={() => {
+                setIsModalOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Заказать
             </button>
           </div>
         </div>

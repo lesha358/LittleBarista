@@ -46,12 +46,12 @@ export default function Hero() {
       </div>
 
       {/* Контент */}
-      <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Левая колонка с текстом */}
-          <div className={`space-y-8 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000`}>
+          <div className={`space-y-6 lg:space-y-8 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000`}>
             {/* Логотип */}
-            <div className="mb-8">
+            <div className="mb-6 lg:mb-8">
               <Image
                 src="/images/logo.png"
                 alt="Little Barista"
@@ -63,27 +63,27 @@ export default function Hero() {
             </div>
 
             {/* Заголовок */}
-            <h1 className="text-5xl lg:text-6xl font-bold text-brown-900 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-brown-900 leading-tight">
               Выездная кофейня на ваши мероприятия
             </h1>
 
             {/* Описание */}
-            <p className="text-xl text-brown-800/90 max-w-xl">
+            <p className="text-lg sm:text-xl text-brown-800/90 max-w-xl">
               Форумы, конференции, выставки, корпоративы, свадьбы и любые другие мероприятия
             </p>
 
             {/* Кнопки */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={() => scrollToSection('pricing')}
-                className="button-primary text-lg px-8 py-4 group"
+                className="button-primary text-lg px-6 sm:px-8 py-3 sm:py-4 group w-full sm:w-auto"
               >
                 <span className="relative z-10 text-white">Рассчитать стоимость</span>
                 <div className="absolute inset-0 bg-brown-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
               </button>
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="button-secondary text-lg px-8 py-4 group"
+                className="button-secondary text-lg px-6 sm:px-8 py-3 sm:py-4 group w-full sm:w-auto"
               >
                 <span className="relative z-10 text-brown-900">Связаться с нами</span>
                 <div className="absolute inset-0 bg-brown-100 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
@@ -92,7 +92,7 @@ export default function Hero() {
           </div>
 
           {/* Правая колонка с преимуществами */}
-          <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000 delay-300`}>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000 delay-300`}>
             <div className="bg-white/80 backdrop-blur-md rounded-2xl p-6 text-brown-900 border border-brown-200 hover:border-brown-300 transition-all group hover:bg-white shadow-lg">
               <div className="w-12 h-12 bg-brown-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <svg className="w-6 h-6 text-brown-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
