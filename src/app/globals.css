@@ -37,7 +37,7 @@
   }
 
   .section-container {
-    @apply relative overflow-hidden;
+    @apply relative overflow-hidden scroll-mt-24 md:scroll-mt-20;
   }
 
   .section-content {
