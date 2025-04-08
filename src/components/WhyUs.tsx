@@ -56,7 +56,7 @@ export default function WhyUs() {
     <section className="section-container section-padding gradient-section">
       <div className="container">
         <div className="section-title">
-          <h2>Почему мы?</h2>
+          <h2>Наши преимущества</h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">

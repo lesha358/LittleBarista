@@ -1,5 +1,7 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
+import EventTypes from '@/components/EventTypes';
+import PhotoCarousel from '@/components/PhotoCarousel';
 import WorkProcess from '@/components/WorkProcess';
 import Cooperation from '@/components/Cooperation';
 import Pricing from '@/components/Pricing';
@@ -15,6 +17,10 @@ export default function Home() {
       <Navigation />
       <section id="hero">
         <Hero />
+      </section>
+      <section id="event-types">
+        <EventTypes />
+        <PhotoCarousel />
       </section>
       <section id="cooperation">
         <Cooperation />

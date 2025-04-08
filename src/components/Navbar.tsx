@@ -30,8 +30,8 @@ export default function Navbar() {
             <a href="#cooperation" className="text-brown-700 hover:text-brown-900">
               Сотрудничество
             </a>
-            <a href="#how-it-works" className="text-brown-700 hover:text-brown-900">
-              Как мы работаем
+            <a href="#gallery" className="text-brown-700 hover:text-brown-900">
+              Галерея
             </a>
             <a href="#pricing" className="text-brown-700 hover:text-brown-900">
               Примеры расчета
@@ -83,8 +83,8 @@ export default function Navbar() {
             <a href="#cooperation" className="block text-brown-700 hover:text-brown-900">
               Сотрудничество
             </a>
-            <a href="#how-it-works" className="block text-brown-700 hover:text-brown-900">
-              Как мы работаем
+            <a href="#gallery" className="block text-brown-700 hover:text-brown-900">
+              Галерея
             </a>
             <a href="#pricing" className="block text-brown-700 hover:text-brown-900">
               Примеры расчета

@@ -47,57 +47,38 @@ export default function Hero() {
 
       {/* Контент */}
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Левая колонка с текстом */}
-          <div className={`space-y-6 lg:space-y-8 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000`}>
-            {/* Логотип */}
-            <div className="mb-6 lg:mb-8 flex justify-center">
-              <Image
-                src="/images/logo.png"
-                alt="Little Barista"
-                width={192}
-                height={56}
-                className="transform hover:scale-105 transition-transform duration-300"
-                priority
-              />
-            </div>
-
-            {/* Заголовок */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-brown-900 leading-tight text-center">
-              Выездная кофейня на ваши мероприятия
-            </h1>
-
-            {/* Описание */}
-            <p className="text-lg sm:text-xl text-brown-800/90 max-w-xl mx-auto text-center">
-              Форумы, конференции, выставки, корпоративы и любые другие мероприятия
-            </p>
-
-            {/* Кнопки */}
-            <div className="flex justify-center">
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="button-primary text-lg px-6 sm:px-8 py-3 sm:py-4 group w-full sm:w-auto"
-              >
-                <span className="relative z-10 text-white">Рассчитать стоимость</span>
-                <div className="absolute inset-0 bg-brown-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-              </button>
-            </div>
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Логотип */}
+          <div className="mb-6 lg:mb-8 flex justify-center">
+            <Image
+              src="/images/logo.png"
+              alt="Little Barista"
+              width={192}
+              height={56}
+              className="transform hover:scale-105 transition-transform duration-300"
+              priority
+            />
           </div>
 
-          {/* Правая колонка с преимуществами */}
-          <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-16 lg:mt-24 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-1000 delay-300`}>
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 text-brown-900 border border-brown-200/50 hover:border-brown-300 transition-all group hover:bg-white shadow-sm">
-              <h3 className="text-xl font-semibold mb-3">Выставки</h3>
-              <p className="text-brown-700/80 text-base">Профессиональное обслуживание на ваших мероприятиях</p>
-            </div>
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 text-brown-900 border border-brown-200/50 hover:border-brown-300 transition-all group hover:bg-white shadow-sm">
-              <h3 className="text-xl font-semibold mb-3">Конференции</h3>
-              <p className="text-brown-700/80 text-base">Свежий кофе и закуски для участников</p>
-            </div>
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-6 text-brown-900 border border-brown-200/50 hover:border-brown-300 transition-all group hover:bg-white shadow-sm sm:col-span-2">
-              <h3 className="text-xl font-semibold mb-3">Кофе-брейки</h3>
-              <p className="text-brown-700/80 text-base">Организация перерывов на мероприятиях</p>
-            </div>
+          {/* Заголовок */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-brown-900 leading-tight mb-6 max-w-4xl mx-auto">
+            Выездная кофейня на ваши мероприятия
+          </h1>
+
+          {/* Описание */}
+          <p className="text-lg sm:text-xl text-brown-800/90 mb-8 max-w-3xl mx-auto">
+            Форумы, конференции, выставки, корпоративы и любые другие мероприятия
+          </p>
+
+          {/* Кнопки */}
+          <div className="flex justify-center">
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="button-primary text-lg px-6 sm:px-8 py-3 sm:py-4 group w-full sm:w-auto"
+            >
+              <span className="relative z-10 text-white">Рассчитать стоимость</span>
+              <div className="absolute inset-0 bg-brown-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+            </button>
           </div>
         </div>
       </div>

@@ -2,10 +2,10 @@ import Calculator from './Calculator';
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-20 bg-gradient-to-b from-brown-50 to-white">
+    <section id="pricing" className="py-32 bg-gradient-to-b from-brown-50 to-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-brown-900 mb-4">Примеры расчета</h2>
+          <h2 className="text-4xl font-bold text-brown-900 mb-4">Рассчитать заказ</h2>
           <p className="text-brown-700 text-lg max-w-2xl mx-auto">
             Рассчитайте стоимость вашего мероприятия с помощью нашего калькулятора
           </p>

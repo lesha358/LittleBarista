@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Contacts() {
   return (
-    <section id="contacts" className="py-20 bg-cream-50">
+    <section id="contacts" className="py-32 bg-cream-50">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Левая колонка с контактами */}
