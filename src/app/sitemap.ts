@@ -1,30 +1,79 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const baseUrl = 'https://littlebarista.ru'
+  
+  // Основные страницы
+  const mainPages = [
     {
-      url: 'https://littlebarista.ru',
+      url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'daily' as const,
       priority: 1,
     },
     {
-      url: 'https://littlebarista.ru#process',
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
     },
     {
-      url: 'https://littlebarista.ru#pricing',
+      url: `${baseUrl}/services`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
     },
     {
-      url: 'https://littlebarista.ru#contacts',
+      url: `${baseUrl}/events`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/contacts`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     },
   ]
+
+  // Подстраницы услуг
+  const servicePages = [
+    {
+      url: `${baseUrl}/services/coffee-shows`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/services/master-classes`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/services/tastings`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+  ]
+
+  // Подстраницы событий
+  const eventPages = [
+    {
+      url: `${baseUrl}/events/upcoming`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/events/past`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+  ]
+
+  return [...mainPages, ...servicePages, ...eventPages]
 } 

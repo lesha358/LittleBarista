@@ -2,11 +2,21 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
+  adjustFontFallback: true,
+  variable: "--font-inter",
+});
 
 export const viewport: Viewport = {
   themeColor: '#ffffff',
   colorScheme: 'light',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
@@ -62,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={inter.variable}>
       <body className={inter.className}>{children}</body>
     </html>
   );
