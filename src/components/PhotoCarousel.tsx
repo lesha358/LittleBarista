@@ -50,7 +50,7 @@ export default function PhotoCarousel() {
   };
 
   return (
-    <section id="gallery" className="py-20 bg-white scroll-mt-32">
+    <section id="gallery" className="py-20 bg-white scroll-mt-32 overflow-hidden">
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-brown-900">Фотографии с наших мероприятий</h2>
@@ -108,19 +108,6 @@ export default function PhotoCarousel() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </button>
-
-          {/* Индикаторы */}
-          <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors duration-300 ${
-                  index === currentIndex ? 'bg-brown-600' : 'bg-brown-300'
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

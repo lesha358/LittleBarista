@@ -114,7 +114,7 @@ export default function Navigation() {
               {/* Навигация */}
               <nav className="hidden md:flex items-center space-x-8">
                 <a href="#cooperation" className="text-brown-900 hover:text-brown-600 transition-colors">
-                  Сотрудничество
+                  Варианты сотрудничества
                 </a>
                 <a href="#gallery" className="text-brown-900 hover:text-brown-600 transition-colors">
                   Галерея
@@ -174,7 +174,7 @@ export default function Navigation() {
                   className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Сотрудничество
+                  Варианты сотрудничества
                 </a>
                 <a 
                   href="#gallery" 
