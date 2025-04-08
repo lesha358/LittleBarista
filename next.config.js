@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['littlebarista.ru'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'littlebarista.ru',
+        port: '',
+        pathname: '/images/**',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
   },
   headers: async () => {
