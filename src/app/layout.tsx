@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   description: "Организация кофейных мероприятий, мастер-классов и дегустаций. Профессиональное кофейное оборудование и бариста для ваших событий.",
   keywords: "кофейные мероприятия, мастер-классы, дегустации, кофейное оборудование, бариста, кофе, мероприятия, организация мероприятий",
   icons: {
-    icon: '/images/favicon.png',
+    icon: '/images/favicon.ico'
   },
   openGraph: {
     title: "Little Barista - Кофейные мероприятия",
@@ -75,6 +75,8 @@ export default function RootLayout({
   return (
     <html lang="ru" className={inter.variable}>
       <head>
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
         <Script id="yandex-metrika" strategy="afterInteractive">
           {`
             (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
