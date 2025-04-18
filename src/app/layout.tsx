@@ -75,6 +75,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={inter.variable}>
       <head>
+        <meta name="yandex-verification" content="512bc29e8533e8e3" />
         <link rel="icon" href="https://littlebarista.ru/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="https://littlebarista.ru/favicon.ico" type="image/x-icon" />
         <Script id="yandex-metrika" strategy="afterInteractive">
