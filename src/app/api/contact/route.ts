@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import TelegramBot from 'node-telegram-bot-api';
 
+// Создаем бота Telegram один раз при инициализации
+const bot = process.env.TELEGRAM_BOT_TOKEN 
+  ? new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false })
+  : null;
+
 export async function POST(request: Request) {
   try {
     const { name, phone, email, message } = await request.json();
@@ -10,7 +15,7 @@ export async function POST(request: Request) {
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
       console.error('Missing environment variables for email configuration');
       return NextResponse.json(
-        { error: 'Ошибка конфигурации сервера' },
+        { error: 'Ошибка конфигурации сервера: отсутствуют настройки email' },
         { status: 500 }
       );
     }
@@ -19,13 +24,10 @@ export async function POST(request: Request) {
     if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
       console.error('Missing environment variables for Telegram configuration');
       return NextResponse.json(
-        { error: 'Ошибка конфигурации сервера' },
+        { error: 'Ошибка конфигурации сервера: отсутствуют настройки Telegram' },
         { status: 500 }
       );
     }
-
-    // Создаем бота Telegram
-    const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN);
 
     // Формируем текст сообщения
     const messageText = `
@@ -40,7 +42,14 @@ ${message}
     `;
 
     // Отправляем сообщение в Telegram
-    await bot.sendMessage(process.env.TELEGRAM_CHAT_ID, messageText);
+    if (bot) {
+      try {
+        await bot.sendMessage(process.env.TELEGRAM_CHAT_ID, messageText);
+      } catch (error) {
+        console.error('Telegram error:', error);
+        // Продолжаем выполнение, даже если Telegram не работает
+      }
+    }
 
     // Создаем транспорт для отправки писем
     const transporter = nodemailer.createTransport({
