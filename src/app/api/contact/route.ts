@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import TelegramBot from 'node-telegram-bot-api';
 
 export async function POST(request: Request) {
   try {
     const { name, phone, email, message } = await request.json();
 
-    // Проверяем наличие переменных окружения
+    // Проверяем наличие переменных окружения для email
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
       console.error('Missing environment variables for email configuration');
       return NextResponse.json(
@@ -13,6 +14,33 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    // Проверяем наличие переменных окружения для Telegram
+    if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
+      console.error('Missing environment variables for Telegram configuration');
+      return NextResponse.json(
+        { error: 'Ошибка конфигурации сервера' },
+        { status: 500 }
+      );
+    }
+
+    // Создаем бота Telegram
+    const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN);
+
+    // Формируем текст сообщения
+    const messageText = `
+Новая заявка с сайта Little Barista:
+
+Имя: ${name}
+Телефон: ${phone}
+Email: ${email}
+
+Сообщение:
+${message}
+    `;
+
+    // Отправляем сообщение в Telegram
+    await bot.sendMessage(process.env.TELEGRAM_CHAT_ID, messageText);
 
     // Создаем транспорт для отправки писем
     const transporter = nodemailer.createTransport({
@@ -38,49 +66,37 @@ export async function POST(request: Request) {
       );
     }
 
-    // Формируем текст письма
-    const mailText = `
-Новая заявка с сайта Little Barista:
-
-Имя: ${name}
-Телефон: ${phone}
-Email: ${email}
-
-Сообщение:
-${message}
-    `;
-
     // Отправляем письмо
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: 'chaplinrus@gmail.com',
       subject: 'Новая заявка с сайта Little Barista',
-      text: mailText,
-      html: mailText.replace(/\n/g, '<br>'),
+      text: messageText,
+      html: messageText.replace(/\n/g, '<br>'),
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error sending message:', error);
     
     // Определяем тип ошибки
     if (error instanceof Error) {
       if (error.message.includes('Invalid login')) {
         return NextResponse.json(
-          { error: 'Ошибка аутентификации почтового сервера' },
+          { error: 'Ошибка аутентификации' },
           { status: 500 }
         );
       }
       if (error.message.includes('connect')) {
         return NextResponse.json(
-          { error: 'Ошибка подключения к почтовому серверу' },
+          { error: 'Ошибка подключения' },
           { status: 500 }
         );
       }
     }
 
     return NextResponse.json(
-      { error: 'Ошибка при отправке письма' },
+      { error: 'Ошибка при отправке сообщения' },
       { status: 500 }
     );
   }
