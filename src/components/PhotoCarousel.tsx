@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const images = [
@@ -23,24 +23,31 @@ const images = [
     src: '/images/carousel/4.jpg',
     alt: 'Кофейный бар',
     orientation: 'horizontal'
-  },
-  {
-    src: '/images/carousel/5.jpg',
-    alt: 'Кофейная зона',
-    orientation: 'vertical'
   }
 ];
 
 export default function PhotoCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(2);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
   const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
 
   const getSlideStyle = (index: number) => {
     const distance = Math.abs(index - currentIndex);
@@ -63,7 +70,7 @@ export default function PhotoCarousel() {
                 key={index}
                 className={`absolute w-full h-full transition-all duration-500 ${getSlideStyle(index)}`}
                 style={{
-                  transform: `translateX(${(index - currentIndex) * 80}%)`,
+                  transform: `translateX(${(index - currentIndex) * 100}%)`,
                 }}
               >
                 <div className="relative w-full h-full flex items-center justify-center">
