@@ -39,8 +39,33 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Юридическая информация */}
+        <div className="mt-8 pt-6 border-t border-brown-100">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <p className="text-sm text-brown-700">
+                <span className="font-medium">ИП Аракелян Мушег Самвелович</span>
+              </p>
+              <p className="text-sm text-brown-700">
+                <span className="font-medium">ИНН:</span> 263411052935
+              </p>
+              <p className="text-sm text-brown-700">
+                <span className="font-medium">ОГРНИП:</span> 321774600377697
+              </p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-brown-700">
+                <span className="font-medium">Адрес:</span> г. Москва, ул. Гаврикова, д. 2/38
+              </p>
+              <p className="text-sm text-brown-700">
+                <span className="font-medium">Email:</span> Misha310@mail.ru
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Копирайт */}
-        <div className="mt-8 pt-6 border-t border-brown-100 text-center text-brown-600 text-sm">
+        <div className="mt-6 pt-6 border-t border-brown-100 text-center text-brown-600 text-sm">
           © 2025 Little Barista. Все права защищены.
         </div>
       </div>

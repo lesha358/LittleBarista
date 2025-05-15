@@ -11,8 +11,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
-    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -29,7 +27,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          email: '',
+          message: '',
+        }),
       });
 
       const data = await response.json();
@@ -39,7 +41,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       }
 
       setSubmitStatus('success');
-      setFormData({ name: '', phone: '', email: '', message: '' });
+      setFormData({ name: '', phone: '' });
       
       // Закрываем модальное окно через 2 секунды после успешной отправки
       setTimeout(() => {
@@ -70,7 +72,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       />
 
       {/* Модальное окно */}
-      <div className="relative bg-white rounded-2xl p-4 sm:p-6 lg:p-8 max-w-md w-full mx-auto shadow-xl overflow-y-auto max-h-[calc(100vh-2rem)]">
+      <div className="relative bg-white rounded-2xl p-4 sm:p-6 lg:p-8 max-w-md w-full mx-auto shadow-xl overflow-y-auto max-h-[calc(100vh-2rem)] border-2 border-brown-200">
         {/* Кнопка закрытия */}
         <button
           onClick={onClose}
@@ -125,39 +127,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             />
             <p className="mt-1 text-xs sm:text-sm text-gray-500">
               Введите номер телефона в любом удобном формате
-            </p>
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email (необязательно)
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-              placeholder="example@email.com"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-              Сообщение
-            </label>
-            <textarea
-              id="message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              rows={4}
-              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent resize-none"
-              placeholder="Опишите ваше мероприятие или задайте вопрос"
-              required
-            />
-            <p className="mt-1 text-xs sm:text-sm text-gray-500">
-              Укажите тип мероприятия, дату и количество гостей
             </p>
           </div>
 

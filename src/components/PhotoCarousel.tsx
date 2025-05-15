@@ -23,6 +23,11 @@ const images = [
     src: '/images/carousel/4.jpg',
     alt: 'Кофейный бар',
     orientation: 'horizontal'
+  },
+  {
+    src: '/images/carousel/5.jpg',
+    alt: 'Кофейное мероприятие',
+    orientation: 'horizontal'
   }
 ];
 

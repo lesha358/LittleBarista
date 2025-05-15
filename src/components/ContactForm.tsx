@@ -6,8 +6,6 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
-    message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -24,7 +22,11 @@ export default function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          email: '',
+          message: '',
+        }),
       });
 
       const data = await response.json();
@@ -34,7 +36,7 @@ export default function ContactForm() {
       }
 
       setSubmitStatus('success');
-      setFormData({ name: '', phone: '', email: '', message: '' });
+      setFormData({ name: '', phone: '' });
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
@@ -65,8 +67,12 @@ export default function ContactForm() {
         </div>
 
         <div className="max-w-2xl mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-cream-50 p-8 rounded-2xl shadow-xl border-2 border-brown-200 relative overflow-hidden">
+            {/* Декоративный элемент */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-brown-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-brown-100 rounded-full -ml-12 -mb-12 opacity-50"></div>
+
+            <div className="grid md:grid-cols-2 gap-6 relative z-10">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Ваше имя
@@ -97,37 +103,6 @@ export default function ContactForm() {
                   placeholder="+7 (999) 123-45-67"
                 />
               </div>
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email (необязательно)
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-                placeholder="example@email.com"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                Сообщение
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brown-500 focus:border-transparent"
-                placeholder="Опишите ваше мероприятие..."
-              />
             </div>
 
             {/* Статус отправки */}
