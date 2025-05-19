@@ -107,6 +107,13 @@ export default function RootLayout({
               accurateTrackBounce:true,
               ecommerce:"dataLayer"
             });
+
+            ym(101111714, "init", {
+              clickmap:true,
+              trackLinks:true,
+              accurateTrackBounce:true,
+              ecommerce:"dataLayer"
+            });
           `}
         </Script>
         <noscript>
@@ -114,6 +121,7 @@ export default function RootLayout({
             <img src="https://mc.yandex.ru/watch/101109907" style={{position: 'absolute', left: '-9999px'}} alt="" />
             <img src="https://mc.yandex.ru/watch/101983555" style={{position: 'absolute', left: '-9999px'}} alt="" />
             <img src="https://mc.yandex.ru/watch/101984487" style={{position: 'absolute', left: '-9999px'}} alt="" />
+            <img src="https://mc.yandex.ru/watch/101111714" style={{position: 'absolute', left: '-9999px'}} alt="" />
           </div>
         </noscript>
       </head>
