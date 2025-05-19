@@ -39,7 +39,7 @@ export default function WorkProcess() {
   ];
 
   return (
-    <section className="section-container section-padding gradient-section">
+    <section id="how-it-works" className="section-container section-padding gradient-section">
       <div className="container">
         <div className="section-title">
           <h2>Как мы работаем</h2>
