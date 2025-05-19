@@ -2,6 +2,13 @@
 
 import { useState } from 'react';
 
+// Добавляем типизацию для Яндекс Метрики
+declare global {
+  interface Window {
+    ym: (id: number, action: string, goal: string) => void;
+  }
+}
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -33,6 +40,11 @@ export default function ContactForm() {
 
       if (!response.ok) {
         throw new Error(data.error || 'Ошибка при отправке формы');
+      }
+
+      // Отправляем событие в Яндекс Метрику
+      if (typeof window !== 'undefined' && window.ym) {
+        window.ym(101109907, 'reachGoal', 'form');
       }
 
       setSubmitStatus('success');
