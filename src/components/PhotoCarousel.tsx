@@ -28,6 +28,16 @@ const images = [
     src: '/images/carousel/5.jpg',
     alt: 'Кофейное мероприятие',
     orientation: 'horizontal'
+  },
+  {
+    src: '/images/carousel/6.jpg',
+    alt: 'Кофейное оборудование и напитки',
+    orientation: 'horizontal'
+  },
+  {
+    src: '/images/carousel/7.jpg',
+    alt: 'Кофейная дегустация',
+    orientation: 'horizontal'
   }
 ];
 

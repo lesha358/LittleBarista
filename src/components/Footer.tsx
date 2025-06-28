@@ -29,12 +29,12 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-brown-900 mb-4">Навигация</h3>
             <div className="grid grid-cols-2 gap-2">
-              <a href="#about" className="text-brown-700 hover:text-brown-900">О нас</a>
-              <a href="#cooperation" className="text-brown-700 hover:text-brown-900">Сотрудничество</a>
-              <a href="#how-it-works" className="text-brown-700 hover:text-brown-900">Как мы работаем</a>
-              <a href="#pricing" className="text-brown-700 hover:text-brown-900">Примеры расчета</a>
-              <a href="#why-us" className="text-brown-700 hover:text-brown-900">Почему мы</a>
-              <a href="#contacts" className="text-brown-700 hover:text-brown-900">Контакты</a>
+              <Link href="/#about" className="text-brown-700 hover:text-brown-900">О нас</Link>
+              <Link href="/#cooperation" className="text-brown-700 hover:text-brown-900">Сотрудничество</Link>
+              <Link href="/#how-it-works" className="text-brown-700 hover:text-brown-900">Как мы работаем</Link>
+              <Link href="/#pricing" className="text-brown-700 hover:text-brown-900">Примеры расчета</Link>
+              <Link href="/#why-us" className="text-brown-700 hover:text-brown-900">Почему мы</Link>
+              <Link href="/contacts" className="text-brown-700 hover:text-brown-900">Контакты</Link>
             </div>
           </div>
         </div>

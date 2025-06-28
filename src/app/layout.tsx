@@ -92,11 +92,36 @@ export default function RootLayout({
               accurateTrackBounce:true,
               webvisor:true
             });
+
+            ym(101983555, "init", {
+              clickmap:true,
+              trackLinks:true,
+              accurateTrackBounce:true,
+              webvisor:true,
+              ecommerce:"dataLayer"
+            });
+
+            ym(101984487, "init", {
+              clickmap:true,
+              trackLinks:true,
+              accurateTrackBounce:true,
+              ecommerce:"dataLayer"
+            });
+
+            ym(101111714, "init", {
+              clickmap:true,
+              trackLinks:true,
+              accurateTrackBounce:true,
+              ecommerce:"dataLayer"
+            });
           `}
         </Script>
         <noscript>
           <div>
             <img src="https://mc.yandex.ru/watch/101109907" style={{position: 'absolute', left: '-9999px'}} alt="" />
+            <img src="https://mc.yandex.ru/watch/101983555" style={{position: 'absolute', left: '-9999px'}} alt="" />
+            <img src="https://mc.yandex.ru/watch/101984487" style={{position: 'absolute', left: '-9999px'}} alt="" />
+            <img src="https://mc.yandex.ru/watch/101111714" style={{position: 'absolute', left: '-9999px'}} alt="" />
           </div>
         </noscript>
       </head>
