@@ -65,9 +65,10 @@
   }
 
   .button-primary {
-    @apply bg-[#C4A484] text-[#0A0502] px-8 py-4 rounded-full
-           hover:bg-[#D4B494] transition-all duration-300 font-medium
-           shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0;
+    @apply bg-brown-600 text-white px-8 py-4 rounded-full
+           hover:bg-brown-700 transition-all duration-300 font-semibold
+           shadow-xl hover:shadow-2xl hover:-translate-y-1 active:translate-y-0
+           border-2 border-brown-700;
   }
 
   .button-secondary {

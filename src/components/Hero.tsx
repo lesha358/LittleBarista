@@ -74,10 +74,10 @@ export default function Hero() {
           <div className="flex justify-center">
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="button-primary text-lg px-6 sm:px-8 py-3 sm:py-4 group w-full sm:w-auto"
+              className="button-primary text-lg px-8 sm:px-10 py-4 sm:py-5 group w-full sm:w-auto relative overflow-hidden"
             >
-              <span className="relative z-10 text-white">Рассчитать стоимость</span>
-              <div className="absolute inset-0 bg-brown-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              <span className="relative z-10">Рассчитать стоимость</span>
+              <div className="absolute inset-0 bg-brown-800 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
             </button>
           </div>
         </div>
