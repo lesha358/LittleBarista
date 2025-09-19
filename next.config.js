@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: true, // Отключаем оптимизацию для статического экспорта
     remotePatterns: [
       {
         protocol: 'https',

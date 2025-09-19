@@ -5,19 +5,19 @@ const recipes = [
     id: 1,
     title: 'Классический эспрессо',
     description: 'Идеальный эспрессо - основа многих кофейных напитков',
-    image: '/images/espresso.jpg'
+    image: '/images/carousel/1.jpg'
   },
   {
     id: 2,
     title: 'Капучино',
     description: 'Традиционный итальянский напиток с идеальной пенкой',
-    image: '/images/cappuccino.jpg'
+    image: '/images/carousel/2.jpg'
   },
   {
     id: 3,
     title: 'Латте',
     description: 'Сливочный и нежный напиток с молоком',
-    image: '/images/latte.jpg'
+    image: '/images/carousel/3.jpg'
   }
 ];
 
