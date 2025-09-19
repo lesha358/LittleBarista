@@ -1,15 +1,17 @@
 {
   "name": "LittleBarista",
-  "description": "Сайт кофейного сервиса Little Barista",
+  "description": "Сайт кофейного сервиса Little Barista - Frontend App",
   "version": "1.0.0",
+  "type": "frontend",
+  "framework": "nextjs",
   "build": {
     "command": "npm run build",
-    "output": "out"
+    "output": "out",
+    "install": "npm install"
   },
   "deploy": {
     "platform": "timeweb.cloud",
-    "type": "frontend",
-    "framework": "nextjs",
+    "type": "static",
     "environment": {
       "NODE_ENV": "production"
     },
