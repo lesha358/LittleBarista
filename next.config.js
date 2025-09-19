@@ -20,36 +20,16 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
   },
-  headers: async () => {
-    return [
-      {
-        source: '/:all*(svg|jpg|png)',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/fonts/:path*',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ]
-  },
-  output: 'standalone',
+  // Headers не поддерживаются в статическом экспорте
+  // Кэширование будет настроено на уровне CDN/hosting
+  // Для статического экспорта (подходит для фронтенд деплоя)
+  output: 'export',
+  trailingSlash: true,
   poweredByHeader: false,
-  // Настройки для правильной работы с прокси
-  trailingSlash: false,
   // Настройки для работы с доменом
   assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  // Отключаем серверные функции для статического экспорта
+  distDir: 'out',
 }
 
 module.exports = nextConfig 

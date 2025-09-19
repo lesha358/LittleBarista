@@ -4,17 +4,14 @@
   "version": "1.0.0",
   "build": {
     "command": "npm run build",
-    "output": "standalone"
+    "output": "out"
   },
   "deploy": {
     "platform": "timeweb.cloud",
-    "docker": {
-      "file": "Dockerfile",
-      "context": "."
-    },
+    "type": "frontend",
+    "framework": "nextjs",
     "environment": {
-      "NODE_ENV": "production",
-      "PORT": "3000"
+      "NODE_ENV": "production"
     },
     "domains": [
       "littlebarista.ru",
@@ -28,11 +25,5 @@
       "http_to_https": true,
       "www_redirect": true
     }
-  },
-  "nginx": {
-    "config": "timeweb-nginx.conf",
-    "ssl_auto": true,
-    "gzip": true,
-    "cache_static": true
   }
 }

@@ -5,7 +5,7 @@ import WorkProcess from '@/components/WorkProcess';
 import Cooperation from '@/components/Cooperation';
 import Pricing from '@/components/Pricing';
 import WhyUs from '@/components/WhyUs';
-import ContactForm from '@/components/ContactForm';
+import ContactFormStatic from '@/components/ContactFormStatic';
 import FloatingCTA from '@/components/FloatingCTA';
 import Footer from '@/components/Footer';
 import Contacts from '@/components/Contacts';
@@ -38,7 +38,7 @@ export default function Home() {
         <WhyUs />
       </section>
       <section id="contact-form">
-        <ContactForm />
+        <ContactFormStatic />
       </section>
       <section id="contacts">
         <Contacts />
