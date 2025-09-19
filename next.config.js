@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/images/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'littlebarista.ru',
+        port: '',
+        pathname: '/images/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },
@@ -40,6 +46,10 @@ const nextConfig = {
   },
   output: 'standalone',
   poweredByHeader: false,
+  // Настройки для правильной работы с прокси
+  trailingSlash: false,
+  // Настройки для работы с доменом
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
 }
 
 module.exports = nextConfig 
