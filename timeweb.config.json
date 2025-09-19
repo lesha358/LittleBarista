@@ -30,7 +30,7 @@
     }
   },
   "nginx": {
-    "config": "nginx.conf",
+    "config": "timeweb-nginx.conf",
     "ssl_auto": true,
     "gzip": true,
     "cache_static": true

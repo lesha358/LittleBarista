@@ -33,9 +33,10 @@ COPY --from=deps /app/.next/static ./.next/static
 RUN chown -R nextjs:nodejs /app
 USER nextjs
 
-# Указываем порт
+# Указываем порт и переменные окружения
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+ENV NODE_ENV=production
 EXPOSE 3000
 
 # Запуск приложения
