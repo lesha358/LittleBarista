@@ -16,19 +16,27 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
-# Удаляем dev-зависимости (опционально)
-RUN npm prune --production
-
 # Используем production-образ для запуска
 FROM node:20-alpine AS runner
 WORKDIR /app
 
+# Создаем пользователя для безопасности
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
 # Копируем только необходимые файлы из предыдущего этапа
-COPY --from=deps /app .
+COPY --from=deps /app/public ./public
+COPY --from=deps /app/.next/standalone ./
+COPY --from=deps /app/.next/static ./.next/static
+
+# Устанавливаем права доступа
+RUN chown -R nextjs:nodejs /app
+USER nextjs
 
 # Указываем порт
 ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 EXPOSE 3000
 
 # Запуск приложения
-CMD ["npm", "start"] 
+CMD ["node", "server.js"] 
