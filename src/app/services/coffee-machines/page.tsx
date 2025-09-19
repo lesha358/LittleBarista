@@ -236,7 +236,7 @@ export default function CoffeeMachinesRentPage() {
 						</p>
 						<div className="mt-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 p-3 rounded-xl bg-brown-50 border border-brown-100">
 							<p className="text-sm text-brown-800/90">Нужен быстрый подбор? Оставьте контакты — перезвоним за 15 минут.</p>
-							<a href="/#contact-form" className="w-full sm:w-auto text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors">Связаться</a>
+							<a href="/#contact-form" className="w-full sm:w-auto text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors">Оставить заявку</a>
 						</div>
 					</div>
 					<div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm hover:shadow-md transition-shadow bg-white/90 backdrop-blur-sm relative flex flex-col">
@@ -253,7 +253,7 @@ export default function CoffeeMachinesRentPage() {
 						</ul>
 						<div className="mt-auto flex items-center justify-between gap-3 sm:gap-4 p-3 rounded-xl bg-brown-50 border border-brown-100">
 							<p className="text-sm text-brown-800/90">Расскажем о подходящей модели под ваш поток гостей.</p>
-							<a href="/#contact-form" className="min-w-[140px] text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors">Связаться</a>
+							<a href="/#contact-form" className="min-w-[140px] text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors">Оставить заявку</a>
 						</div>
 					</div>
 				</div>

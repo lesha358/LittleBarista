@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ServiceTriad() {
   return (
@@ -22,7 +23,15 @@ export default function ServiceTriad() {
             className="group relative h-[200px] sm:h-[240px] md:h-full overflow-hidden shadow-sm hover:shadow-md transition-all rounded-xl md:rounded-none md:[clip-path:polygon(0%_0%,_96%_0%,_100%_100%,_0%_100%)]"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-white to-brown-50" />
-            <div className="absolute inset-0 bg-[url('/images/Stand.jpg')] bg-cover bg-center opacity-15 group-hover:opacity-20 transition-opacity" />
+            <div className="absolute inset-0 opacity-15 group-hover:opacity-20 transition-opacity">
+              <Image
+                src="/images/Stand.jpg"
+                alt="Выездная кофейня"
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            </div>
             <div className="relative h-full flex items-center">
               <div className="container px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md">
@@ -42,7 +51,15 @@ export default function ServiceTriad() {
             className="group relative h-[200px] sm:h-[240px] md:h-full overflow-hidden shadow-md hover:shadow-lg transition-all rounded-xl md:rounded-none md:[clip-path:polygon(0%_0%,_96%_0%,_100%_100%,_4%_100%)]"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#0f0d0b] to-[#1a1713]" />
-            <div className="absolute inset-0 bg-[url('/images/triad-bar.webp')] bg-cover bg-center opacity-25 group-hover:opacity-30 transition-opacity" />
+            <div className="absolute inset-0 opacity-25 group-hover:opacity-30 transition-opacity">
+              <Image
+                src="/images/triad-bar.webp"
+                alt="Выездной бар"
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            </div>
             <div className="relative h-full flex items-center">
               <div className="container px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md">
@@ -62,7 +79,15 @@ export default function ServiceTriad() {
             className="group relative h-[200px] sm:h-[240px] md:h-full overflow-hidden shadow-sm hover:shadow-md transition-all rounded-xl md:rounded-none md:[clip-path:polygon(0%_0%,_100%_0%,_100%_100%,_4%_100%)]"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-brown-50 to-white" />
-            <div className="absolute inset-0 bg-[url('/images/machines-triad.jpg')] bg-cover bg-center opacity-20 group-hover:opacity-25 transition-opacity" />
+            <div className="absolute inset-0 opacity-20 group-hover:opacity-25 transition-opacity">
+              <Image
+                src="/images/machines-triad.jpg"
+                alt="Аренда кофемашин"
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            </div>
             <div className="relative h-full flex items-center">
               <div className="container px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md">

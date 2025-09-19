@@ -30,7 +30,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20 md:pt-24">
       {/* Фоновое изображение с размытием */}
-      <div className="fixed inset-0 -z-10">
+      <div className="absolute inset-0 -z-10">
         <Image
           src="/images/hero-bg.jpeg"
           alt=""
@@ -38,6 +38,7 @@ export default function Hero() {
           className="object-cover object-center"
           sizes="100vw"
           priority
+          unoptimized
         />
         <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px]" />
         {/* Декоративные элементы */}
@@ -57,6 +58,7 @@ export default function Hero() {
               height={56}
               className="transform hover:scale-105 transition-transform duration-300"
               priority
+              unoptimized
             />
           </div>
 

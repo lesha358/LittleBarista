@@ -1,26 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 
 interface FormData {
   name: string;
   phone: string;
-  email: string;
-  message: string;
-  model: string;
+  model?: string;
 }
 
 export default function ContactFormStatic() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
-    email: '',
-    message: '',
     model: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Получаем модель из URL параметров
+  useEffect(() => {
+    const model = searchParams.get('model');
+    if (model) {
+      setFormData(prev => ({
+        ...prev,
+        model: decodeURIComponent(model)
+      }));
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,9 +43,7 @@ export default function ContactFormStatic() {
       const body = `
 Имя: ${formData.name}
 Телефон: ${formData.phone}
-Email: ${formData.email}
-Модель: ${formData.model}
-Сообщение: ${formData.message}
+${formData.model ? `Модель кофемашины: ${formData.model}` : ''}
       `.trim();
 
       // Открываем почтовый клиент
@@ -47,8 +54,6 @@ Email: ${formData.email}
       setFormData({
         name: '',
         phone: '',
-        email: '',
-        message: '',
         model: ''
       });
     } catch (error) {
@@ -75,7 +80,7 @@ Email: ${formData.email}
       className="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto"
     >
       <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-        Свяжитесь с нами
+        Оставить заявку
       </h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -113,56 +118,16 @@ Email: ${formData.email}
           </div>
         </div>
 
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-            placeholder="your@email.com"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="model" className="block text-sm font-medium text-gray-700 mb-2">
-            Модель кофемашины
-          </label>
-          <select
-            id="model"
-            name="model"
-            value={formData.model}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-          >
-            <option value="">Выберите модель</option>
-            <option value="Caravel">Caravel</option>
-            <option value="DR Coffee F10">DR Coffee F10</option>
-            <option value="JL30">JL30</option>
-            <option value="Jofemar">Jofemar</option>
-            <option value="Simonelli">Simonelli</option>
-            <option value="Другая">Другая</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-            Сообщение
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={4}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-            placeholder="Расскажите о ваших потребностях..."
-          />
-        </div>
+        {formData.model && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Выбранная модель кофемашины
+            </label>
+            <div className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-700">
+              {formData.model}
+            </div>
+          </div>
+        )}
 
         {submitStatus === 'success' && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">

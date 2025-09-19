@@ -100,6 +100,7 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
                 height={40}
                 className="w-32 md:w-[180px] transform hover:scale-105 transition-transform duration-300"
                 priority
+                unoptimized
               />
             </button>
 
@@ -137,6 +138,7 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
                       width={20}
                       height={20}
                       className={`${theme === 'dark' ? 'w-5 h-5 grayscale opacity-90' : 'w-5 h-5 grayscale opacity-80'} object-cover`}
+                      unoptimized
                     />
                   </a>
                 </div>

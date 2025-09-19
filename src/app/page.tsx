@@ -10,6 +10,7 @@ import FloatingCTA from '@/components/FloatingCTA';
 import Footer from '@/components/Footer';
 import Contacts from '@/components/Contacts';
 import ServiceTriad from '@/components/ServiceTriad';
+import { Suspense } from 'react';
 
 export default function Home() {
   return (
@@ -38,7 +39,9 @@ export default function Home() {
         <WhyUs />
       </section>
       <section id="contact-form">
-        <ContactFormStatic />
+        <Suspense fallback={<div>Загрузка формы...</div>}>
+          <ContactFormStatic />
+        </Suspense>
       </section>
       <section id="contacts">
         <Contacts />
