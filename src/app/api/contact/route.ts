@@ -9,7 +9,7 @@ const bot = process.env.TELEGRAM_BOT_TOKEN
 
 export async function POST(request: Request) {
   try {
-    const { name, phone, email, message } = await request.json();
+    const { name, phone, email, message, model } = await request.json();
 
     // Проверяем наличие переменных окружения для email
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
@@ -29,26 +29,42 @@ export async function POST(request: Request) {
       );
     }
 
-    // Формируем текст сообщения
-    const messageText = `
-Новая заявка с сайта Little Barista:
+    // Формируем текст сообщения (HTML для красивого отображения)
+    const escapeHtml = (value: string | undefined | null) =>
+      (value ?? '').toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-Имя: ${name}
-Телефон: ${phone}
-Email: ${email}
+    const now = new Date();
+    const timeMsk = new Intl.DateTimeFormat('ru-RU', {
+      timeZone: 'Europe/Moscow',
+      dateStyle: 'short',
+      timeStyle: 'medium',
+    }).format(now);
 
-Сообщение:
-${message}
-    `;
+    const messageText = `🔥 <b>НОВАЯ ЗАЯВКА С САЙТА LITTLE BARISTA</b> 🔥\n
+👤 <b>Имя:</b> ${escapeHtml(name)}\n
+📞 <b>Телефон:</b> ${escapeHtml(phone)}\n
+☕ <b>Модель:</b> ${escapeHtml(model || 'не указана')}\n
+🕒 <b>Время (МСК):</b> ${escapeHtml(timeMsk)}`;
 
-    // Отправляем сообщение в Telegram
+    // Отправляем сообщение в Telegram с логами
+    let telegramStatus: 'sent' | 'skipped' | 'error' = 'skipped';
     if (bot) {
+      console.log('[API /contact] Telegram: sending to chat', process.env.TELEGRAM_CHAT_ID);
       try {
-        await bot.sendMessage(process.env.TELEGRAM_CHAT_ID, messageText);
+        const tgMessage = await bot.sendMessage(
+          process.env.TELEGRAM_CHAT_ID as string,
+          messageText,
+          { parse_mode: 'HTML', disable_web_page_preview: true }
+        );
+        console.log('[API /contact] Telegram: sent OK, message_id =', tgMessage.message_id);
+        telegramStatus = 'sent';
       } catch (error) {
-        console.error('Telegram error:', error);
+        console.error('[API /contact] Telegram: send error ->', error);
+        telegramStatus = 'error';
         // Продолжаем выполнение, даже если Telegram не работает
       }
+    } else {
+      console.warn('[API /contact] Telegram: bot is not initialized');
     }
 
     // Создаем транспорт для отправки писем
@@ -76,15 +92,16 @@ ${message}
     }
 
     // Отправляем письмо
-    await transporter.sendMail({
+    const emailInfo = await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: 'chaplinrus@gmail.com',
       subject: 'Новая заявка с сайта Little Barista',
       text: messageText,
       html: messageText.replace(/\n/g, '<br>'),
     });
+    console.log('[API /contact] Email: sent OK, messageId =', (emailInfo as any)?.messageId);
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, telegram: telegramStatus, email: 'sent' });
   } catch (error) {
     console.error('Error sending message:', error);
     

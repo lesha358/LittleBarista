@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 // Добавляем типизацию для Яндекс Метрики
 declare global {
@@ -9,14 +10,31 @@ declare global {
   }
 }
 
-export default function ContactForm() {
+type ContactFormProps = {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  presetModel?: string;
+};
+
+export default function ContactForm({ title = 'Оставить заявку', subtitle = 'Заполните форму, и мы свяжемся с вами в ближайшее время', ctaText = 'Отправить заявку', presetModel = '' }: ContactFormProps) {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    model: '' as string,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const modelFromQuery = searchParams?.get('model') || '';
+    const initialModel = presetModel || modelFromQuery;
+    if (initialModel) {
+      setFormData(prev => ({ ...prev, model: initialModel }));
+    }
+  }, [searchParams, presetModel]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,9 +48,10 @@ export default function ContactForm() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
+          name: formData.name,
+          phone: formData.phone,
           email: '',
-          message: '',
+          model: formData.model || undefined,
         }),
       });
 
@@ -48,7 +67,7 @@ export default function ContactForm() {
       }
 
       setSubmitStatus('success');
-      setFormData({ name: '', phone: '' });
+      setFormData({ name: '', phone: '', model: '' });
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
@@ -62,7 +81,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -74,8 +93,8 @@ export default function ContactForm() {
     <section className="section-container section-padding gradient-section">
       <div className="container">
         <div className="section-title">
-          <h2>Оставить заявку</h2>
-          <p>Заполните форму, и мы свяжемся с вами в ближайшее время</p>
+          <h2>{title}</h2>
+          <p>{subtitle}</p>
         </div>
 
         <div className="max-w-2xl mx-auto">
@@ -117,6 +136,20 @@ export default function ContactForm() {
               </div>
             </div>
 
+            {formData.model && (
+              <div className="relative z-10">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Выбранная модель
+                </label>
+                <input
+                  type="text"
+                  value={formData.model}
+                  readOnly
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-800"
+                />
+              </div>
+            )}
+
             {/* Статус отправки */}
             {submitStatus === 'success' && (
               <div className="p-4 bg-green-50 text-green-700 rounded-lg">
@@ -138,7 +171,7 @@ export default function ContactForm() {
                 }`}
               >
                 <span className="relative z-10 text-white">
-                  {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                  {isSubmitting ? 'Отправка...' : ctaText}
                 </span>
                 <div className="absolute inset-0 bg-brown-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
               </button>

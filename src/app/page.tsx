@@ -1,6 +1,5 @@
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import EventTypes from '@/components/EventTypes';
 import PhotoCarousel from '@/components/PhotoCarousel';
 import WorkProcess from '@/components/WorkProcess';
 import Cooperation from '@/components/Cooperation';
@@ -10,6 +9,7 @@ import ContactForm from '@/components/ContactForm';
 import FloatingCTA from '@/components/FloatingCTA';
 import Footer from '@/components/Footer';
 import Contacts from '@/components/Contacts';
+import ServiceTriad from '@/components/ServiceTriad';
 
 export default function Home() {
   return (
@@ -18,8 +18,11 @@ export default function Home() {
       <section id="hero">
         <Hero />
       </section>
-      <section id="event-types">
-        <EventTypes />
+      <section id="services-triad">
+        <ServiceTriad />
+      </section>
+      {/** Удалено по просьбе: секция с конференциями/выставками/кофе-брейками */}
+      <section id="gallery">
         <PhotoCarousel />
       </section>
       <section id="cooperation">
