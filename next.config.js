@@ -24,13 +24,14 @@ const nextConfig = {
   // Headers не поддерживаются в статическом экспорте
   // Кэширование будет настроено на уровне CDN/hosting
   // Для статического экспорта (подходит для фронтенд деплоя)
-  output: 'export',
-  trailingSlash: true,
+  ...(process.env.NODE_ENV === 'production' && {
+    output: 'export',
+    trailingSlash: true,
+    distDir: 'out',
+  }),
   poweredByHeader: false,
   // Настройки для работы с доменом
   assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  // Отключаем серверные функции для статического экспорта
-  distDir: 'out',
 }
 
 module.exports = nextConfig 
