@@ -6,7 +6,7 @@
   "framework": "nextjs",
   "build": {
     "command": "npm run build",
-    "output": "out",
+    "output": "/out",
     "install": "npm install"
   },
   "deploy": {
