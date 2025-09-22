@@ -1,25 +1,31 @@
-# Используем официальный образ nginx
-FROM nginx:alpine
+# Multi-stage Dockerfile to run Next.js server with API routes
+FROM node:20-alpine AS builder
 
-# Устанавливаем рабочую директорию
-WORKDIR /var/www/html
+WORKDIR /app
 
-# Копируем собранные статические файлы
-COPY out/ /var/www/html/
+COPY package*.json ./
+RUN npm ci || npm install
 
-# Копируем конфигурацию nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY . .
+RUN npm run build
 
-# Создаем директории для логов
-RUN mkdir -p /var/log/nginx
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
 
-# Устанавливаем права доступа
-RUN chown -R nginx:nginx /var/www/html
-RUN chmod -R 755 /var/www/html
+COPY --from=builder /app/package*.json ./
+RUN npm ci --omit=dev || npm install --omit=dev
 
-# Открываем порт 80
-EXPOSE 80
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/next-env.d.ts ./next-env.d.ts
+COPY --from=builder /app/tailwind.config.js ./tailwind.config.js
+COPY --from=builder /app/postcss.config.js ./postcss.config.js
+COPY --from=builder /app/tsconfig.json ./tsconfig.json
 
-# Запускаем nginx
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+ENV PORT=3000 HOSTNAME=0.0.0.0
+
+CMD ["npm", "run", "start"]
 
