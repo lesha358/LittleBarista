@@ -82,6 +82,22 @@ function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: 
       setSubmitStatus('success');
       setFormData({ name: '', phone: '', model: '' });
     } catch (error) {
+      // Fallback: если серверный API недоступен — отправляем в Telegram с клиента
+      try {
+        const { sendTelegramClient } = await import('../lib/telegram');
+        const tg = await sendTelegramClient({
+          name: formData.name,
+          phone: formData.phone,
+          model: formData.model,
+          source: 'Форма: Оставить заявку',
+        });
+        if (tg.ok) {
+          setSubmitStatus('success');
+          setFormData({ name: '', phone: '', model: '' });
+          return;
+        }
+      } catch (_) {}
+
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
       if (error instanceof Error) {

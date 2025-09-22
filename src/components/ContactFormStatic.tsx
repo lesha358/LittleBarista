@@ -64,6 +64,22 @@ export default function ContactFormStatic() {
       setSubmitStatus('success');
       setFormData({ name: '', phone: '', model: '' });
     } catch (error) {
+      // Fallback на клиенте: прямой запрос к Telegram Bot API
+      try {
+        const { sendTelegramClient } = await import('../lib/telegram');
+        const tg = await sendTelegramClient({
+          name: formData.name,
+          phone: formData.phone,
+          model: formData.model,
+          source: 'Форма: Статическая карточка',
+        });
+        if (tg.ok) {
+          setSubmitStatus('success');
+          setFormData({ name: '', phone: '', model: '' });
+          return;
+        }
+      } catch (_) {}
+
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
     } finally {

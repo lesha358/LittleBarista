@@ -55,6 +55,22 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         onClose();
       }, 2000);
     } catch (error) {
+      // Fallback: клиентская отправка в Telegram
+      try {
+        const { sendTelegramClient } = await import('../lib/telegram');
+        const tg = await sendTelegramClient({
+          name: formData.name,
+          phone: formData.phone,
+          source: 'Модалка в шапке',
+        });
+        if (tg.ok) {
+          setSubmitStatus('success');
+          setFormData({ name: '', phone: '' });
+          setTimeout(() => onClose(), 2000);
+          return;
+        }
+      } catch (_) {}
+
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
       // Показываем более подробное сообщение об ошибке
