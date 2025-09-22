@@ -56,10 +56,22 @@ function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: 
         }),
       });
 
-      const data = await response.json();
+      // Пытаемся безопасно распарсить JSON; если пришел HTML (например, статика/Nginx),
+      // читаем текст и показываем понятную ошибку.
+      let data: any = null;
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        if (!response.ok) {
+          throw new Error('Сервер вернул ошибку. Проверьте доступность API.');
+        }
+        throw new Error('Ответ сервера имеет неверный формат (ожидался JSON).');
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || 'Ошибка при отправке формы');
+        throw new Error(data?.error || 'Ошибка при отправке формы');
       }
 
       // Отправляем событие в Яндекс Метрику

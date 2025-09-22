@@ -23,18 +23,11 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
   },
-  // В dev используем стандартные настройки (.next),
-  // а для прод-экспорта включаем output: 'export' и distDir: 'out'
+  // Включаем стандартный серверный рендеринг в продакшене,
+  // чтобы работали API-роуты (без output: 'export').
   ...(isProd
     ? {
-        // Headers не поддерживаются в статическом экспорте
-        // Кэширование будет настроено на уровне CDN/hosting
-        output: 'export',
-        trailingSlash: true,
-        // Настройки для работы с доменом
-        assetPrefix: '',
-        // Отключаем серверные функции для статического экспорта
-        distDir: 'out',
+        poweredByHeader: false,
       }
     : {
         poweredByHeader: false,

@@ -49,9 +49,16 @@ export default function ContactFormStatic() {
         }),
       });
 
-      const data = await response.json().catch(() => ({} as any));
+      const contentType = response.headers.get('content-type') || '';
+      let data: any = null;
+      if (contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const _text = await response.text();
+        throw new Error('Ответ сервера имеет неверный формат (ожидался JSON).');
+      }
       if (!response.ok) {
-        throw new Error((data as any)?.error || 'Ошибка при отправке формы');
+        throw new Error(data?.error || 'Ошибка при отправке формы');
       }
 
       setSubmitStatus('success');
