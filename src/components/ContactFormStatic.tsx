@@ -37,25 +37,25 @@ export default function ContactFormStatic() {
     setSubmitStatus('idle');
 
     try {
-      // Используем внешний сервис для отправки формы (например, Formspree, Netlify Forms, или EmailJS)
-      // Для демонстрации используем простую отправку через mailto
-      const subject = `Новая заявка с сайта Little Barista - ${formData.name}`;
-      const body = `
-Имя: ${formData.name}
-Телефон: ${formData.phone}
-${formData.model ? `Модель кофемашины: ${formData.model}` : ''}
-      `.trim();
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: '',
+          message: '',
+          model: formData.model || undefined,
+        }),
+      });
 
-      // Открываем почтовый клиент
-      const mailtoLink = `mailto:chaplinrus@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.open(mailtoLink);
+      const data = await response.json().catch(() => ({} as any));
+      if (!response.ok) {
+        throw new Error((data as any)?.error || 'Ошибка при отправке формы');
+      }
 
       setSubmitStatus('success');
-      setFormData({
-        name: '',
-        phone: '',
-        model: ''
-      });
+      setFormData({ name: '', phone: '', model: '' });
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus('error');

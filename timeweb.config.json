@@ -1,0 +1,31 @@
+{
+  "name": "LittleBarista",
+  "description": "Сайт кофейного сервиса Little Barista - Frontend App",
+  "version": "1.0.0",
+  "type": "frontend",
+  "framework": "nextjs",
+  "build": {
+    "command": "npm run build",
+    "output": "out",
+    "install": "npm install"
+  },
+  "deploy": {
+    "platform": "timeweb.cloud",
+    "type": "static",
+    "environment": {
+      "NODE_ENV": "production"
+    },
+    "domains": [
+      "littlebarista.ru",
+      "www.littlebarista.ru"
+    ],
+    "ssl": {
+      "enabled": true,
+      "auto": true
+    },
+    "redirects": {
+      "http_to_https": true,
+      "www_redirect": true
+    }
+  }
+}

@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production'
+
 const nextConfig = {
   images: {
     unoptimized: true, // Отключаем оптимизацию для статического экспорта
@@ -21,17 +23,22 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
   },
-  // Headers не поддерживаются в статическом экспорте
-  // Кэширование будет настроено на уровне CDN/hosting
-  // Для статического экспорта (подходит для фронтенд деплоя)
-  ...(process.env.NODE_ENV === 'production' && {
-    output: 'export',
-    trailingSlash: true,
-    distDir: 'out',
-  }),
-  poweredByHeader: false,
-  // Настройки для работы с доменом
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  // В dev используем стандартные настройки (.next),
+  // а для прод-экспорта включаем output: 'export' и distDir: 'out'
+  ...(isProd
+    ? {
+        // Headers не поддерживаются в статическом экспорте
+        // Кэширование будет настроено на уровне CDN/hosting
+        output: 'export',
+        trailingSlash: true,
+        // Настройки для работы с доменом
+        assetPrefix: '',
+        // Отключаем серверные функции для статического экспорта
+        distDir: 'out',
+      }
+    : {
+        poweredByHeader: false,
+      }),
 }
 
 module.exports = nextConfig 

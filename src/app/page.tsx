@@ -1,35 +1,53 @@
+import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import Advantages from '@/components/Advantages';
-import ServiceTriad from '@/components/ServiceTriad';
-import WhyUs from '@/components/WhyUs';
-import Pricing from '@/components/Pricing';
-import WorkProcess from '@/components/WorkProcess';
-import FeaturedRecipes from '@/components/FeaturedRecipes';
-import EventTypes from '@/components/EventTypes';
 import PhotoCarousel from '@/components/PhotoCarousel';
+import WorkProcess from '@/components/WorkProcess';
 import Cooperation from '@/components/Cooperation';
-import Contacts from '@/components/Contacts';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
+import Pricing from '@/components/Pricing';
+import WhyUs from '@/components/WhyUs';
+import ContactFormStatic from '@/components/ContactFormStatic';
 import FloatingCTA from '@/components/FloatingCTA';
+import Footer from '@/components/Footer';
+import Contacts from '@/components/Contacts';
+import ServiceTriad from '@/components/ServiceTriad';
+import { Suspense } from 'react';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Advantages />
-      <ServiceTriad />
-      <WhyUs />
-      <Pricing />
-      <WorkProcess />
-      <FeaturedRecipes />
-      <EventTypes />
-      <PhotoCarousel />
-      <Cooperation />
-      <Contacts />
-      <Footer />
+      <Navigation />
+      <section id="hero">
+        <Hero />
+      </section>
+      <section id="services-triad">
+        <ServiceTriad />
+      </section>
+      {/** Удалено по просьбе: секция с конференциями/выставками/кофе-брейками */}
+      <section id="gallery">
+        <PhotoCarousel />
+      </section>
+      <section id="cooperation">
+        <Cooperation />
+      </section>
+      <section id="process">
+        <WorkProcess />
+      </section>
+      <section id="pricing">
+        <Pricing />
+      </section>
+      <section id="why-us">
+        <WhyUs />
+      </section>
+      <section id="contact-form">
+        <Suspense fallback={<div>Загрузка формы...</div>}>
+          <ContactFormStatic />
+        </Suspense>
+      </section>
+      <section id="contacts">
+        <Contacts />
+      </section>
       <FloatingCTA />
+      <Footer />
     </main>
   );
 } 
