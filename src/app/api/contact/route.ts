@@ -10,8 +10,15 @@ export async function POST(request: Request) {
   try {
     const { name, phone, email, message, model } = await request.json();
 
-    // Если Telegram не сконфигурирован — просто пропускаем отправку, без 500
+    // Проверяем конфигурацию Telegram
     const telegramConfigured = Boolean(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID);
+    if (!telegramConfigured) {
+      console.error('[API /contact] Telegram is NOT configured: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
+      return NextResponse.json(
+        { success: false, error: 'Telegram не сконфигурирован на сервере', telegram: 'skipped' },
+        { status: 500 }
+      );
+    }
 
     // Формируем текст сообщения (HTML для красивого отображения)
     const escapeHtml = (value: string | undefined | null) =>
@@ -45,10 +52,17 @@ export async function POST(request: Request) {
       } catch (error) {
         console.error('[API /contact] Telegram: send error ->', error);
         telegramStatus = 'error';
-        // Продолжаем выполнение, даже если Telegram не работает
+        return NextResponse.json(
+          { success: false, error: 'Ошибка отправки в Telegram', telegram: telegramStatus },
+          { status: 500 }
+        );
       }
     } else {
       console.warn('[API /contact] Telegram: bot is not initialized');
+      return NextResponse.json(
+        { success: false, error: 'Telegram бот не инициализирован', telegram: 'skipped' },
+        { status: 500 }
+      );
     }
 
     // Email-отправка отключена по требованию. Возвращаем статус email: 'disabled'
