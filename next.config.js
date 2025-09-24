@@ -23,8 +23,7 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
   },
-  // Включаем стандартный серверный рендеринг в продакшене,
-  // чтобы работали API-роуты (без output: 'export').
+  output: 'export',
   ...(isProd
     ? {
         poweredByHeader: false,

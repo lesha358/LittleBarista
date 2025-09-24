@@ -43,35 +43,16 @@ function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: 
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: '',
-          model: formData.model || undefined,
-        }),
+      const { sendTelegramClient } = await import('../lib/telegram');
+      const tg = await sendTelegramClient({
+        name: formData.name,
+        phone: formData.phone,
+        model: formData.model,
+        source: 'Форма: Оставить заявку',
       });
 
-      // Пытаемся безопасно распарсить JSON; если пришел HTML (например, статика/Nginx),
-      // читаем текст и показываем понятную ошибку.
-      let data: any = null;
-      const contentType = response.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        data = await response.json();
-      } else {
-        const text = await response.text();
-        if (!response.ok) {
-          throw new Error('Сервер вернул ошибку. Проверьте доступность API.');
-        }
-        throw new Error('Ответ сервера имеет неверный формат (ожидался JSON).');
-      }
-
-      if (!response.ok) {
-        throw new Error(data?.error || 'Ошибка при отправке формы');
+      if (!tg.ok) {
+        throw new Error(tg.error || 'Не удалось отправить сообщение в Telegram');
       }
 
       // Отправляем событие в Яндекс Метрику
@@ -82,22 +63,6 @@ function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: 
       setSubmitStatus('success');
       setFormData({ name: '', phone: '', model: '' });
     } catch (error) {
-      // Fallback: если серверный API недоступен — отправляем в Telegram с клиента
-      try {
-        const { sendTelegramClient } = await import('../lib/telegram');
-        const tg = await sendTelegramClient({
-          name: formData.name,
-          phone: formData.phone,
-          model: formData.model,
-          source: 'Форма: Оставить заявку',
-        });
-        if (tg.ok) {
-          setSubmitStatus('success');
-          setFormData({ name: '', phone: '', model: '' });
-          return;
-        }
-      } catch (_) {}
-
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
       if (error instanceof Error) {

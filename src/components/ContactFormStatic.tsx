@@ -37,49 +37,21 @@ export default function ContactFormStatic() {
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: '',
-          message: '',
-          model: formData.model || undefined,
-        }),
+      const { sendTelegramClient } = await import('../lib/telegram');
+      const tg = await sendTelegramClient({
+        name: formData.name,
+        phone: formData.phone,
+        model: formData.model,
+        source: 'Форма: Статическая карточка',
       });
 
-      const contentType = response.headers.get('content-type') || '';
-      let data: any = null;
-      if (contentType.includes('application/json')) {
-        data = await response.json();
-      } else {
-        const _text = await response.text();
-        throw new Error('Ответ сервера имеет неверный формат (ожидался JSON).');
-      }
-      if (!response.ok) {
-        throw new Error(data?.error || 'Ошибка при отправке формы');
+      if (!tg.ok) {
+        throw new Error(tg.error || 'Не удалось отправить сообщение в Telegram');
       }
 
       setSubmitStatus('success');
       setFormData({ name: '', phone: '', model: '' });
     } catch (error) {
-      // Fallback на клиенте: прямой запрос к Telegram Bot API
-      try {
-        const { sendTelegramClient } = await import('../lib/telegram');
-        const tg = await sendTelegramClient({
-          name: formData.name,
-          phone: formData.phone,
-          model: formData.model,
-          source: 'Форма: Статическая карточка',
-        });
-        if (tg.ok) {
-          setSubmitStatus('success');
-          setFormData({ name: '', phone: '', model: '' });
-          return;
-        }
-      } catch (_) {}
-
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
     } finally {
