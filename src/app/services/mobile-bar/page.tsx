@@ -1,5 +1,7 @@
 import { generateMetadata } from '@/lib/metadata'
 import Navigation from '@/components/Navigation'
+import ContactModalTrigger from '@/components/ContactModalTrigger'
+import BarContactForm from '@/components/BarContactForm'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import Script from 'next/script'
@@ -209,7 +211,12 @@ export default function MobileBarPage() {
               </ul>
             </div>
             <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2.5 sm:gap-4">
-              <a href="/#contact-form" className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 text-[#0d0a08] hover:from-amber-400 hover:to-yellow-300 transition-colors shadow w-full sm:w-auto text-center">Заказать бар</a>
+              <ContactModalTrigger
+                label="Заказать бар"
+                className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 text-[#0d0a08] hover:from-amber-400 hover:to-yellow-300 transition-colors shadow w-full sm:w-auto text-center"
+                sourceTag="Выездной бар"
+                theme="dark"
+              />
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/70">
                 <span className="font-semibold text-white">100+ событий</span>
                 <span>в портфолио</span>
@@ -238,8 +245,16 @@ export default function MobileBarPage() {
         </div>
         <h2 className="sr-only">Услуги выездного бара</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          <ServiceAccordion headline={alcoholic[0]} items={alcoholicItems} />
-          <ServiceAccordion headline={softTitle} items={softItems} />
+          <ServiceAccordion 
+            headline={alcoholic[0]} 
+            items={alcoholicItems}
+            cta={{ label: 'Оставить заявку', sourceTag: 'Выездной бар — Алкогольные', theme: 'dark' }}
+          />
+          <ServiceAccordion 
+            headline={softTitle} 
+            items={softItems}
+            cta={{ label: 'Оставить заявку', sourceTag: 'Выездной бар — Безалкогольные', theme: 'dark' }}
+          />
         </div>
         <div className="mt-6 p-5 rounded-2xl border border-amber-200/20 bg-[rgba(0,0,0,0.35)] backdrop-blur shadow">
           <h3 className="text-sm tracking-wider uppercase text-white/60">Тематические</h3>
@@ -346,29 +361,41 @@ export default function MobileBarPage() {
         <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Примеры коктейлей</h2>
         <Divider />
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+          <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
             <h3 className="text-lg font-semibold text-white">Классика</h3>
             <ul className="mt-3 space-y-1 list-disc pl-5 text-white/80 text-sm sm:text-base">
               {classics.map(i => <li key={i}>{i}</li>)}
             </ul>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
+              <Image src="/images/bar/mohito.jpg" alt="Мохито" fill className="object-cover" />
+            </div>
           </div>
-          <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+          <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
             <h3 className="text-lg font-semibold text-white">Свежие и ягодные</h3>
             <ul className="mt-3 space-y-1 list-disc pl-5 text-white/80 text-sm sm:text-base">
               {freshBerry.map(i => <li key={i}>{i}</li>)}
             </ul>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
+              <Image src="/images/bar/Bramble.jpg" alt="Брамбл" fill className="object-cover" />
+            </div>
           </div>
-          <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+          <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
             <h3 className="text-lg font-semibold text-white">Трендовые и авторские</h3>
             <ul className="mt-3 space-y-1 list-disc pl-5 text-white/80 text-sm sm:text-base">
               {trendy.map(i => <li key={i}>{i}</li>)}
             </ul>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
+              <Image src="/images/bar/espresso-martini.jpg" alt="Эспрессо Мартини" fill className="object-cover" />
+            </div>
           </div>
-          <div className="p-5 rounded-2xl border border-white/10 bg-white/5">
+          <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
             <h3 className="text-lg font-semibold text-white">Безалкогольные (Zero‑Proof)</h3>
             <ul className="mt-3 space-y-1 list-disc pl-5 text-white/80 text-sm sm:text-base">
               {zeroProof.map(i => <li key={i}>{i}</li>)}
             </ul>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
+              <Image src="/images/bar/ShirleyTemple.jpg" alt="Shirley Temple" fill className="object-cover" />
+            </div>
           </div>
         </div>
       </section>
@@ -380,17 +407,32 @@ export default function MobileBarPage() {
           <div className="p-6 rounded-2xl border border-white/10 bg-white/5 flex flex-col">
             <h3 className="text-xl font-semibold text-white">Light</h3>
             <p className="mt-2 text-white/70">Безалкогольные коктейли • бармен • посуда • лёд • сиропы.</p>
-            <a href="/#contact-form" className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors">Запросить расчёт</a>
+            <ContactModalTrigger
+              label="Запросить расчёт"
+              className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors"
+              sourceTag="Выездной бар — пакет Light"
+              theme="dark"
+            />
           </div>
           <div className="p-6 rounded-2xl border border-white/10 bg-white/5 flex flex-col">
             <h3 className="text-xl font-semibold text-white">Classic</h3>
             <p className="mt-2 text-white/70">Классические коктейли • 2 бармена • барная станция • гарниши.</p>
-            <a href="/#contact-form" className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors">Запросить расчёт</a>
+            <ContactModalTrigger
+              label="Запросить расчёт"
+              className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors"
+              sourceTag="Выездной бар — пакет Classic"
+              theme="dark"
+            />
           </div>
           <div className="p-6 rounded-2xl border border-white/10 bg-white/5 flex flex-col">
             <h3 className="text-xl font-semibold text-white">Pro</h3>
             <p className="mt-2 text-white/70">Авторское меню • бар‑менеджер • декор • брендирование стойки.</p>
-            <a href="/#contact-form" className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors">Запросить расчёт</a>
+            <ContactModalTrigger
+              label="Запросить расчёт"
+              className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors"
+              sourceTag="Выездной бар — пакет Pro"
+              theme="dark"
+            />
           </div>
         </div>
       </section>
@@ -430,10 +472,12 @@ export default function MobileBarPage() {
       </section>
 
       <section className="container px-4 sm:px-6 lg:px-8 pb-10">
-        <div className="p-6 rounded-2xl border border-white/10 bg-white/5 text-center">
-          <h2 className="text-xl sm:text-2xl font-semibold text-white">Готовы оформить заявку?</h2>
-          <p className="mt-2 text-white/70">Перейдите к форме на главной странице, и мы свяжемся с вами в ближайшее время.</p>
-          <a href="/#contact-form" className="mt-4 inline-block px-6 py-3 rounded-full bg-amber-500 text-[#0d0a08] hover:bg-amber-400 transition-colors">Оставить заявку</a>
+        <div className="p-6 rounded-2xl border border-amber-500/20 bg-black/30 backdrop-blur-sm">
+          <h2 className="text-xl sm:text-2xl font-semibold text-amber-100">Готовы оформить заявку?</h2>
+          <p className="mt-2 text-amber-100/80">Заполните короткую форму — перезвоним за 15 минут.</p>
+          <div className="mt-4">
+            <BarContactForm />
+          </div>
         </div>
       </section>
 

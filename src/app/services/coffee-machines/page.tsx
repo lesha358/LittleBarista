@@ -1,5 +1,6 @@
 import { generateMetadata } from '@/lib/metadata'
 import Navigation from '@/components/Navigation'
+import ContactModalTrigger from '@/components/ContactModalTrigger'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import Script from 'next/script'
@@ -77,7 +78,7 @@ const espressoMachines = [
 ]
 
 export default function CoffeeMachinesRentPage() {
-	return (
+    return (
 		<main className="min-h-screen relative overflow-x-hidden">
 			{/* SEO: Breadcrumbs, Service and FAQ structured data */}
 			<Script id="breadcrumbs-jsonld" type="application/ld+json">
@@ -190,10 +191,12 @@ export default function CoffeeMachinesRentPage() {
 							<li className="flex items-center gap-2 rounded-lg bg-brown-50 px-3 py-2 border border-brown-100"><span>✓</span><span>Доставка, подключение, обучение персонала</span></li>
 							<li className="flex items-center gap-2 rounded-lg bg-brown-50 px-3 py-2 border border-brown-100"><span>✓</span><span>Опция «под ключ»: бариста и расходники</span></li>
 						</ul>
-						<div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2.5 sm:gap-4">
-							<a href="/#contact-form" className="px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-brown-700 text-white hover:bg-brown-800 transition-colors shadow w-full sm:w-auto text-center">
-								Получить расчёт
-							</a>
+                        <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2.5 sm:gap-4">
+                            <ContactModalTrigger 
+                                label="Получить расчёт"
+                                className="px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-brown-700 text-white hover:bg-brown-800 transition-colors shadow w-full sm:w-auto text-center"
+                                sourceTag="Аренда кофемашин"
+                            />
 							<span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-brown-200 bg-white/90 px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm text-brown-900 shadow-sm">
 								<span className="font-semibold">15 мин</span>
 								<span className="text-brown-700/90">перезвоним</span>
@@ -236,7 +239,11 @@ export default function CoffeeMachinesRentPage() {
 						</p>
 						<div className="mt-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 p-3 rounded-xl bg-brown-50 border border-brown-100">
 							<p className="text-sm text-brown-800/90">Нужен быстрый подбор? Оставьте контакты — перезвоним за 15 минут.</p>
-							<a href="/#contact-form" className="w-full sm:w-auto text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors">Оставить заявку</a>
+                            <ContactModalTrigger 
+                                label="Оставить заявку"
+                                className="w-full sm:w-auto text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors"
+                                sourceTag="Аренда кофемашин"
+                            />
 						</div>
 					</div>
 					<div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm hover:shadow-md transition-shadow bg-white/90 backdrop-blur-sm relative flex flex-col">
@@ -252,8 +259,12 @@ export default function CoffeeMachinesRentPage() {
 							<li>Опция «под ключ»: оборудование, расходники, бариста</li>
 						</ul>
 						<div className="mt-auto flex items-center justify-between gap-3 sm:gap-4 p-3 rounded-xl bg-brown-50 border border-brown-100">
-							<p className="text-sm text-brown-800/90">Расскажем о подходящей модели под ваш поток гостей.</p>
-							<a href="/#contact-form" className="min-w-[140px] text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors">Оставить заявку</a>
+                            <p className="text-sm text-brown-800/90">Расскажем о подходящей модели под ваш поток гостей.</p>
+                            <ContactModalTrigger 
+                                label="Оставить заявку"
+                                className="min-w-[140px] text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors"
+                                sourceTag="Аренда кофемашин"
+                            />
 						</div>
 					</div>
 				</div>
@@ -296,12 +307,12 @@ export default function CoffeeMachinesRentPage() {
 								</div>
 							</div>
 							<div className="mt-4 sm:mt-5 pt-2 border-t border-brown-100">
-								<a
-									href={`/?model=${encodeURIComponent(m.name)}#contact-form`}
-									className="inline-block w-full text-center px-4 py-2.5 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors text-sm sm:text-base mt-auto"
-								>
-									Забронировать
-								</a>
+                                <ContactModalTrigger
+                                    label="Забронировать"
+                                    className="inline-block w-full text-center px-4 py-2.5 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors text-sm sm:text-base mt-auto"
+                                    model={m.name}
+                                    sourceTag="Аренда кофемашин"
+                                />
 							</div>
 						</div>
 					))}
@@ -343,12 +354,12 @@ export default function CoffeeMachinesRentPage() {
 								</div>
 							</div>
 							<div className="mt-4 sm:mt-5 pt-2 border-t border-brown-100">
-								<a
-									href={`/?model=${encodeURIComponent(m.name)}#contact-form`}
-									className="inline-block w-full text-center px-4 py-2.5 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors text-sm sm:text-base mt-auto"
-								>
-									Забронировать
-								</a>
+                                <ContactModalTrigger
+                                    label="Забронировать"
+                                    className="inline-block w-full text-center px-4 py-2.5 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors text-sm sm:text-base mt-auto"
+                                    model={m.name}
+                                    sourceTag="Аренда кофемашин"
+                                />
 							</div>
 						</div>
 					))}
@@ -368,7 +379,7 @@ export default function CoffeeMachinesRentPage() {
 				</div>
 			</section>
 
-			<Footer />
+            <Footer />
 		</main>
 	)
 }
