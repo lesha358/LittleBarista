@@ -1,4 +1,4 @@
-# Multi-stage Dockerfile to run Next.js server with API routes
+# Multi-stage Dockerfile for static export
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -9,23 +9,15 @@ RUN npm ci || npm install
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV=production
+FROM nginx:alpine AS runner
 
-COPY --from=builder /app/package*.json ./
-RUN npm ci --omit=dev || npm install --omit=dev
+# Copy static files from Next.js build
+COPY --from=builder /app/out /usr/share/nginx/html
 
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./next.config.js
-COPY --from=builder /app/next-env.d.ts ./next-env.d.ts
-COPY --from=builder /app/tailwind.config.js ./tailwind.config.js
-COPY --from=builder /app/postcss.config.js ./postcss.config.js
-COPY --from=builder /app/tsconfig.json ./tsconfig.json
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 3000
-ENV PORT=3000 HOSTNAME=0.0.0.0
+EXPOSE 80
 
-CMD ["npm", "run", "start"]
+CMD ["nginx", "-g", "daemon off;"]
 

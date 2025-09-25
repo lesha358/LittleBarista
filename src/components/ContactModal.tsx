@@ -26,59 +26,25 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          email: '',
-          message: '',
-        }),
+      // Используем клиентский Telegram API
+      const { sendTelegramClient } = await import('../lib/telegram');
+      const tg = await sendTelegramClient({
+        name: formData.name,
+        phone: formData.phone,
+        model: formData.model || presetModel,
+        source: sourceTag,
       });
-
-      const contentType = response.headers.get('content-type') || '';
-      let data: any = null;
-      if (contentType.includes('application/json')) {
-        data = await response.json();
-      } else {
-        const _text = await response.text();
-        throw new Error('Ответ сервера имеет неверный формат (ожидался JSON).');
-      }
-
-      if (!response.ok) {
-        throw new Error(data?.error || 'Ошибка при отправке формы');
-      }
-
-      setSubmitStatus('success');
-      setFormData({ name: '', phone: '', model: '' });
       
-      // Закрываем модальное окно через 2 секунды после успешной отправки
-      setTimeout(() => {
-        onClose();
-      }, 2000);
+      if (tg.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', phone: '', model: '' });
+        setTimeout(() => onClose(), 2000);
+      } else {
+        throw new Error(tg.error || 'Ошибка отправки в Telegram');
+      }
     } catch (error) {
-      // Fallback: клиентская отправка в Telegram
-      try {
-        const { sendTelegramClient } = await import('../lib/telegram');
-        const tg = await sendTelegramClient({
-          name: formData.name,
-          phone: formData.phone,
-          model: formData.model || presetModel,
-          source: sourceTag,
-        });
-        if (tg.ok) {
-          setSubmitStatus('success');
-          setFormData({ name: '', phone: '', model: '' });
-          setTimeout(() => onClose(), 2000);
-          return;
-        }
-      } catch (_) {}
-
       console.error('Error submitting form:', error);
       setSubmitStatus('error');
-      // Показываем более подробное сообщение об ошибке
       if (error instanceof Error) {
         setErrorMessage(error.message);
       } else {
