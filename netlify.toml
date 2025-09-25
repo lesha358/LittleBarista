@@ -5,6 +5,28 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Handle services pages specifically
+[[redirects]]
+  from = "/services/coffee-machines"
+  to = "/services/coffee-machines.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/coffee-shows"
+  to = "/services/coffee-shows.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/mobile-bar"
+  to = "/services/mobile-bar.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/mobile-coffee"
+  to = "/services/mobile-coffee.html"
+  status = 200
+
+# Fallback for all other routes
 [[redirects]]
   from = "/*"
   to = "/index.html"
