@@ -9,8 +9,13 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +42,8 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
   }, [isMobileMenuOpen]);
 
   const goToSection = (sectionId: string) => {
+    if (!mounted) return;
+    
     if (pathname !== '/') {
       router.push(`/#${sectionId}`);
       setIsMobileMenuOpen(false);
@@ -59,6 +66,8 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
   };
 
   const goHome = () => {
+    if (!mounted) return;
+    
     if (pathname !== '/') {
       router.push('/');
       setIsMobileMenuOpen(false);
@@ -71,6 +80,8 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
   };
 
   const handleOrder = () => {
+    if (!mounted) return;
+    
     if (pathname !== '/') {
       router.push('/#contact-form');
       setIsMobileMenuOpen(false);
@@ -237,7 +248,7 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
                   Наши преимущества
                 </button>
                 <button 
-                  className="text-lg font-medium text-brown-900 hover:text-бrown-600 transition-colors py-2"
+                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
                   onClick={() => goToSection('contacts')}
                 >
                   Контакты
