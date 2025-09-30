@@ -65,21 +65,6 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
     setIsMobileMenuOpen(false);
   };
 
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navElement = document.querySelector('nav');
-      const navHeight = navElement ? (navElement as HTMLElement).offsetHeight : 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      setIsMobileMenuOpen(false);
-    }
-  };
-
   const goHome = () => {
     if (!mounted) return;
     

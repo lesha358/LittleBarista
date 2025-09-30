@@ -4,6 +4,7 @@ import ContactModalTrigger from '@/components/ContactModalTrigger'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import Script from 'next/script'
+import Link from 'next/link'
 
 export const metadata = generateMetadata({
 	title: 'Аренда кофемашин в Москве — посуточно для мероприятий и офиса',
@@ -174,9 +175,14 @@ export default function CoffeeMachinesRentPage() {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
 					{/* Левая колонка: текст и CTA */}
 					<div>
-						<div className="inline-flex items-center gap-2 rounded-full border border-brown-200 bg-white px-3 py-1 text-xs sm:text-sm text-brown-700 shadow-sm">
-							<span className="inline-block h-2 w-2 rounded-full bg-brown-500" />
-							Краткосрочная аренда по Москве и области
+						<div className="flex items-center gap-2">
+							<div className="inline-flex items-center gap-2 rounded-full border border-brown-200 bg-white px-3 py-1 text-xs sm:text-sm text-brown-700 shadow-sm">
+								<span className="inline-block h-2 w-2 rounded-full bg-brown-500" />
+								Краткосрочная аренда по Москве и области
+							</div>
+							<Link href="/services/coffee-machines/long-term" className="inline-flex items-center gap-2 rounded-full border border-brown-200 bg-white px-3 py-1 text-xs sm:text-sm text-brown-700 shadow-sm hover:bg-brown-50 transition-colors">
+								Долгосрочная аренда для офисов
+							</Link>
 						</div>
 						<h1 className="mt-3 sm:mt-4 text-[28px] sm:text-4xl md:text-5xl font-extrabold text-brown-900 tracking-tight">
 							Аренда кофемашин для событий и бизнеса
