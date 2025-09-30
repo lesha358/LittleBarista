@@ -11,19 +11,19 @@ const services = [
   {
     title: 'Кофейные шоу',
     description: 'Зрелищные выступления профессиональных бариста с элементами латте-арта и кофейных трюков',
-    link: '/services/coffee-shows.html',
+    link: '/services/coffee-shows',
     image: '/images/services/coffee-show.jpg',
   },
   {
     title: 'Мастер-классы',
     description: 'Обучающие занятия по приготовлению кофе различных видов и методик заваривания',
-    link: '/services/master-classes.html',
+    link: '/services/master-classes',
     image: '/images/services/master-class.jpg',
   },
   {
     title: 'Дегустации',
     description: 'Профессиональные дегустации различных сортов кофе с подробным разбором вкусовых характеристик',
-    link: '/services/tastings.html',
+    link: '/services/tastings',
     image: '/images/services/tasting.jpg',
   },
 ]

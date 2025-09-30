@@ -46,7 +46,7 @@ export default function ServiceTriad() {
 
           {/* Центральная полоса */}
           <Link
-            href="/services/mobile-bar.html"
+            href="/services/mobile-bar"
             aria-label="Выездной бар"
             className="group relative h-[200px] sm:h-[240px] md:h-full overflow-hidden shadow-md hover:shadow-lg transition-all rounded-xl md:rounded-none md:[clip-path:polygon(0%_0%,_96%_0%,_100%_100%,_4%_100%)]"
           >
@@ -74,7 +74,7 @@ export default function ServiceTriad() {
 
           {/* Правая полоса */}
           <Link
-            href="/services/coffee-machines.html"
+            href="/services/coffee-machines"
             aria-label="Аренда кофемашин"
             className="group relative h-[200px] sm:h-[240px] md:h-full overflow-hidden shadow-sm hover:shadow-md transition-all rounded-xl md:rounded-none md:[clip-path:polygon(0%_0%,_100%_0%,_100%_100%,_4%_100%)]"
           >
