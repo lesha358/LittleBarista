@@ -170,7 +170,7 @@ export default function CoffeeMachinesRentPage() {
 
 			<Navigation />
 
-			<section className="container px-4 sm:px-6 lg:px-8 pt-24 md:pt-40 pb-8">
+			<section id="intro" className="container px-4 sm:px-6 lg:px-8 pt-24 md:pt-40 pb-8">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
 					{/* Левая колонка: текст и CTA */}
 					<div>
@@ -219,7 +219,7 @@ export default function CoffeeMachinesRentPage() {
 				</div>
 			</section>
 
-			<section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+			<section id="cooperation" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
 					<div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm hover:shadow-md transition-shadow bg-white/90 backdrop-blur-sm relative flex flex-col">
 						<div className="absolute inset-0 rounded-2xl pointer-events-none" style={{boxShadow:'inset 0 0 0 1px rgba(214,184,158,0.25)'}} />
@@ -270,7 +270,7 @@ export default function CoffeeMachinesRentPage() {
 				</div>
 			</section>
 
-			<section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+			<section id="machines" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 				<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Варианты кофемашин</h2>
 				<div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
 					{machines.map((m) => (
@@ -319,7 +319,7 @@ export default function CoffeeMachinesRentPage() {
 				</div>
 			</section>
 
-			<section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+			<section id="espresso" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 				<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Рожковые кофемашины</h2>
 				<p className="mt-2 text-brown-800/90 max-w-3xl text-sm sm:text-base">Для работы на рожковом оборудовании нужны навыки бариста и кофемолка.</p>
 				<div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -366,7 +366,7 @@ export default function CoffeeMachinesRentPage() {
 				</div>
 			</section>
 
-			<section className="container px-4 sm:px-6 lg:px-8 py-12">
+			<section id="extras" className="container px-4 sm:px-6 lg:px-8 py-12">
 				<div className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl border border-brown-200 shadow-sm">
 					<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Дополнительные услуги</h2>
 					<ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 text-brown-800/90 list-disc pl-5">

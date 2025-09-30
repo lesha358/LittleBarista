@@ -187,7 +187,7 @@ export default function MobileBarPage() {
 
       <Navigation theme="dark" />
 
-      <section className="container px-4 sm:px-6 lg:px-8 pt-24 md:pt-40 pb-8">
+      <section id="intro" className="container px-4 sm:px-6 lg:px-8 pt-24 md:pt-40 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs sm:text-sm text-amber-100/80 backdrop-blur">
@@ -234,7 +234,7 @@ export default function MobileBarPage() {
         </div>
       </section>
 
-      <section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <section id="cooperation" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="mb-8 grid grid-cols-2 md:grid-cols-4 gap-3">
           {[{k:"7+ лет",v:"на рынке"},{k:"100+",v:"событий/год"},{k:"4.9/5",v:"оценка клиентов"},{k:"24/7",v:"поддержка"}].map((s,i)=> (
             <div key={i} className="rounded-2xl border border-amber-200/20 bg-[rgba(0,0,0,0.35)] backdrop-blur px-4 py-5 text-center text-amber-100 shadow">
@@ -266,7 +266,7 @@ export default function MobileBarPage() {
         </div>
       </section>
 
-      <section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <section id="why-us" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">РАБОТАЕМ ДЛЯ ВАШЕГО КОМФОРТА</h2>
         <Divider />
         <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
@@ -282,7 +282,7 @@ export default function MobileBarPage() {
         <p className="mt-4 text-amber-100/80">Результат: ваши гости довольны, а праздник бьёт все рекорды.</p>
       </section>
       {/* Галерея временно скрыта */}
-      <section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <section id="themes" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Тематические бары</h2>
         <Divider />
         <p className="mt-2 text-white/70 max-w-3xl text-sm sm:text-base">Оформим стойку, подачу и меню под конкретный сценарий мероприятия.</p>
@@ -339,7 +339,7 @@ export default function MobileBarPage() {
         </div>
       </section>
 
-      <section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <section id="benefits" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Чем интересен выездной коктейль‑бар</h2>
         <Divider />
         <p className="mt-2 text-white/70 max-w-3xl text-sm sm:text-base">Это универсальное решение для событий разного формата.</p>
@@ -400,7 +400,7 @@ export default function MobileBarPage() {
         </div>
       </section>
 
-      <section className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <section id="packages" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Пакеты обслуживания</h2>
         <Divider />
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
@@ -471,7 +471,7 @@ export default function MobileBarPage() {
         </div>
       </section>
 
-      <section className="container px-4 sm:px-6 lg:px-8 pb-10">
+      <section id="contacts" className="container px-4 sm:px-6 lg:px-8 pb-10">
         <div className="p-6 rounded-2xl border border-amber-500/20 bg-black/30 backdrop-blur-sm">
           <h2 className="text-xl sm:text-2xl font-semibold text-amber-100">Готовы оформить заявку?</h2>
           <p className="mt-2 text-amber-100/80">Заполните короткую форму — перезвоним за 15 минут.</p>

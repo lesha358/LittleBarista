@@ -44,11 +44,26 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
   const goToSection = (sectionId: string) => {
     if (!mounted) return;
     
-    if (pathname !== '/') {
-      router.push(`/#${sectionId}`);
+    // If we're already on the current page (home or any route), try smooth-scroll first
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navElement = document.querySelector('nav');
+      const navHeight = navElement ? (navElement as HTMLElement).offsetHeight : 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
       setIsMobileMenuOpen(false);
       return;
     }
+
+    // If the section is not on the current DOM (navigating across routes), push with hash on the same pathname
+    router.push(`${pathname === '/' ? '' : pathname}#${sectionId}`);
+    setIsMobileMenuOpen(false);
+  };
 
     const element = document.getElementById(sectionId);
     if (element) {
@@ -83,12 +98,46 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
     if (!mounted) return;
     
     if (pathname !== '/') {
-      router.push('/#contact-form');
+      // On non-home pages we prefer opening the modal as well (no redirect to home)
       setIsMobileMenuOpen(false);
+      setIsModalOpen(true);
       return;
     }
     setIsModalOpen(true);
   };
+
+  type MenuItem = { label: string; sectionId?: string; onClick?: () => void };
+  const getMenuItems = (): MenuItem[] => {
+    if (pathname?.startsWith('/services/coffee-machines')) {
+      return [
+        { label: 'Варианты аренды', sectionId: 'cooperation' },
+        { label: 'Модели', sectionId: 'machines' },
+        { label: 'Рожковые', sectionId: 'espresso' },
+        { label: 'Доп. услуги', sectionId: 'extras' },
+        { label: 'Заказать', onClick: handleOrder },
+      ];
+    }
+    if (pathname?.startsWith('/services/mobile-bar')) {
+      return [
+        { label: 'Форматы', sectionId: 'cooperation' },
+        { label: 'Меню', sectionId: 'menu-list' },
+        { label: 'Пакеты', sectionId: 'packages' },
+        { label: 'Преимущества', sectionId: 'benefits' },
+        { label: 'Контакты', sectionId: 'contacts' },
+        { label: 'Заказать', onClick: handleOrder },
+      ];
+    }
+    // Default (homepage) menu
+    return [
+      { label: 'Варианты сотрудничества', sectionId: 'cooperation' },
+      { label: 'Галерея', sectionId: 'gallery' },
+      { label: 'Рассчитать заказ', sectionId: 'pricing' },
+      { label: 'Наши преимущества', sectionId: 'why-us' },
+      { label: 'Контакты', sectionId: 'contacts' },
+      { label: 'Заказать', onClick: handleOrder },
+    ];
+  };
+  const menuItems = getMenuItems();
 
   return (
     <>
@@ -157,27 +206,15 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
 
               {/* Навигация */}
               <nav className="hidden md:flex items-center space-x-8">
-                <button onClick={() => goToSection('cooperation')} className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors`}>
-                  Варианты сотрудничества
-                </button>
-                <button onClick={() => goToSection('gallery')} className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors`}>
-                  Галерея
-                </button>
-                <button onClick={() => goToSection('pricing')} className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors`}>
-                  Рассчитать заказ
-                </button>
-                <button onClick={() => goToSection('why-us')} className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors`}>
-                  Наши преимущества
-                </button>
-                <button onClick={() => goToSection('contacts')} className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors`}>
-                  Контакты
-                </button>
-                <button 
-                  onClick={handleOrder}
-                  className={`px-6 py-2 rounded-full transition-all duration-300 hover:shadow-md shadow-sm ${theme === 'dark' ? 'bg-amber-500 text-[#0d0a08] hover:bg-amber-400' : 'bg-brown-600 text-white hover:bg-brown-700'}`}
-                >
-                  Заказать
-                </button>
+                {menuItems.map((item, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => (item.onClick ? item.onClick() : item.sectionId ? goToSection(item.sectionId) : undefined)}
+                    className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors ${item.onClick ? `px-6 py-2 rounded-full hover:shadow-md shadow-sm ${theme === 'dark' ? 'bg-amber-500 text-[#0d0a08] hover:bg-amber-400' : 'bg-brown-600 text-white hover:bg-brown-700'}` : ''}`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
               </nav>
             </div>
 
@@ -222,47 +259,32 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
           <div className={`fixed inset-x-0 top-16 md:top-32 z-50 shadow-xl rounded-b-2xl transform transition-all duration-300 ease-in-out ${theme === 'dark' ? 'bg-[#12100d] border-t border-white/10' : 'bg-white'}`}>
             <div className="p-6 space-y-6">
               <div className="flex flex-col space-y-4">
-                
-                <button 
-                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
-                  onClick={() => goToSection('cooperation')}
-                >
-                  Варианты сотрудничества
-                </button>
-                <button 
-                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
-                  onClick={() => goToSection('gallery')}
-                >
-                  Галерея
-                </button>
-                <button 
-                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
-                  onClick={() => goToSection('pricing')}
-                >
-                  Рассчитать заказ
-                </button>
-                <button 
-                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
-                  onClick={() => goToSection('why-us')}
-                >
-                  Наши преимущества
-                </button>
-                <button 
-                  className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
-                  onClick={() => goToSection('contacts')}
-                >
-                  Контакты
-                </button>
+                {menuItems
+                  .filter(i => i.onClick === undefined) // render section links first
+                  .map((item, idx) => (
+                    <button
+                      key={idx}
+                      className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
+                      onClick={() => item.sectionId ? goToSection(item.sectionId) : undefined}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
               </div>
               
               <div className="pt-4 border-t border-brown-100">
                 <div className="flex justify-center space-x-4 mb-4">
-                  <button 
-                    onClick={() => handleOrder()}
-                    className="w-full py-3 px-6 rounded-full bg-brown-600 text-white transition-all duration-300 hover:bg-brown-700 hover:shadow-md shadow-sm text-lg font-medium"
-                  >
-                    Заказать
-                  </button>
+                  {menuItems
+                    .filter(i => i.onClick)
+                    .map((item, idx) => (
+                      <button
+                        key={idx}
+                        onClick={item.onClick}
+                        className="w-full py-3 px-6 rounded-full bg-brown-600 text-white transition-all duration-300 hover:bg-brown-700 hover:shadow-md shadow-sm text-lg font-medium"
+                      >
+                        {item.label}
+                      </button>
+                    ))}
                 </div>
               </div>
             </div>
