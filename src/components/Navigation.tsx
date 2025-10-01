@@ -56,6 +56,12 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
         top: offsetPosition,
         behavior: 'smooth'
       });
+      // Update URL hash to reflect current section without reloading
+      const newHash = `#${sectionId}`;
+      if (window.location.hash !== newHash) {
+        const newUrl = `${window.location.pathname}${newHash}`;
+        window.history.pushState(null, '', newUrl);
+      }
       setIsMobileMenuOpen(false);
       return;
     }
