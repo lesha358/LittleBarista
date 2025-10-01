@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next build",
+    "build:static": "next build",
     "start": "next start",
     "lint": "next lint",
-    "preview": "next start"
+    "preview": "next start",
+    "preview:static": "npx serve out -l 3000"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",

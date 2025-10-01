@@ -20,6 +20,7 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
+  trailingSlash: true,
   experimental: {
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
   },
