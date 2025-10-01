@@ -18,7 +18,7 @@ export default function ServiceTriad() {
         <div className="grid grid-cols-1 md:grid-cols-3 md:h-full gap-3 md:gap-0 px-4">
           {/* Левая полоса */}
           <Link
-            href="/#cooperation"
+            href="/services/mobile-coffee"
             aria-label="Выездная кофейня"
             className="group relative h-[200px] sm:h-[240px] md:h-full overflow-hidden shadow-sm hover:shadow-md transition-all rounded-xl md:rounded-none md:[clip-path:polygon(0%_0%,_96%_0%,_100%_100%,_0%_100%)]"
           >

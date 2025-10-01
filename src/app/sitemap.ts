@@ -40,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Подстраницы услуг
   const servicePages = [
     {
+      url: `${baseUrl}/services/mobile-coffee`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/services/coffee-shows`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
