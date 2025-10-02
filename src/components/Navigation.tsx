@@ -101,6 +101,7 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
   const getMenuItems = (): MenuItem[] => {
     if (pathname?.startsWith('/services/coffee-machines')) {
       return [
+        { label: 'Главная', onClick: goHome },
         { label: 'Варианты аренды', sectionId: 'cooperation' },
         { label: 'Модели', sectionId: 'machines' },
         { label: 'Рожковые', sectionId: 'espresso' },
@@ -110,6 +111,7 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
     }
     if (pathname?.startsWith('/services/mobile-bar')) {
       return [
+        { label: 'Главная', onClick: goHome },
         { label: 'Форматы', sectionId: 'cooperation' },
         { label: 'Меню', sectionId: 'menu-list' },
         { label: 'Пакеты', sectionId: 'packages' },
@@ -201,7 +203,7 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
                   <button
                     key={idx}
                     onClick={() => (item.onClick ? item.onClick() : item.sectionId ? goToSection(item.sectionId) : undefined)}
-                    className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors ${item.onClick ? `px-6 py-2 rounded-full hover:shadow-md shadow-sm ${theme === 'dark' ? 'bg-amber-500 text-[#0d0a08] hover:bg-amber-400' : 'bg-brown-600 text-white hover:bg-brown-700'}` : ''}`}
+                    className={`${theme === 'dark' ? 'text-white/90 hover:text-white' : 'text-brown-900 hover:text-brown-600'} transition-colors ${item.label === 'Заказать' ? `px-6 py-2 rounded-full hover:shadow-md shadow-sm ${theme === 'dark' ? 'bg-amber-500 text-[#0d0a08] hover:bg-amber-400' : 'bg-brown-600 text-white hover:bg-brown-700'}` : ''}`}
                   >
                     {item.label}
                   </button>
@@ -251,12 +253,12 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
             <div className="p-6 space-y-6">
               <div className="flex flex-col space-y-4">
                 {menuItems
-                  .filter(i => i.onClick === undefined) // render section links first
+                  .filter(i => i.label !== 'Заказать') // render all items except "Заказать"
                   .map((item, idx) => (
                     <button
                       key={idx}
                       className="text-lg font-medium text-brown-900 hover:text-brown-600 transition-colors py-2"
-                      onClick={() => item.sectionId ? goToSection(item.sectionId) : undefined}
+                      onClick={() => item.onClick ? item.onClick() : item.sectionId ? goToSection(item.sectionId) : undefined}
                     >
                       {item.label}
                     </button>
@@ -266,7 +268,7 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
               <div className="pt-4 border-t border-brown-100">
                 <div className="flex justify-center space-x-4 mb-4">
                   {menuItems
-                    .filter(i => i.onClick)
+                    .filter(i => i.onClick && i.label === 'Заказать')
                     .map((item, idx) => (
                       <button
                         key={idx}

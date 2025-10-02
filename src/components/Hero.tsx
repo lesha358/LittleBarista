@@ -64,7 +64,7 @@ export default function Hero() {
 
           {/* Заголовок */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-brown-900 leading-tight mb-6 max-w-4xl mx-auto">
-            Выездная кофейня на ваши мероприятия
+            Сделаем ваше мероприятие точкой притяжения с помощью вкусного кофе и коктейлей
           </h1>
 
           {/* Описание */}
