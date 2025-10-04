@@ -35,7 +35,8 @@ export default function Footer({ theme = 'light' }: { theme?: 'light' | 'dark' }
             <div className="grid grid-cols-2 gap-2">
               <Link href="/services/mobile-coffee" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Выездная кофейня</Link>
               <Link href="/services/mobile-bar" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Выездной бар</Link>
-              <Link href="/services/coffee-machines" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Аренда кофемашин</Link>
+              <Link href="/services/coffee-machines" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Краткосрочная аренда</Link>
+              <Link href="/services/coffee-machines/long-term" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Долгосрочная аренда</Link>
               <Link href="/#contacts" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Контакты</Link>
             </div>
           </div>
