@@ -110,10 +110,10 @@ export default function RootLayout({
             });
 
             ym(101111714, "init", {
+              webvisor:true,
               clickmap:true,
-              trackLinks:true,
               accurateTrackBounce:true,
-              ecommerce:"dataLayer"
+              trackLinks:true
             });
           `}
         </Script>
