@@ -122,10 +122,9 @@ export default function Navigation({ theme = 'light' }: { theme?: 'light' | 'dar
     }
     // Default (homepage) menu
     return [
-      { label: 'Варианты сотрудничества', sectionId: 'cooperation' },
-      { label: 'Галерея', sectionId: 'gallery' },
-      { label: 'Рассчитать заказ', sectionId: 'pricing' },
-      { label: 'Наши преимущества', sectionId: 'why-us' },
+      { label: 'Выездная кофейня', onClick: () => router.push('/services/mobile-coffee') },
+      { label: 'Выездной бар', onClick: () => router.push('/services/mobile-bar') },
+      { label: 'Аренда кофемашин', onClick: () => router.push('/services/coffee-machines') },
       { label: 'Контакты', sectionId: 'contacts' },
       { label: 'Заказать', onClick: handleOrder },
     ];

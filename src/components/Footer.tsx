@@ -33,11 +33,9 @@ export default function Footer({ theme = 'light' }: { theme?: 'light' | 'dark' }
           <div>
             <h3 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-amber-100' : 'text-brown-900'}`}>Навигация</h3>
             <div className="grid grid-cols-2 gap-2">
-              <Link href="/#about" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>О нас</Link>
-              <Link href="/#cooperation" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Сотрудничество</Link>
-              <Link href="/#process" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Как мы работаем</Link>
-              <Link href="/#pricing" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Примеры расчета</Link>
-              <Link href="/#why-us" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Почему мы</Link>
+              <Link href="/services/mobile-coffee" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Выездная кофейня</Link>
+              <Link href="/services/mobile-bar" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Выездной бар</Link>
+              <Link href="/services/coffee-machines" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Аренда кофемашин</Link>
               <Link href="/#contacts" className={`${theme === 'dark' ? 'text-white/85 hover:text-white' : 'text-brown-700 hover:text-brown-900'}`}>Контакты</Link>
             </div>
           </div>

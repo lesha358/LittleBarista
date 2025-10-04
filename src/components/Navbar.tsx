@@ -24,20 +24,14 @@ export default function Navbar() {
 
           {/* Навигация */}
           <div className="hidden md:flex space-x-8">
-            <a href="#about" className="text-brown-700 hover:text-brown-900">
-              О нас
+            <a href="/services/mobile-coffee" className="text-brown-700 hover:text-brown-900">
+              Выездная кофейня
             </a>
-            <a href="#cooperation" className="text-brown-700 hover:text-brown-900">
-              Сотрудничество
+            <a href="/services/mobile-bar" className="text-brown-700 hover:text-brown-900">
+              Выездной бар
             </a>
-            <a href="#gallery" className="text-brown-700 hover:text-brown-900">
-              Галерея
-            </a>
-            <a href="#pricing" className="text-brown-700 hover:text-brown-900">
-              Примеры расчета
-            </a>
-            <a href="#why-us" className="text-brown-700 hover:text-brown-900">
-              Почему мы
+            <a href="/services/coffee-machines" className="text-brown-700 hover:text-brown-900">
+              Аренда кофемашин
             </a>
             <a href="#contacts" className="text-brown-700 hover:text-brown-900">
               Контакты
@@ -77,20 +71,14 @@ export default function Navbar() {
         {/* Мобильное меню */}
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-4">
-            <a href="#about" className="block text-brown-700 hover:text-brown-900">
-              О нас
+            <a href="/services/mobile-coffee" className="block text-brown-700 hover:text-brown-900">
+              Выездная кофейня
             </a>
-            <a href="#cooperation" className="block text-brown-700 hover:text-brown-900">
-              Сотрудничество
+            <a href="/services/mobile-bar" className="block text-brown-700 hover:text-brown-900">
+              Выездной бар
             </a>
-            <a href="#gallery" className="block text-brown-700 hover:text-brown-900">
-              Галерея
-            </a>
-            <a href="#pricing" className="block text-brown-700 hover:text-brown-900">
-              Примеры расчета
-            </a>
-            <a href="#why-us" className="block text-brown-700 hover:text-brown-900">
-              Почему мы
+            <a href="/services/coffee-machines" className="block text-brown-700 hover:text-brown-900">
+              Аренда кофемашин
             </a>
             <a href="#contacts" className="block text-brown-700 hover:text-brown-900">
               Контакты
