@@ -2,13 +2,9 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { reachGoalAll } from '@/lib/analytics';
 
-// Добавляем типизацию для Яндекс Метрики
-declare global {
-  interface Window {
-    ym: (id: number, action: string, goal: string) => void;
-  }
-}
+// Типизация для window.ym берётся из утилиты analytics, здесь декларация не нужна
 
 type ContactFormProps = {
   title?: string;
@@ -55,10 +51,8 @@ function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: 
         throw new Error(tg.error || 'Не удалось отправить сообщение в Telegram');
       }
 
-      // Отправляем событие в Яндекс Метрику
-      if (typeof window !== 'undefined' && window.ym) {
-        window.ym(101109907, 'reachGoal', 'form');
-      }
+      // Отправляем событие в Яндекс Метрику (во все счётчики)
+      reachGoalAll('form_success')
 
       setSubmitStatus('success');
       setFormData({ name: '', phone: '', model: '' });
