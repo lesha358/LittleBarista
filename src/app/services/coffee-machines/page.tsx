@@ -385,6 +385,30 @@ export default function CoffeeMachinesRentPage() {
 				</div>
 			</section>
 
+			<section id="faq" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+				<div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm bg-white/90 backdrop-blur-sm">
+					<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Частые вопросы</h2>
+					<div className="mt-4 space-y-4 text-brown-900">
+						<div>
+							<h3 className="font-semibold">На какой срок сдаёте кофемашины?</h3>
+							<p className="text-brown-800/90">Чаще посуточно на 1–5 дней или на весь срок мероприятия.</p>
+						</div>
+						<div>
+							<h3 className="font-semibold">Входит ли доставка и подключение?</h3>
+							<p className="text-brown-800/90">Да. Привозим, подключаем, проверяем работу и при необходимости обучаем персонал.</p>
+						</div>
+						<div>
+							<h3 className="font-semibold">Можно ли заказать бариста и расходники?</h3>
+							<p className="text-brown-800/90">Да, есть пакет «под ключ»: бариста, кофе, молоко, сиропы, посуда.</p>
+						</div>
+						<div>
+							<h3 className="font-semibold">Как выбрать модель под мой поток?</h3>
+							<p className="text-brown-800/90">Мы подскажем по ожидаемому трафику: до 100 чашек/день или до 500+.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
             <Footer />
 		</main>
 	)

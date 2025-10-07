@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Подстраницы услуг
+  // Подстраницы услуг (только существующие маршруты)
   const servicePages = [
     {
       url: `${baseUrl}/services/mobile-coffee`,
@@ -52,34 +52,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services/master-classes`,
+      url: `${baseUrl}/services/mobile-bar`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services/tastings`,
+      url: `${baseUrl}/services/coffee-machines`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
-      priority: 0.8,
+      priority: 0.95,
     },
-  ]
-
-  // Подстраницы событий
-  const eventPages = [
     {
-      url: `${baseUrl}/events/upcoming`,
+      url: `${baseUrl}/services/coffee-machines/long-term`,
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/events/past`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    },
   ]
 
-  return [...mainPages, ...servicePages, ...eventPages]
+  return [...mainPages, ...servicePages]
 } 

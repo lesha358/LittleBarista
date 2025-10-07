@@ -3,6 +3,8 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import ContactModalTrigger from '@/components/ContactModalTrigger'
+import Script from 'next/script'
+import Link from 'next/link'
 
 const machines = [
 	{
@@ -80,6 +82,96 @@ export default function CoffeeMachinesLongTermPage() {
     return (
         <main className="min-h-screen relative overflow-x-hidden">
             <Navigation />
+            {/* SEO: Breadcrumbs, Service structured data */}
+            <Script id="breadcrumbs-jsonld" type="application/ld+json">
+                {JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'BreadcrumbList',
+                    itemListElement: [
+                        { '@type': 'ListItem', position: 1, name: 'Главная', item: 'https://littlebarista.ru/' },
+                        { '@type': 'ListItem', position: 2, name: 'Услуги', item: 'https://littlebarista.ru/services' },
+                        { '@type': 'ListItem', position: 3, name: 'Аренда кофемашин', item: 'https://littlebarista.ru/services/coffee-machines' },
+                        { '@type': 'ListItem', position: 4, name: 'Долгосрочная аренда', item: 'https://littlebarista.ru/services/coffee-machines/long-term' },
+                    ],
+                })}
+            </Script>
+            <Script id="service-jsonld" type="application/ld+json">
+                {JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'Service',
+                    name: 'Долгосрочная аренда кофемашин',
+                    areaServed: ['Москва', 'Московская область'],
+                    provider: {
+                        '@type': 'LocalBusiness',
+                        name: 'Little Barista',
+                        address: {
+                            '@type': 'PostalAddress',
+                            addressLocality: 'Москва',
+                            streetAddress: 'ул. Гаврикова, д. 2/38',
+                            addressCountry: 'RU',
+                        },
+                        email: 'Misha310@mail.ru',
+                        telephone: '+7 962 442-97-94',
+                    },
+                    offers: {
+                        '@type': 'Offer',
+                        availability: 'https://schema.org/InStock',
+                        priceSpecification: {
+                            '@type': 'PriceSpecification',
+                            priceCurrency: 'RUB',
+                            price: '0',
+                        },
+                    },
+                })}
+            </Script>
+            <Script id="faq-jsonld" type="application/ld+json">
+                {JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'FAQPage',
+                    mainEntity: [
+                        {
+                            '@type': 'Question',
+                            name: 'На какой срок доступна долгосрочная аренда?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Обычно от 1 месяца и более. Условия и тариф согласовываются индивидуально под ваш трафик.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            name: 'Входит ли обслуживание кофемашины в аренду?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Да. Регулярная чистка, сервисные выезды и замена расходников включены по договору.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            name: 'Кто поставляет кофе и молоко?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Мы организуем регулярные поставки кофе, молока и сиропов по согласованному графику.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            name: 'Как быстро приедет мастер при поломке?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Обычно в течение 24 часов. При необходимости предоставим подменную машину.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            name: 'Можно ли начать с пилотного месяца?',
+                            acceptedAnswer: {
+                                '@type': 'Answer',
+                                text: 'Да, возможно заключение договора на пилотный период с последующей пролонгацией.',
+                            },
+                        },
+                    ],
+                })}
+            </Script>
 
             <section id="intro" className="container px-4 sm:px-6 lg:px-8 pt-24 md:pt-40 pb-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
@@ -87,6 +179,11 @@ export default function CoffeeMachinesLongTermPage() {
                         <div className="inline-flex items-center gap-2 rounded-full border border-brown-200 bg-white px-3 py-1 text-xs sm:text-sm text-brown-700 shadow-sm">
                             <span className="inline-block h-2 w-2 rounded-full bg-brown-700" />
                             Долгосрочная аренда по Москве и области
+                        </div>
+                        <div className="mt-2">
+                            <Link href="/services/coffee-machines" className="text-brown-700 hover:text-brown-900 underline underline-offset-4">
+                                Аренда кофемашины в Москве посуточно →
+                            </Link>
                         </div>
                         <h1 className="mt-3 sm:mt-4 text-[28px] sm:text-4xl md:text-5xl font-extrabold text-brown-900 tracking-tight">
                             Кофемашина в офис, салон красоты и шоурум
@@ -241,6 +338,34 @@ export default function CoffeeMachinesLongTermPage() {
                             className="px-4 py-2.5 rounded-full bg-brown-700 text-white hover:bg-brown-800 transition-colors"
                             sourceTag="Долгосрочная аренда"
                         />
+                    </div>
+                </div>
+            </section>
+
+            <section id="faq" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+                <div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm bg-white/90 backdrop-blur-sm">
+                    <h2 className="text-2xl md:text-3xl font-bold text-brown-900">Частые вопросы</h2>
+                    <div className="mt-4 space-y-4 text-brown-900">
+                        <div>
+                            <h3 className="font-semibold">На какой срок доступна долгосрочная аренда?</h3>
+                            <p className="text-brown-800/90">От 1 месяца и дольше. Условия подбираем под ваш трафик и график работы.</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">Входит ли обслуживание в стоимость?</h3>
+                            <p className="text-brown-800/90">Да. Профилактика, чистка, сервисные выезды и замена узлов — по договору.</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">Кто обеспечивает расходники?</h3>
+                            <p className="text-brown-800/90">Мы организуем регулярные поставки кофе, молока, сиропов и одноразовой посуды.</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">Сколько ждать мастера при поломке?</h3>
+                            <p className="text-brown-800/90">Обычно до 24 часов. На время ремонта предоставим подменную машину.</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">Можно ли начать с пилотного месяца?</h3>
+                            <p className="text-brown-800/90">Да, часто начинаем с пилота, далее пролонгируем на удобный срок.</p>
+                        </div>
                     </div>
                 </div>
             </section>
