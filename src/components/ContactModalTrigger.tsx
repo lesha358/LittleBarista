@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import ContactModal from './ContactModal';
+import { reachGoalAll } from '@/lib/analytics';
 
 type ContactModalTriggerProps = {
   label: string;
@@ -22,7 +23,7 @@ export default function ContactModalTrigger({ label, className = '', model = '',
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className={className}>
+      <button onClick={() => { reachGoalAll('cta_click'); setIsOpen(true); }} className={className}>
         {label}
       </button>
       {mounted && typeof document !== 'undefined' && createPortal(

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import ScrollToTop from "@/components/ScrollToTop";
+import { useEffect } from "react";
+import { parseUtmFromLocation, saveUtmOnce } from "@/lib/utm";
 import "./globals.css";
 
 const inter = Inter({
@@ -73,6 +75,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Кладём UTM при первом визите
+  if (typeof window !== 'undefined') {
+    // обёртка в эффект не доступна здесь (Server Component), поэтому добавим скрипт ниже
+  }
   return (
     <html lang="ru" className={inter.variable}>
       <head>
@@ -125,6 +131,22 @@ export default function RootLayout({
             <img src="https://mc.yandex.ru/watch/101111714" style={{position: 'absolute', left: '-9999px'}} alt="" />
           </div>
         </noscript>
+        <Script id="utm-capture" strategy="afterInteractive">
+          {`
+            try {
+              var params = new URLSearchParams(window.location.search);
+              var utm = {};
+              ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+                var v = params.get(k); if (v) utm[k] = v;
+              });
+              utm.referrer = document.referrer || '';
+              var key = 'lb_first_utm';
+              if (Object.keys(utm).length && !localStorage.getItem(key)) {
+                localStorage.setItem(key, JSON.stringify(Object.assign({ts: Date.now()}, utm)));
+              }
+            } catch(e) {}
+          `}
+        </Script>
       </head>
       <body className={inter.className}>
         {children}

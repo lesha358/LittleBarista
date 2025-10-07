@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getSavedUtm } from '@/lib/utm';
+import { reachGoalAll } from '@/lib/analytics';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -16,6 +18,9 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
     phone: '',
     model: presetModel || '',
   });
+  useEffect(() => {
+    if (isOpen) reachGoalAll('modal_open')
+  }, [isOpen])
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,14 +33,24 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
     try {
       // Используем клиентский Telegram API
       const { sendTelegramClient } = await import('../lib/telegram');
+      const utm = getSavedUtm();
       const tg = await sendTelegramClient({
         name: formData.name,
         phone: formData.phone,
         model: formData.model || presetModel,
-        source: sourceTag,
+        source: [
+          sourceTag,
+          utm?.utm_source && `utm_source=${utm.utm_source}`,
+          utm?.utm_medium && `utm_medium=${utm.utm_medium}`,
+          utm?.utm_campaign && `utm_campaign=${utm.utm_campaign}`,
+          utm?.utm_content && `utm_content=${utm.utm_content}`,
+          utm?.utm_term && `utm_term=${utm.utm_term}`,
+          utm?.referrer && `ref=${utm.referrer}`,
+        ].filter(Boolean).join(' | '),
       });
       
       if (tg.ok) {
+        reachGoalAll('form_success')
         setSubmitStatus('success');
         setFormData({ name: '', phone: '', model: '' });
         setTimeout(() => onClose(), 2000);
