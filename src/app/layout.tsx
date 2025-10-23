@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import ScrollToTop from "@/components/ScrollToTop";
+import YMHits from "@/components/YMHits";
 import { useEffect } from "react";
 import { parseUtmFromLocation, saveUtmOnce } from "@/lib/utm";
 import "./globals.css";
@@ -87,57 +88,23 @@ export default function RootLayout({
         <link rel="shortcut icon" href="https://littlebarista.ru/favicon.ico" type="image/x-icon" />
         <Script id="yandex-metrika" strategy="afterInteractive">
           {`
-            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+            (function(m,e,t,r,i,k,a){
+              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-            ym(101109907, "init", {
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true,
-              webvisor:true
-            });
-
-            ym(101983555, "init", {
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true,
-              webvisor:true,
-              ecommerce:"dataLayer"
-            });
-
-            ym(101984487, "init", {
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true,
-              ecommerce:"dataLayer"
-            });
-
-            ym(101111714, "init", {
-              webvisor:true,
-              clickmap:true,
-              accurateTrackBounce:true,
-              trackLinks:true
-            });
-
-            ym(104587269, "init", {
-              ssr:true,
-              webvisor:true,
-              clickmap:true,
-              ecommerce:"dataLayer",
-              accurateTrackBounce:true,
-              trackLinks:true
+            ym(104587269, 'init', {
+              webvisor: true,
+              clickmap: true,
+              accurateTrackBounce: true,
+              trackLinks: true
             });
           `}
         </Script>
         <noscript>
           <div>
-            <img src="https://mc.yandex.ru/watch/101109907" style={{position: 'absolute', left: '-9999px'}} alt="" />
-            <img src="https://mc.yandex.ru/watch/101983555" style={{position: 'absolute', left: '-9999px'}} alt="" />
-            <img src="https://mc.yandex.ru/watch/101984487" style={{position: 'absolute', left: '-9999px'}} alt="" />
-            <img src="https://mc.yandex.ru/watch/101111714" style={{position: 'absolute', left: '-9999px'}} alt="" />
             <img src="https://mc.yandex.ru/watch/104587269" style={{position: 'absolute', left: '-9999px'}} alt="" />
           </div>
         </noscript>
@@ -157,8 +124,31 @@ export default function RootLayout({
             } catch(e) {}
           `}
         </Script>
+        <Script id="ym-events" strategy="afterInteractive">
+          {`
+            (function () {
+              // Отправка любой формы
+              document.addEventListener('submit', function () {
+                try { ym(104587269, 'reachGoal', 'form_submit'); } catch(e) {}
+              }, true);
+
+              // Клик по номеру телефона (tel:)
+              document.addEventListener('click', function (e) {
+                var a = e.target.closest('a[href^="tel:"]');
+                if (a) { try { ym(104587269, 'reachGoal', 'phone_click'); } catch(e) {} }
+              }, true);
+
+              // Клик по мессенджерам (WhatsApp/Telegram)
+              document.addEventListener('click', function (e) {
+                var a = e.target.closest('a[href*="wa.me"],a[href*="whatsapp"],a[href*="t.me"],a[href*="telegram"]');
+                if (a) { try { ym(104587269, 'reachGoal', 'messenger_click'); } catch(e) {} }
+              }, true);
+            })();
+          `}
+        </Script>
       </head>
       <body className={inter.className}>
+        <YMHits />
         {children}
         <ScrollToTop />
       </body>
