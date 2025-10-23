@@ -1,8 +1,8 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function YMHits() {
+function YMHitsInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   
@@ -12,4 +12,12 @@ export default function YMHits() {
   }, [pathname, searchParams]);
   
   return null;
+}
+
+export default function YMHits() {
+  return (
+    <Suspense fallback={null}>
+      <YMHitsInner />
+    </Suspense>
+  );
 }
