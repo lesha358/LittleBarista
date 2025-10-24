@@ -103,11 +103,6 @@ export default function RootLayout({
             });
           `}
         </Script>
-        <noscript>
-          <div>
-            <img src="https://mc.yandex.ru/watch/104587269" style={{position: 'absolute', left: '-9999px'}} alt="" />
-          </div>
-        </noscript>
         <Script id="utm-capture" strategy="afterInteractive">
           {`
             try {
