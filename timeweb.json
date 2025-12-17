@@ -1,0 +1,12 @@
+{
+  "name": "LittleBarista",
+  "description": "Сайт кофейного сервиса Little Barista - Static Website",
+  "version": "1.0.0",
+  "type": "static",
+  "framework": "nextjs",
+  "build": {
+    "command": "npm run build",
+    "output": "out",
+    "install": "npm install"
+  }
+}

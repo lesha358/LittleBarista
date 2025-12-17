@@ -1,0 +1,8 @@
+# Handle Next.js static export routing
+/*    /index.html   200
+
+# Handle services pages specifically
+/services/coffee-machines    /services/coffee-machines.html    200
+/services/coffee-shows       /services/coffee-shows.html       200
+/services/mobile-bar         /services/mobile-bar.html         200
+/services/mobile-coffee      /services/mobile-coffee.html      200
