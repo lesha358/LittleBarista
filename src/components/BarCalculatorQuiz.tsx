@@ -220,6 +220,8 @@ export default function BarCalculatorQuiz() {
         throw new Error(tg.error || "Не удалось отправить данные");
       }
 
+      // Логика отправки как у других форм: фиксируем успешную заявку
+      reachGoalAll("form_success");
       reachGoalAll("calc_submit", {
         approxPrice,
         guests: guestsCount,
