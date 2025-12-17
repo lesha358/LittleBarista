@@ -3,5 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /_next/
 Disallow: /static/
-
 Sitemap: https://littlebarista.ru/sitemap.xml 
