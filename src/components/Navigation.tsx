@@ -151,6 +151,9 @@ export default function Navigation({ theme = 'dark' }: { theme?: 'light' | 'dark
           </nav>
 
           <div className="site-header__actions">
+            <a href="tel:+79624429794" className="header-phone" aria-label="Позвонить">
+              +7 (962) 442-97-94
+            </a>
             {orderItem && (
               <button
                 type="button"
@@ -192,6 +195,9 @@ export default function Navigation({ theme = 'dark' }: { theme?: 'light' | 'dark
               </button>
             )
           ))}
+          <a href="tel:+79624429794" className="mobile-menu__phone">
+            +7 (962) 442-97-94
+          </a>
           {orderItem && (
             <button
               type="button"
