@@ -650,6 +650,7 @@
 
   .service-card__wrapper {
     display: flex;
+    flex-direction: column;
     min-height: 0;
   }
 
@@ -671,7 +672,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    flex: 1;
     min-height: 0;
     border-radius: 30px;
     overflow: hidden;
@@ -697,12 +698,8 @@
       inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
-  .service-card.featured {
-    transform: translateY(-10px);
-  }
-
   .service-card.featured:hover {
-    transform: translateY(-16px);
+    transform: translateY(-6px);
   }
 
   .service-card__media {
