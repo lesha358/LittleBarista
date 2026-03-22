@@ -22,7 +22,7 @@ export default function ScrollToTop() {
     <button
       aria-label="Наверх"
       onClick={scrollToTop}
-      className={`fixed right-4 bottom-8 z-[60] md:right-6 md:bottom-8 h-14 w-14 rounded-full bg-brown-600 text-white shadow-lg transition-all duration-300 hover:bg-brown-700 hover:shadow-xl flex items-center justify-center border border-brown-500 ${
+      className={`fixed right-6 bottom-8 z-[60] md:right-8 md:bottom-8 h-14 w-14 rounded-full bg-brown-600 text-white shadow-lg transition-all duration-300 hover:bg-brown-700 hover:shadow-xl flex items-center justify-center border border-brown-500 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
