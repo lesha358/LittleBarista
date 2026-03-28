@@ -1,33 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
 import ScrollToTop from "@/components/ScrollToTop";
 import YMHits from "@/components/YMHits";
 import { useEffect } from "react";
 import { parseUtmFromLocation, saveUtmOnce } from "@/lib/utm";
+import { inter, cormorant } from "@/lib/fonts";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-  preload: true,
-  fallback: ["system-ui", "arial"],
-  adjustFontFallback: true,
-  variable: "--font-inter",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-  variable: "--font-playfair",
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "600"],
-  display: "swap",
-  variable: "--font-cormorant",
-});
 
 export const viewport: Viewport = {
   themeColor: '#ffffff',
@@ -94,7 +72,7 @@ export default function RootLayout({
     // обёртка в эффект не доступна здесь (Server Component), поэтому добавим скрипт ниже
   }
   return (
-    <html lang="ru" className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}>
+    <html lang="ru" className={`${inter.variable} ${cormorant.variable}`}>
       <head>
         <meta name="yandex-verification" content="512bc29e8533e8e3" />
         <link rel="icon" href="https://littlebarista.ru/favicon.ico" type="image/x-icon" />

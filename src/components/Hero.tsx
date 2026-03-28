@@ -3,9 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import ContactModal from './ContactModal';
-import { Prata } from 'next/font/google';
-
-const prata = Prata({ subsets: ['latin', 'cyrillic'], weight: '400', display: 'swap' });
+import { cormorant } from '@/lib/fonts';
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,9 +27,9 @@ export default function Hero() {
       </div>
 
       {/* Контент — прижат к верху, пустое место снизу */}
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 pt-4 md:pt-8 flex flex-col items-center text-center w-full max-w-full">
-        {/* Логотип */}
-        <div className="mb-4 lg:mb-5 flex justify-center">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 pt-6 md:pt-10 flex flex-col items-center text-center w-full max-w-full">
+        {/* Логотип — чуть ниже, чтобы визуально сбалансировать отступы сверху/снизу */}
+        <div className="mt-2 md:mt-4 mb-5 md:mb-6 flex justify-center">
           <Image
             src="/images/hero-logo.png"
             alt="Little Barista"
@@ -43,15 +41,15 @@ export default function Hero() {
           />
         </div>
 
-        {/* Заголовок — серif, светлый текст */}
+        {/* Заголовок — serif, светлый текст */}
         <h1
-          className={`${prata.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-amber-50 leading-tight mb-4 max-w-5xl mx-auto tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]`}
+          className={`${cormorant.className} text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-amber-50 leading-[1.08] max-w-6xl mx-auto tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]`}
         >
-          Сделаем ваше мероприятие точкой притяжения с помощью вкусного кофе и коктейлей
+          Сделаем ваше мероприятие точкой притяжения
         </h1>
 
-        {/* Подзаголовок */}
-        <p className="text-base sm:text-lg md:text-xl text-amber-100/90 mb-6 max-w-3xl mx-auto font-medium">
+        {/* Подзаголовок — отступ от h1 сильно больше, чем между подзаголовком и CTA */}
+        <p className="mt-10 sm:mt-12 md:mt-14 text-lg sm:text-xl md:text-2xl text-amber-100/90 max-w-3xl mx-auto font-medium leading-relaxed tracking-wide mb-10 md:mb-12 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">
           Форумы, конференции, выставки, корпоративы и любые другие мероприятия
         </p>
 

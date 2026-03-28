@@ -7,7 +7,7 @@ import BarCalculatorQuiz from '@/components/BarCalculatorQuiz'
 import FloatingWhatsAppCalc from '@/components/FloatingWhatsAppCalc'
 import Image from 'next/image'
 import Script from 'next/script'
-import { Prata } from 'next/font/google'
+import { cormorant } from '@/lib/fonts'
 import ServiceAccordion, { type ServiceItem } from '@/components/ui/ServiceAccordion'
 
 export const metadata = generateMetadata({
@@ -15,8 +15,6 @@ export const metadata = generateMetadata({
   description: 'Организация выездного бара в Москве и МО: классические и авторские коктейли, non‑alcohol, бармен‑шоу, пирамида из шампанского. Под ключ: стойка, лёд, посуда, бармены.',
   path: '/services/mobile-bar',
 })
-
-const prata = Prata({ subsets: ['latin', 'cyrillic'], weight: '400', display: 'swap', variable: '--font-prata' })
 
 export default function MobileBarPage() {
   const jsonLdBreadcrumbs = {
@@ -183,7 +181,7 @@ export default function MobileBarPage() {
   ]
 
   return (
-    <main className={`min-h-screen relative overflow-x-hidden bg-[#0d0a08] text-cream-50 ${prata.variable}`}>
+    <main className={`min-h-screen relative overflow-x-hidden bg-[#0d0a08] text-cream-50`}>
       <Script id="breadcrumbs-mobile-bar" type="application/ld+json">{JSON.stringify(jsonLdBreadcrumbs)}</Script>
       <Script id="service-mobile-bar" type="application/ld+json">{JSON.stringify(jsonLdService)}</Script>
       <Script id="faq-mobile-bar" type="application/ld+json">{JSON.stringify(jsonLdFaq)}</Script>
@@ -203,7 +201,7 @@ export default function MobileBarPage() {
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-400" />
               Бар под ключ: меню, посуда, лёд, бармены
             </div>
-            <h1 className="mt-3 sm:mt-4 text-[34px] sm:text-6xl md:text-7xl font-extrabold text-amber-100 tracking-tight drop-shadow-[0_2px_12px_rgba(255,200,100,0.15)] [font-family:var(--font-prata),serif] whitespace-nowrap">
+            <h1 className={`${cormorant.className} mt-3 sm:mt-4 text-[34px] sm:text-6xl md:text-7xl font-semibold text-amber-100 tracking-tight drop-shadow-[0_2px_12px_rgba(255,200,100,0.15)] whitespace-nowrap`}>
               ВЫЕЗДНОЙ БАР
             </h1>
             <p className="mt-3 sm:mt-4 text-amber-100/80 leading-relaxed text-base sm:text-lg max-w-2xl">

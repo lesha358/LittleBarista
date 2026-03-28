@@ -2,6 +2,7 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
 import ServiceTriad from '@/components/ServiceTriad';
+import PortfolioSection from '@/components/PortfolioSection';
 import FloatingCTA from '@/components/FloatingCTA';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
         <Hero />
       </section>
       <ServiceTriad />
+      <PortfolioSection />
       <FloatingCTA />
       <section id="contacts">
         <Footer theme="dark" />

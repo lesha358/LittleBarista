@@ -98,8 +98,9 @@
     border: 1px solid rgba(212, 175, 55, 0.6);
     color: #e7cfa3;
     font-size: 18px;
-    font-family: var(--font-playfair), 'Playfair Display', serif;
-    letter-spacing: 0.5px;
+    font-family: var(--font-cormorant), "Cormorant Garamond", serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     cursor: pointer;
     box-shadow:
       0 0 12px rgba(212, 175, 55, 0.25),

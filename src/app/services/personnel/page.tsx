@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export const metadata = generateMetadata({
   title: 'Персонал на мероприятия — Little Barista',
-  description: 'Подбор временного персонала на мероприятия в Москве и МО: хостес, промо-модели, хелперы, операторы регистрации, гардеробщики.',
+  description: 'Подбор временного персонала на мероприятия в Москве и МО: хостес, промо-модели, официанты, бармены, бариста, хелперы, операторы регистрации, гардеробщики.',
   path: '/services/personnel',
 });
 
@@ -49,6 +49,24 @@ const roles = [
     subtitle: 'Комфорт гостей',
     text: 'Тактичный сервис, аккуратная работа с верхней одеждой и поддержание премиального уровня обслуживания.',
     tag: 'Guest Service',
+  },
+  {
+    title: 'Официанты',
+    subtitle: 'Сервис в зале',
+    text: 'Поддержание темпа банкета или фуршета, аккуратная подача блюд и напитков, внимание к гостям без навязчивости.',
+    tag: 'F&B Service',
+  },
+  {
+    title: 'Бармены',
+    subtitle: 'Бар и коктейли',
+    text: 'Классические и авторские напитки, стабильная скорость обслуживания и аккуратная работа на барной зоне.',
+    tag: 'Bar',
+  },
+  {
+    title: 'Бариста',
+    subtitle: 'Кофе на площадке',
+    text: 'Стабильное качество напитков, работа с потоком гостей и аккуратная коммуникация у кофейной станции.',
+    tag: 'Coffee',
   },
 ];
 
@@ -210,10 +228,7 @@ export default function PersonnelPage() {
                 {role.text}
               </p>
 
-              <div className="relative z-10 mt-8 flex shrink-0 items-center justify-between">
-                <span className="text-sm uppercase tracking-[0.18em] text-[#f0d3a8] transition group-hover:translate-x-1">
-                  Подробнее →
-                </span>
+              <div className="relative z-10 mt-8 flex shrink-0 justify-end">
                 <div className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-[#a47f56]">
                   Premium staff
                 </div>
