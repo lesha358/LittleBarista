@@ -28,7 +28,7 @@ const cards = [
   },
   {
     href: '/services/personnel',
-    img: '/images/event.jpg',
+    img: '/images/host.webp',
     alt: 'Персонал на мероприятия',
     title: 'Персонал на мероприятия',
     desc: 'Хостес, промо-модели, хелперы, операторы регистрации. Подбор под задачу',
