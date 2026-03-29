@@ -1,16 +1,36 @@
+import fs from 'fs';
+import path from 'path';
 import Image from 'next/image';
 
 const PORTFOLIO_DIR = '/images/portfolio';
 
-const portfolioFiles = [
-  'convertio.in_photo_1_2026-03-28_11-07-55.webp',
-  'convertio.in_photo_2_2026-03-28_11-07-55.webp',
-  'convertio.in_photo_3_2026-03-28_11-07-55.webp',
-  'convertio.in_photo_4_2026-03-28_11-07-55.webp',
-  'convertio.in_photo_5_2026-03-28_11-07-55.webp',
-  'convertio.in_photo_6_2026-03-28_11-07-55.webp',
-  'convertio.in_photo_7_2026-03-28_11-07-55.webp',
-] as const;
+/** Стабильный «микс» от набора имён файлов — порядок не меняется при каждом обновлении страницы */
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const copy = [...arr];
+  let s = seed >>> 0;
+  const rnd = () => {
+    s = (1664525 * s + 1013904223) >>> 0;
+    return s / 0xffffffff;
+  };
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function getPortfolioFiles(): string[] {
+  const dir = path.join(process.cwd(), 'public', 'images', 'portfolio');
+  if (!fs.existsSync(dir)) return [];
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => /\.(webp|jpe?g|png)$/i.test(f) && !f.startsWith('.'))
+    .sort();
+  const seed = files.reduce((acc, name) => acc + [...name].reduce((a, c) => a + c.charCodeAt(0), 0), 0);
+  return seededShuffle(files, seed);
+}
+
+const portfolioFiles = getPortfolioFiles();
 
 const photoItems: { src: string; alt: string; aspect: 'portrait' | 'landscape' }[] =
   portfolioFiles.map((file, i) => ({
