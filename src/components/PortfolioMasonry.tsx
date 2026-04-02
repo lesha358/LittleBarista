@@ -13,6 +13,9 @@ const cardShell =
 const imgClass =
   'h-full w-full object-cover brightness-[1.02] saturate-[1.06] contrast-[1.02] transition duration-500 group-hover:scale-[1.04]';
 
+const mobileCardShell =
+  'group relative h-[280px] w-[78vw] max-w-[320px] min-w-[240px] snap-start overflow-hidden rounded-[22px] border border-[#6b4e2e]/35 shadow-[0_12px_40px_rgba(0,0,0,.4)]';
+
 const mobileTiles: Tile[] = [
   { colStart: 'col-start-1', colSpan: 'col-span-2', rowStart: 'row-start-1', rowSpan: 'row-span-2' },
   { colStart: 'col-start-3', colSpan: 'col-span-2', rowStart: 'row-start-1', rowSpan: 'row-span-2' },
@@ -103,13 +106,25 @@ function GridView({
 }
 
 export default function PortfolioMasonry({ items }: { items: PortfolioItem[] }) {
+  if (items.length === 0) return null;
+
   return (
     <div className="mt-10">
-      <GridView
-        items={items}
-        tiles={mobileTiles}
-        className="grid h-[720px] grid-cols-4 grid-rows-6 gap-3 md:hidden"
-      />
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 md:hidden [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+        {items.map((item, index) => (
+          <div key={`${item.src}-mobile-${index}`} className={mobileCardShell}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={item.src}
+              alt={item.alt}
+              loading={index < 4 ? 'eager' : 'lazy'}
+              decoding="async"
+              className={imgClass}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,5,4,0),rgba(7,5,4,.08)_40%,rgba(7,5,4,.22))]" />
+          </div>
+        ))}
+      </div>
       <GridView
         items={items}
         tiles={tabletTiles}
