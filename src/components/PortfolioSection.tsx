@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import Image from 'next/image';
 
 const PORTFOLIO_DIR = '/images/portfolio';
 
@@ -87,13 +86,10 @@ function getPortfolioFiles(): string[] {
 
 const portfolioFiles = getPortfolioFiles();
 
-const photoItems: { src: string; alt: string; aspect: 'portrait' | 'landscape' }[] =
-  portfolioFiles.map((file, i) => ({
-    src: `${PORTFOLIO_DIR}/${file}`,
-    alt: `Портфолио Little Barista — фото ${i + 1}`,
-    /** Чередование по хэшу имени — не «портрет-пейзаж-портрет» по индексу, меньше визуальных пар */
-    aspect: (hashString(file) + i) % 2 === 0 ? 'portrait' : 'landscape',
-  }));
+const photoItems: { src: string; alt: string }[] = portfolioFiles.map((file, i) => ({
+  src: `${PORTFOLIO_DIR}/${file}`,
+  alt: `Портфолио Little Barista — фото ${i + 1}`,
+}));
 
 export default function PortfolioSection() {
   return (
@@ -109,19 +105,16 @@ export default function PortfolioSection() {
           {photoItems.map((item, i) => (
             <div
               key={`${item.src}-${i}`}
-              className={`group relative mb-3 break-inside-avoid overflow-hidden rounded-[22px] border border-[#6b4e2e]/35 shadow-[0_12px_40px_rgba(0,0,0,.4)] md:mb-4 md:rounded-[26px] ${
-                item.aspect === 'portrait'
-                  ? 'aspect-[3/4]'
-                  : 'aspect-[4/3]'
-              }`}
+              className="group relative mb-3 break-inside-avoid overflow-hidden rounded-[22px] border border-[#6b4e2e]/35 shadow-[0_12px_40px_rgba(0,0,0,.4)] md:mb-4 md:rounded-[26px]"
             >
-              <Image
+              {/* Натуральные пропорции файла — masonry без object-cover и без letterbox */}
+              {/* eslint-disable-next-line @next/next/no-img-element -- смешанные ориентации, нужен натуральный aspect ratio */}
+              <img
                 src={item.src}
                 alt={item.alt}
-                fill
-                className="object-cover brightness-[1.02] saturate-[1.06] contrast-[1.02] transition duration-500 group-hover:scale-[1.04]"
-                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                unoptimized
+                loading={i < 6 ? 'eager' : 'lazy'}
+                decoding="async"
+                className="block h-auto w-full brightness-[1.02] saturate-[1.06] contrast-[1.02] transition duration-500 group-hover:scale-[1.04]"
               />
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,5,4,0),rgba(7,5,4,.08)_40%,rgba(7,5,4,.22))]" />
             </div>
