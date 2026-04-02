@@ -8,8 +8,8 @@ import { inter, cormorant } from "@/lib/fonts";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
-  colorScheme: 'light',
+  themeColor: '#121212',
+  colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,

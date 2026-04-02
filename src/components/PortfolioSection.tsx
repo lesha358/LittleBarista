@@ -4,6 +4,14 @@ import Image from 'next/image';
 
 const PORTFOLIO_DIR = '/images/portfolio';
 
+function hashString(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+  }
+  return h >>> 0;
+}
+
 /** Стабильный «микс» от набора имён файлов — порядок не меняется при каждом обновлении страницы */
 function seededShuffle<T>(arr: T[], seed: number): T[] {
   const copy = [...arr];
@@ -19,15 +27,62 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return copy;
 }
 
+/** Чередует первую и вторую половину списка — в CSS columns похожие кадры реже идут подряд в одной колонке */
+function interleaveHalves<T>(arr: T[]): T[] {
+  if (arr.length < 3) return arr;
+  const mid = Math.ceil(arr.length / 2);
+  const a = arr.slice(0, mid);
+  const b = arr.slice(mid);
+  const out: T[] = [];
+  const n = Math.max(a.length, b.length);
+  for (let i = 0; i < n; i++) {
+    if (i < a.length) out.push(a[i]);
+    if (i < b.length) out.push(b[i]);
+  }
+  return out;
+}
+
+/** Попеременно склеивает два списка — удобно поднять «коктейльные» кадры выше и размешать с остальными */
+function interleaveTwo<T>(a: T[], b: T[]): T[] {
+  const out: T[] = [];
+  const n = Math.max(a.length, b.length);
+  for (let i = 0; i < n; i++) {
+    if (i < a.length) out.push(a[i]);
+    if (i < b.length) out.push(b[i]);
+  }
+  return out;
+}
+
+/** Если в имени файла есть подсказка — кадр идёт в приоритет и чаще выше в сетке. Переименуйте файлы, напр. `cocktail_01.jpg`. */
+const FILENAME_TOP_HINT =
+  /cocktail|mocktail|моктейл|напит|drinks?|барная|бар-/i;
+
 function getPortfolioFiles(): string[] {
   const dir = path.join(process.cwd(), 'public', 'images', 'portfolio');
   if (!fs.existsSync(dir)) return [];
-  const files = fs
+  const raw = fs
     .readdirSync(dir)
     .filter((f) => /\.(webp|jpe?g|png)$/i.test(f) && !f.startsWith('.'))
-    .sort();
-  const seed = files.reduce((acc, name) => acc + [...name].reduce((a, c) => a + c.charCodeAt(0), 0), 0);
-  return seededShuffle(files, seed);
+    .sort((x, y) => hashString(x) - hashString(y));
+
+  const priority: string[] = [];
+  const rest: string[] = [];
+  for (const f of raw) {
+    if (FILENAME_TOP_HINT.test(f)) priority.push(f);
+    else rest.push(f);
+  }
+
+  const seed = raw.reduce((acc, name) => acc ^ hashString(name), 0);
+  const s = seed || 1;
+
+  let mixed: string[];
+  if (priority.length && rest.length) {
+    mixed = interleaveTwo(seededShuffle(priority, s ^ 0x9e3779b9), seededShuffle(rest, s ^ 0x85ebca6b));
+  } else {
+    mixed = interleaveHalves(seededShuffle(raw, s));
+  }
+
+  return interleaveHalves(mixed);
 }
 
 const portfolioFiles = getPortfolioFiles();
@@ -36,7 +91,8 @@ const photoItems: { src: string; alt: string; aspect: 'portrait' | 'landscape' }
   portfolioFiles.map((file, i) => ({
     src: `${PORTFOLIO_DIR}/${file}`,
     alt: `Портфолио Little Barista — фото ${i + 1}`,
-    aspect: i % 2 === 0 ? 'portrait' : 'landscape',
+    /** Чередование по хэшу имени — не «портрет-пейзаж-портрет» по индексу, меньше визуальных пар */
+    aspect: (hashString(file) + i) % 2 === 0 ? 'portrait' : 'landscape',
   }));
 
 export default function PortfolioSection() {
@@ -53,7 +109,7 @@ export default function PortfolioSection() {
           {photoItems.map((item, i) => (
             <div
               key={`${item.src}-${i}`}
-              className={`relative mb-3 break-inside-avoid overflow-hidden rounded-[22px] border border-[#6b4e2e]/35 shadow-[0_12px_40px_rgba(0,0,0,.4)] md:mb-4 md:rounded-[26px] ${
+              className={`group relative mb-3 break-inside-avoid overflow-hidden rounded-[22px] border border-[#6b4e2e]/35 shadow-[0_12px_40px_rgba(0,0,0,.4)] md:mb-4 md:rounded-[26px] ${
                 item.aspect === 'portrait'
                   ? 'aspect-[3/4]'
                   : 'aspect-[4/3]'
@@ -63,10 +119,11 @@ export default function PortfolioSection() {
                 src={item.src}
                 alt={item.alt}
                 fill
-                className="object-cover"
+                className="object-cover brightness-[1.02] saturate-[1.06] contrast-[1.02] transition duration-500 group-hover:scale-[1.04]"
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 unoptimized
               />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,5,4,0),rgba(7,5,4,.08)_40%,rgba(7,5,4,.22))]" />
             </div>
           ))}
         </div>

@@ -86,6 +86,16 @@ export default function Navigation({ theme = 'dark' }: { theme?: 'light' | 'dark
         { label: 'Заказать', onClick: handleOrder },
       ];
     }
+    if (pathname?.startsWith('/services/mobile-coffee')) {
+      return [
+        { label: 'Главная', onClick: goHome },
+        { label: 'Форматы', sectionId: 'formats' },
+        { label: 'Портфолио', sectionId: 'gallery' },
+        { label: 'Процесс', sectionId: 'process' },
+        { label: 'Контакты', sectionId: 'contact-form' },
+        { label: 'Заказать', onClick: handleOrder },
+      ];
+    }
     if (pathname?.startsWith('/services/personnel')) {
       return [
         { label: 'Главная', onClick: goHome },

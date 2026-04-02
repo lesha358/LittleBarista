@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 :root {
+  --brand-charcoal: #121212;
+  --brand-white: #ffffff;
+  --brand-copper: #c78149;
+  --brand-terracotta: #cc6d3c;
+  --brand-stone: #7a7a7a;
+  --brand-beige: #e2d4c8;
+  --brand-roast: #5c3a24;
+  --brand-surface: #171312;
+  --brand-surface-soft: #1d1715;
+  --brand-border: rgba(199, 129, 73, 0.28);
+  --brand-border-strong: rgba(199, 129, 73, 0.52);
+  --brand-glow: rgba(199, 129, 73, 0.16);
+
   /* Site header (pill) */
   --header-bg: rgba(11, 7, 5, 0.58);
   --header-bg-scrolled: rgba(11, 7, 5, 0.78);
@@ -15,17 +28,17 @@
   --gold-light: #f1d1a4;
   --gold-glow: rgba(214, 164, 104, 0.14);
 
-  --primary: #C4A484;
-  --primary-dark: #B39474;
-  --primary-light: #D4B494;
-  --text: #0A0502;
-  --text-light: #4A4A4A;
-  --background: #FFFFFF;
-  --background-alt: #FDF6F0;
-  --section-bg: #F5EDE3;
-  --section-bg-alt: #FFF5EB;
-  --section-bg-dark: #E8D5C4;
-  --section-bg-light: #FFF9F5;
+  --primary: var(--brand-copper);
+  --primary-dark: #9f6136;
+  --primary-light: #d7b89f;
+  --text: #f5eee4;
+  --text-light: #b6a08c;
+  --background: var(--brand-charcoal);
+  --background-alt: #151110;
+  --section-bg: #1a1412;
+  --section-bg-alt: #171210;
+  --section-bg-dark: #110d0c;
+  --section-bg-light: #1d1715;
 }
 
 @layer base {
@@ -36,7 +49,11 @@
 
   body {
     overflow-x: hidden;
-    @apply bg-white text-gray-900;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(199, 129, 73, 0.08), transparent 26%),
+      radial-gradient(circle at 80% 0%, rgba(92, 58, 36, 0.18), transparent 28%),
+      var(--brand-charcoal);
+    color: var(--brand-beige);
     font-family: 'Inter', sans-serif;
   }
 }
@@ -63,11 +80,16 @@
   }
 
   .section-title h2 {
-    @apply text-3xl sm:text-4xl font-bold text-gray-900 mb-4;
+    @apply text-3xl sm:text-4xl mb-4;
+    font-family: var(--font-cormorant), "Cormorant Garamond", serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #f5eee4;
   }
 
   .section-title p {
-    @apply text-lg text-gray-600 max-w-2xl mx-auto;
+    @apply text-lg max-w-2xl mx-auto;
+    color: rgba(226, 212, 200, 0.76);
   }
 
   .card {
@@ -86,32 +108,38 @@
   }
 
   .button-secondary {
-    @apply bg-white text-[#0A0502] px-8 py-4 rounded-full
-           hover:bg-gray-50 transition-all duration-300 font-medium
-           shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0;
+    @apply px-8 py-4 rounded-full transition-all duration-300 font-medium
+           hover:-translate-y-0.5 active:translate-y-0;
+    color: var(--brand-beige);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid var(--brand-border);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
   }
 
   .btn-premium {
     padding: 16px 36px;
     border-radius: 999px;
-    background: linear-gradient(180deg, #1a1a1a, #0d0d0d);
-    border: 1px solid rgba(212, 175, 55, 0.6);
-    color: #e7cfa3;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
+      linear-gradient(180deg, #231813, #130d0a);
+    border: 1px solid rgba(199, 129, 73, 0.55);
+    color: #f4e6d5;
     font-size: 18px;
     font-family: var(--font-cormorant), "Cormorant Garamond", serif;
     font-weight: 600;
     letter-spacing: 0.04em;
     cursor: pointer;
     box-shadow:
-      0 0 12px rgba(212, 175, 55, 0.25),
-      inset 0 0 8px rgba(255, 255, 255, 0.05);
+      0 12px 30px rgba(0, 0, 0, 0.28),
+      0 0 14px rgba(199, 129, 73, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
     transition: all 0.3s ease;
   }
 
   .btn-premium:hover {
     box-shadow:
-      0 0 20px rgba(212, 175, 55, 0.5),
-      inset 0 0 10px rgba(255, 255, 255, 0.08);
+      0 16px 36px rgba(0, 0, 0, 0.34),
+      0 0 22px rgba(199, 129, 73, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
     transform: translateY(-1px);
   }
 
@@ -147,7 +175,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    background: #16110f;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -372,15 +400,16 @@
     padding: 0 26px;
     border-radius: 999px;
     text-decoration: none;
-    color: #23160d;
+    color: #1f1611;
     font-size: 16px;
     font-weight: 600;
-    background: linear-gradient(180deg, #f0b34e 0%, #cf8a2a 100%);
+    background: linear-gradient(180deg, #f5eee4 0%, #e7d5c0 48%, #c78149 100%);
     box-shadow:
-      0 8px 20px rgba(207, 138, 42, 0.24),
-      inset 0 1px 0 rgba(255,255,255,0.28);
+      0 10px 26px rgba(0, 0, 0, 0.22),
+      0 0 18px rgba(199, 129, 73, 0.16),
+      inset 0 1px 0 rgba(255,255,255,0.42);
     transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
-    border: none;
+    border: 1px solid rgba(226, 212, 200, 0.28);
     cursor: pointer;
     font-family: inherit;
   }
@@ -388,9 +417,9 @@
   .header-btn:hover {
     transform: translateY(-1px);
     box-shadow:
-      0 12px 28px rgba(207, 138, 42, 0.3),
-      0 0 22px rgba(240, 179, 78, 0.16),
-      inset 0 1px 0 rgba(255,255,255,0.32);
+      0 14px 32px rgba(0, 0, 0, 0.28),
+      0 0 22px rgba(199, 129, 73, 0.22),
+      inset 0 1px 0 rgba(255,255,255,0.5);
   }
 
   .site-header.is-scrolled .header-btn {
@@ -563,10 +592,11 @@
       margin-top: 10px;
       min-height: 52px;
       padding: 0 16px;
-      color: #23160d !important;
+      color: #1f1611 !important;
       font-weight: 600;
       font-size: 16px;
-      background: linear-gradient(180deg, #f0b34e 0%, #cf8a2a 100%) !important;
+      background: linear-gradient(180deg, #f5eee4 0%, #e7d5c0 48%, #c78149 100%) !important;
+      border: 1px solid rgba(226, 212, 200, 0.28) !important;
       border-radius: 14px;
       -webkit-tap-highlight-color: transparent;
     }

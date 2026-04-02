@@ -2,6 +2,7 @@ import { generateMetadata } from '@/lib/metadata'
 import Navigation from '@/components/Navigation'
 import ContactModalTrigger from '@/components/ContactModalTrigger'
 import Footer from '@/components/Footer'
+import FloatingCTA from '@/components/FloatingCTA'
 import Image from 'next/image'
 import Script from 'next/script'
 import Link from 'next/link'
@@ -78,10 +79,26 @@ const espressoMachines = [
 	},
 ]
 
+const heroFeatures = [
+	['Посуточно 1–5 дней', 'Или на всё мероприятие'],
+	['Подбор под поток', 'Суперавто и рожковые'],
+	['Доставка и подключение', 'Обучение персонала'],
+	['Опция «под ключ»', 'Бариста и расходники'],
+]
+
+const sectionBg =
+	'relative overflow-hidden w-full py-16 lg:py-24 scroll-mt-28 bg-[radial-gradient(circle_at_20%_0%,rgba(190,118,45,.18),transparent_28%),radial-gradient(circle_at_80%_50%,rgba(190,118,45,.1),transparent_22%),linear-gradient(180deg,#120c09_0%,#0d0806_50%,#090605_100%)]'
+
+const cardClass =
+	'group relative flex flex-col h-full overflow-hidden rounded-[30px] border border-[#7b5230]/35 bg-[linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01)),linear-gradient(180deg,rgba(29,19,14,.94),rgba(15,10,8,.98))] p-6 shadow-[0_18px_40px_rgba(0,0,0,.28)] transition duration-300 hover:-translate-y-1 hover:border-[#d3a468]/55 hover:shadow-[0_24px_60px_rgba(0,0,0,.4),0_0_28px_rgba(211,164,104,.08)]'
+
+/** Светлая премиум-кнопка: контраст на тёмном фоне, золото по краю */
+const ctaBtnClass =
+	'rounded-full border-2 border-[#c9a06c] bg-gradient-to-b from-[#faf3e8] via-[#f0e2cf] to-[#e5d0b0] px-6 py-3 text-sm font-semibold text-[#1a1008] shadow-[0_10px_36px_rgba(0,0,0,.42),inset_0_1px_0_rgba(255,255,255,.65),0_0_28px_rgba(200,150,80,.22)] transition hover:-translate-y-0.5 hover:from-[#fffaf3] hover:via-[#f7ebdc] hover:to-[#edd9be] hover:border-[#ddb66a] hover:shadow-[0_14px_44px_rgba(0,0,0,.48),0_0_36px_rgba(220,170,100,.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8c48a] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d0705] active:translate-y-0'
+
 export default function CoffeeMachinesRentPage() {
-    return (
-		<main className="min-h-screen relative overflow-x-hidden">
-			{/* SEO: Breadcrumbs, Service and FAQ structured data */}
+	return (
+		<div className="min-h-screen bg-[#0d0705] text-[#f3e4c8]">
 			<Script id="breadcrumbs-jsonld" type="application/ld+json">
 				{JSON.stringify({
 					'@context': 'https://schema.org',
@@ -162,254 +179,383 @@ export default function CoffeeMachinesRentPage() {
 					],
 				})}
 			</Script>
-			{/* Мягкий фон */}
-			<div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-				<div className="absolute -top-24 -left-24 h-72 w-72 max-w-[100vw] rounded-full bg-gradient-to-br from-brown-100 via-brown-50 to-transparent blur-2xl opacity-70" />
-				<div className="absolute top-1/3 -right-24 h-80 w-80 max-w-[100vw] rounded-full bg-gradient-to-tr from-brown-100 via-brown-50 to-transparent blur-2xl opacity-60" />
-				<div className="absolute bottom-0 left-1/4 right-1/4 h-48 bg-gradient-to-t from-brown-50/70 to-transparent" />
-			</div>
 
-			<Navigation />
+			<Navigation theme="dark" />
 
-			<section id="intro" className="container px-4 sm:px-6 lg:px-8 pt-24 md:pt-40 pb-8">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
-					{/* Левая колонка: текст и CTA */}
-					<div>
-						<div className="flex items-center gap-2">
-							<div className="inline-flex items-center gap-2 rounded-full border border-brown-200 bg-white px-3 py-1 text-xs sm:text-sm text-brown-700 shadow-sm">
-								<span className="inline-block h-2 w-2 rounded-full bg-brown-500" />
-								Краткосрочная аренда по Москве и области
+			{/* Hero */}
+			<section
+				id="intro"
+				className="relative overflow-hidden border-b border-[#6f4a26]/40 bg-[radial-gradient(circle_at_20%_0%,rgba(190,118,45,.22),transparent_28%),radial-gradient(circle_at_85%_15%,rgba(190,118,45,.14),transparent_22%),linear-gradient(180deg,#140c09_0%,#090605_100%)]"
+			>
+				<div className="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,transparent,rgba(255,194,120,.06),transparent)]" />
+				<div className="mx-auto grid max-w-[85rem] grid-cols-1 gap-10 px-6 pb-16 pt-[104px] md:px-10 md:pt-[108px] lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.22fr)] lg:gap-x-8 lg:gap-y-10 lg:pb-24 lg:pl-10 lg:pr-5 lg:pt-[112px] xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.28fr)] xl:gap-x-10 xl:pr-4">
+					<div className="relative z-10 min-h-0 lg:max-w-none lg:self-start">
+						<div className="mb-6 flex flex-wrap items-center gap-3">
+							<div className="inline-flex items-center gap-3 rounded-full border border-[#d4a574]/35 bg-[linear-gradient(180deg,rgba(255,245,230,.08),rgba(18,12,9,.5))] px-4 py-2.5 text-[11px] uppercase tracking-[0.26em] text-[#e0c49a] shadow-[0_4px_24px_rgba(0,0,0,.25)] backdrop-blur-md">
+								Equipment rent
+								<span className="h-1 w-1 rounded-full bg-[#d4a574]" />
+								Москва и МО
 							</div>
-							<Link href="/services/coffee-machines/long-term" className="inline-flex items-center gap-2 rounded-full border border-brown-200 bg-white px-3 py-1 text-xs sm:text-sm text-brown-700 shadow-sm hover:bg-brown-50 transition-colors">
+							<Link
+								href="/services/coffee-machines/long-term"
+								className="inline-flex rounded-full border border-[#c9a06c]/25 bg-white/[0.04] px-4 py-2.5 text-[11px] uppercase tracking-[0.18em] text-[#d4b896] backdrop-blur-md transition hover:border-[#d4a574]/45 hover:text-[#f0dcc0]"
+							>
 								Долгосрочная аренда для офисов
 							</Link>
 						</div>
-						<h1 className="mt-3 sm:mt-4 text-[28px] sm:text-4xl md:text-5xl font-extrabold text-brown-900 tracking-tight">
+						<h1
+							className="max-w-3xl text-5xl leading-[0.95] text-[#f5e8d3] md:text-6xl lg:text-7xl"
+							style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+						>
 							Аренда кофемашин для событий и бизнеса
 						</h1>
-						<p className="mt-3 sm:mt-4 text-brown-800/95 leading-relaxed text-base sm:text-lg max-w-2xl">
-							Для выставок, конференций, переговорных и pop‑up событий. Создадим кофейную зону с
-							вкусными напитками без покупки техники: доставка, подключение, расходники и поддержка.
+						<p className="mt-5 max-w-2xl text-lg leading-8 text-[#caa97a] md:text-xl">
+							Для выставок, конференций, переговорных и pop‑up. Кофейная зона без покупки техники: доставка, подключение, расходники и поддержка.
 						</p>
-						<ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-brown-900">
-							<li className="flex items-center gap-2 rounded-lg bg-brown-50 px-3 py-2 border border-brown-100"><span>✓</span><span>Посуточно 1–5 дней или на все мероприятия</span></li>
-							<li className="flex items-center gap-2 rounded-lg bg-brown-50 px-3 py-2 border border-brown-100"><span>✓</span><span>Подбор модели под поток гостей</span></li>
-							<li className="flex items-center gap-2 rounded-lg bg-brown-50 px-3 py-2 border border-brown-100"><span>✓</span><span>Доставка, подключение, обучение персонала</span></li>
-							<li className="flex items-center gap-2 rounded-lg bg-brown-50 px-3 py-2 border border-brown-100"><span>✓</span><span>Опция «под ключ»: бариста и расходники</span></li>
-						</ul>
-                        <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2.5 sm:gap-4">
-                            <ContactModalTrigger 
-                                label="Получить расчёт"
-                                className="px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-brown-700 text-white hover:bg-brown-800 transition-colors shadow w-full sm:w-auto text-center"
-                                sourceTag="Аренда кофемашин"
-                            />
-							<span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-brown-200 bg-white/90 px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm text-brown-900 shadow-sm">
-								<span className="font-semibold">15 мин</span>
-								<span className="text-brown-700/90">перезвоним</span>
+						<div className="mt-8 flex flex-wrap gap-4">
+							<ContactModalTrigger
+								label="Получить расчёт"
+								className={`${ctaBtnClass} px-7 py-4 text-base`}
+								sourceTag="Аренда кофемашин"
+								theme="dark"
+							/>
+							<Link
+								href="/#services-triad"
+								className="rounded-full border border-white/10 px-7 py-4 text-base text-[#c6a16d] backdrop-blur transition hover:border-[#d2a063]/35 hover:text-[#f0d3a8]"
+							>
+								Все услуги
+							</Link>
+						</div>
+						<div className="mt-10 grid max-w-3xl grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-4">
+							{heroFeatures.map(([title, sub]) => (
+								<div
+									key={title}
+									className="group relative overflow-hidden rounded-xl border border-[#c9a06c]/22 bg-[linear-gradient(155deg,rgba(255,236,210,.1),rgba(22,16,12,.75))] px-3 py-2 shadow-[0_8px_28px_rgba(0,0,0,.28),inset_0_1px_0_rgba(255,255,255,.07)] backdrop-blur-md transition duration-300 hover:border-[#ddb66a]/45 hover:shadow-[0_12px_36px_rgba(0,0,0,.34),0_0_24px_rgba(200,150,90,.1)]"
+								>
+									<div
+										className="pointer-events-none absolute -right-3 -top-3 h-12 w-12 rounded-full bg-[#d4a574]/10 blur-lg transition group-hover:bg-[#d4a574]/15"
+										aria-hidden
+									/>
+									<div className="relative text-[13px] font-medium leading-tight text-[#f5e8d3]">{title}</div>
+									<div className="relative mt-0.5 text-[11px] leading-snug text-[#b89a72]">{sub}</div>
+								</div>
+							))}
+						</div>
+						<div className="mt-8 flex flex-wrap gap-3 text-sm">
+							<span className="inline-flex items-center gap-2 rounded-full border border-[#7b5230]/40 bg-black/25 px-4 py-2 text-[#d4b896]">
+								<span className="font-semibold text-[#f1dfc3]">15 мин</span>
+								перезвоним
 							</span>
-							<span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-brown-200 bg-white/90 px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm text-brown-900 shadow-sm">
-								<span className="font-semibold">100+ событий</span>
-								<span className="text-brown-700/90">обслужили</span>
+							<span className="inline-flex items-center gap-2 rounded-full border border-[#7b5230]/40 bg-black/25 px-4 py-2 text-[#d4b896]">
+								<span className="font-semibold text-[#f1dfc3]">100+</span>
+								событий обслужили
 							</span>
 						</div>
 					</div>
 
-					{/* Правая колонка: иллюстрация */}
-					<div className="relative md:h-[420px] h-48 sm:h-64 rounded-2xl overflow-hidden border border-brown-200 bg-white shadow-sm">
-						<div className="absolute -top-16 -right-16 h-64 w-64 rounded-full bg-brown-100 blur-3xl opacity-70" />
-						<div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-brown-50/80 to-transparent" />
-						<div className="relative h-full w-full">
-							<Image src="/images/machines/main.jpg" alt="Арендная кофемашина" fill className="object-cover" />
+					<div className="relative z-10 w-full min-h-0 lg:self-center lg:pl-3 xl:pl-6">
+						<div className="relative w-full overflow-hidden rounded-[28px] border border-[#8f6238]/35 bg-[#120c09] p-2 shadow-[0_30px_70px_rgba(0,0,0,.45),0_0_40px_rgba(214,160,91,.08)] sm:rounded-[32px] sm:p-2">
+							<div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(255,204,130,.08),transparent_25%)]" />
+							<div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] sm:rounded-[24px] lg:aspect-auto lg:min-h-[min(58vh,600px)] lg:h-[min(58vh,600px)] xl:min-h-[min(60vh,640px)] xl:h-[min(60vh,640px)]">
+								<Image
+									src="/images/machines/main.jpg"
+									alt="Арендная кофемашина"
+									fill
+									className="object-cover brightness-[0.72] saturate-[0.82]"
+									priority
+									unoptimized
+								/>
+								<div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,5,4,.05),rgba(7,5,4,.18)_40%,rgba(7,5,4,.62))]" />
+								<div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/30 px-3 py-2 text-xs uppercase tracking-[0.24em] text-[#dfbf90] backdrop-blur">
+									Суперавто и рожковые
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<section id="cooperation" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-					<div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm hover:shadow-md transition-shadow bg-white/90 backdrop-blur-sm relative flex flex-col">
-						<div className="absolute inset-0 rounded-2xl pointer-events-none" style={{boxShadow:'inset 0 0 0 1px rgba(214,184,158,0.25)'}} />
-						<div className="flex items-center gap-3">
-							<div className="w-10 h-10 rounded-xl bg-brown-100 text-brown-700 flex items-center justify-center">☕</div>
-							<h2 className="text-xl font-semibold text-brown-900">Кофемашина на 1–5 дней посуточно</h2>
+			{/* Условия */}
+			<section id="cooperation" className={sectionBg}>
+				<div className="pointer-events-none absolute inset-0 opacity-30 bg-[linear-gradient(to_right,transparent,rgba(255,194,120,.05),transparent)]" />
+				<div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:items-stretch">
+						<div className={cardClass}>
+							<div className="absolute inset-0 opacity-0 transition group-hover:opacity-100 bg-[radial-gradient(circle_at_top_right,rgba(250,205,139,.08),transparent_26%)]" />
+							<div className="relative z-10 flex items-center gap-3">
+								<div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#7b5230]/50 bg-black/25 text-xl text-[#d8ae78]">
+									☕
+								</div>
+								<h2
+									className="text-2xl text-[#f2e3c7] md:text-3xl"
+									style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+								>
+									Кофемашина на 1–5 дней посуточно
+								</h2>
+							</div>
+							<ul className="relative z-10 mt-6 space-y-2.5 pl-5 text-[#c7a679] marker:text-[#d2a063] list-disc">
+								<li>Помогаем подобрать оптимальную модель</li>
+								<li>Доставка, подключение, вывоз после мероприятия</li>
+								<li>Компоненты, сахар, посуда</li>
+								<li>Обучаем персонал</li>
+								<li>По запросу — бариста и официанты</li>
+							</ul>
+							<p className="relative z-10 mt-5 text-[#b89a72]">
+								При выборе кофемашины на сутки для выставки важны нюансы — подскажем по опыту.
+							</p>
+							<div className="relative z-10 mt-8 flex flex-col gap-4 rounded-2xl border border-[#7b5230]/30 bg-black/20 p-4 sm:flex-row sm:items-center sm:justify-between">
+								<p className="text-sm text-[#c7a679]">Быстрый подбор — оставьте контакты, перезвоним за 15 минут.</p>
+								<ContactModalTrigger
+									label="Оставить заявку"
+									className={ctaBtnClass}
+									sourceTag="Аренда кофемашин"
+									theme="dark"
+								/>
+							</div>
 						</div>
-						<ul className="mt-3 sm:mt-4 space-y-2 list-disc pl-5 text-brown-800/90 text-sm sm:text-base">
-							<li>Помогаем подобрать оптимальную модель</li>
-							<li>Обеспечиваем доставку, подключение, вывоз после мероприятия</li>
-							<li>Поставляем компоненты, сахар, посуду</li>
-							<li>Обучаем персонал пользованию</li>
-							<li>По необходимости предоставляем бариста и официантов</li>
-						</ul>
-						<p className="mt-3 sm:mt-4 text-brown-800/90 text-sm sm:text-base">
-							При выборе кофемашины на сутки для выставки нужно учитывать множество нюансов — мы подскажем.
+
+						<div className={cardClass}>
+							<div className="absolute inset-0 opacity-0 transition group-hover:opacity-100 bg-[radial-gradient(circle_at_top_right,rgba(250,205,139,.08),transparent_26%)]" />
+							<div className="relative z-10 flex items-center gap-3">
+								<div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#7b5230]/50 bg-black/25 text-xl text-[#d8ae78]">
+									⭐
+								</div>
+								<h2
+									className="text-2xl text-[#f2e3c7] md:text-3xl"
+									style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+								>
+									Почему мы
+								</h2>
+							</div>
+							<ul className="relative z-10 mt-6 space-y-2.5 pl-5 text-[#c7a679] marker:text-[#d2a063] list-disc">
+								<li>Гибкие сроки и прозрачные условия</li>
+								<li>Проверенное оборудование, сервис и чистка перед выдачей</li>
+								<li>Поддержка на площадке и консультации</li>
+								<li>Опция «под ключ»: оборудование, расходники, бариста</li>
+							</ul>
+							<div className="relative z-10 mt-auto flex flex-col gap-4 rounded-2xl border border-[#7b5230]/30 bg-black/20 p-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
+								<p className="text-sm text-[#c7a679]">Подберём модель под ваш поток гостей.</p>
+								<ContactModalTrigger
+									label="Оставить заявку"
+									className={ctaBtnClass}
+									sourceTag="Аренда кофемашин"
+									theme="dark"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Суперавтоматы */}
+			<section id="machines" className={sectionBg}>
+				<div className="pointer-events-none absolute inset-0 opacity-30 bg-[linear-gradient(to_right,transparent,rgba(255,194,120,.05),transparent)]" />
+				<div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
+					<div className="mb-10 text-center md:text-left">
+						<div className="text-xs uppercase tracking-[0.28em] text-[#9f7b52]">Каталог</div>
+						<h2
+							className="mt-3 text-4xl text-[#f5e8d3] md:text-5xl"
+							style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+						>
+							Варианты кофемашин
+						</h2>
+						<p className="mt-4 max-w-2xl text-[#c7a679] md:mx-0 mx-auto">
+							Суперавтоматические модели — удобны без бариста на площадке.
 						</p>
-						<div className="mt-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 p-3 rounded-xl bg-brown-50 border border-brown-100">
-							<p className="text-sm text-brown-800/90">Нужен быстрый подбор? Оставьте контакты — перезвоним за 15 минут.</p>
-                            <ContactModalTrigger 
-                                label="Оставить заявку"
-                                className="w-full sm:w-auto text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors"
-                                sourceTag="Аренда кофемашин"
-                            />
-						</div>
 					</div>
-					<div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm hover:shadow-md transition-shadow bg-white/90 backdrop-blur-sm relative flex flex-col">
-						<div className="absolute inset-0 rounded-2xl pointer-events-none" style={{boxShadow:'inset 0 0 0 1px rgba(214,184,158,0.25)'}} />
-						<div className="flex items-center gap-3">
-							<div className="w-10 h-10 rounded-xl bg-brown-100 text-brown-700 flex items-center justify-center">⭐</div>
-							<h3 className="text-lg font-semibold text-brown-900">Почему мы</h3>
-						</div>
-						<ul className="mt-3 sm:mt-4 space-y-2 list-disc pl-5 text-brown-800/90 text-sm sm:text-base">
-							<li>Гибкие сроки аренды и прозрачные условия</li>
-							<li>Проверенное оборудование, сервис и чистка перед выдачей</li>
-							<li>Поддержка на площадке и консультации</li>
-							<li>Опция «под ключ»: оборудование, расходники, бариста</li>
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+						{machines.map((m) => (
+							<article key={m.name} className={cardClass}>
+								<div className="absolute right-5 top-5 z-10 rounded-full border border-[#7b5230]/50 bg-black/40 px-3 py-1.5 text-xs font-medium text-[#e8cfa3] backdrop-blur">
+									{m.performance}
+								</div>
+								<div className="relative -mx-6 -mt-6 mb-4 aspect-[4/3] overflow-hidden rounded-t-[28px] border-b border-[#7b5230]/25">
+									<Image src={m.image} alt={m.name} fill className="object-cover brightness-[0.85]" unoptimized />
+									<div className="absolute inset-0 bg-gradient-to-t from-[#0d0806]/80 to-transparent" />
+								</div>
+								<h3
+									className="text-2xl text-[#f2e3c7]"
+									style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+								>
+									{m.name}
+								</h3>
+								<p className="mt-3 flex-1 text-[#c7a679] leading-relaxed">{m.description}</p>
+								<div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+									<div>
+										<p className="text-[#9f7b52]">Тип</p>
+										<p className="font-medium text-[#e8cfa3]">{m.type}</p>
+									</div>
+									<div>
+										<p className="text-[#9f7b52]">Нагрузка</p>
+										<p className="font-medium text-[#e8cfa3]">{m.performance}</p>
+									</div>
+									<div>
+										<p className="text-[#9f7b52]">Габариты</p>
+										<p className="font-medium text-[#e8cfa3]">{m.dimensions}</p>
+									</div>
+									<div>
+										<p className="text-[#9f7b52]">Вес</p>
+										<p className="font-medium text-[#e8cfa3]">{m.weight}</p>
+									</div>
+									<div className="col-span-2 border-t border-[#7b5230]/25 pt-3">
+										<p className="text-[#9f7b52]">Дополнительно</p>
+										<p className="font-medium text-[#e8cfa3]">{m.notes}</p>
+									</div>
+								</div>
+								<div className="relative z-10 mt-6">
+									<ContactModalTrigger
+										label="Забронировать"
+										className={`${ctaBtnClass} w-full text-center`}
+										model={m.name}
+										sourceTag="Аренда кофемашин"
+										theme="dark"
+									/>
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Рожковые */}
+			<section id="espresso" className={sectionBg}>
+				<div className="pointer-events-none absolute inset-0 opacity-30 bg-[linear-gradient(to_right,transparent,rgba(255,194,120,.05),transparent)]" />
+				<div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
+					<div className="mb-10 text-center md:text-left">
+						<div className="text-xs uppercase tracking-[0.28em] text-[#9f7b52]">Профи</div>
+						<h2
+							className="mt-3 text-4xl text-[#f5e8d3] md:text-5xl"
+							style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+						>
+							Рожковые кофемашины
+						</h2>
+						<p className="mt-4 max-w-3xl text-[#c7a679] md:mx-0 mx-auto">
+							Нужны навыки бариста и кофемолка.
+						</p>
+					</div>
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+						{espressoMachines.map((m) => (
+							<article key={m.name} className={cardClass}>
+								<div className="relative -mx-6 -mt-6 mb-4 aspect-[4/3] overflow-hidden rounded-t-[28px] border-b border-[#7b5230]/25">
+									<Image src={m.image} alt={m.name} fill className="object-cover brightness-[0.85]" unoptimized />
+									<div className="absolute inset-0 bg-gradient-to-t from-[#0d0806]/80 to-transparent" />
+								</div>
+								<h3
+									className="text-xl leading-tight text-[#f2e3c7] md:text-2xl"
+									style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+								>
+									{m.name}
+								</h3>
+								<p className="mt-3 flex-1 text-[#c7a679] leading-relaxed">{m.description}</p>
+								<div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+									<div>
+										<p className="text-[#9f7b52]">Тип</p>
+										<p className="font-medium text-[#e8cfa3]">{m.type}</p>
+									</div>
+									<div>
+										<p className="text-[#9f7b52]">Производительность</p>
+										<p className="font-medium text-[#e8cfa3]">{m.performance}</p>
+									</div>
+									<div>
+										<p className="text-[#9f7b52]">Габариты</p>
+										<p className="font-medium text-[#e8cfa3]">{m.dimensions}</p>
+									</div>
+									<div>
+										<p className="text-[#9f7b52]">Вес</p>
+										<p className="font-medium text-[#e8cfa3]">{m.weight}</p>
+									</div>
+									<div className="col-span-2 border-t border-[#7b5230]/25 pt-3">
+										<p className="text-[#9f7b52]">Дополнительно</p>
+										<p className="font-medium text-[#e8cfa3]">{m.notes}</p>
+									</div>
+								</div>
+								<div className="relative z-10 mt-6">
+									<ContactModalTrigger
+										label="Забронировать"
+										className={`${ctaBtnClass} w-full text-center`}
+										model={m.name}
+										sourceTag="Аренда кофемашин"
+										theme="dark"
+									/>
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Доп. услуги + FAQ */}
+			<section id="extras" className={sectionBg}>
+				<div className="pointer-events-none absolute inset-0 opacity-30 bg-[linear-gradient(to_right,transparent,rgba(255,194,120,.05),transparent)]" />
+				<div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
+					<div className={cardClass}>
+						<h2
+							className="text-3xl text-[#f5e8d3] md:text-4xl"
+							style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+						>
+							Дополнительные услуги
+						</h2>
+						<ul className="mt-6 grid grid-cols-1 gap-2 text-[#c7a679] md:grid-cols-2 md:gap-3 list-disc pl-5 marker:text-[#d2a063]">
+							<li>Выездные бариста и официанты</li>
+							<li>Выездная кофейня</li>
+							<li>Выездные бармены</li>
+							<li>Продажа кофемашин новых и б/у</li>
+							<li>Кейтеринг</li>
 						</ul>
-						<div className="mt-auto flex items-center justify-between gap-3 sm:gap-4 p-3 rounded-xl bg-brown-50 border border-brown-100">
-                            <p className="text-sm text-brown-800/90">Расскажем о подходящей модели под ваш поток гостей.</p>
-                            <ContactModalTrigger 
-                                label="Оставить заявку"
-                                className="min-w-[140px] text-center px-4 py-2 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors"
-                                sourceTag="Аренда кофемашин"
-                            />
+					</div>
+
+					<div id="faq" className={`${cardClass} mt-8 scroll-mt-28`}>
+						<h2
+							className="text-3xl text-[#f5e8d3] md:text-4xl"
+							style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+						>
+							Частые вопросы
+						</h2>
+						<div className="mt-8 space-y-6">
+							<div className="border-b border-[#7b5230]/25 pb-6 last:border-0 last:pb-0">
+								<h3 className="font-medium text-[#e8cfa3]">На какой срок сдаёте кофемашины?</h3>
+								<p className="mt-2 text-[#c7a679]">Чаще посуточно на 1–5 дней или на весь срок мероприятия.</p>
+							</div>
+							<div className="border-b border-[#7b5230]/25 pb-6 last:border-0 last:pb-0">
+								<h3 className="font-medium text-[#e8cfa3]">Входит ли доставка и подключение?</h3>
+								<p className="mt-2 text-[#c7a679]">Да. Привозим, подключаем, проверяем работу и при необходимости обучаем персонал.</p>
+							</div>
+							<div className="border-b border-[#7b5230]/25 pb-6 last:border-0 last:pb-0">
+								<h3 className="font-medium text-[#e8cfa3]">Можно ли заказать бариста и расходники?</h3>
+								<p className="mt-2 text-[#c7a679]">Да, есть пакет «под ключ»: бариста, кофе, молоко, сиропы, посуда.</p>
+							</div>
+							<div>
+								<h3 className="font-medium text-[#e8cfa3]">Как выбрать модель под мой поток?</h3>
+								<p className="mt-2 text-[#c7a679]">Подскажем по ожидаемому трафику: до 100 чашек/день или до 500+.</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<section id="machines" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-				<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Варианты кофемашин</h2>
-				<div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-					{machines.map((m) => (
-						<div key={m.name} className="group p-4 sm:p-6 bg-white rounded-2xl border border-brown-200 shadow-sm hover:shadow-lg transition-shadow relative overflow-hidden flex flex-col h-full">
-							<div className="absolute top-5 right-5 z-10 px-3 py-1.5 text-xs font-semibold rounded-full bg-brown-100 text-brown-800 border border-brown-200">
-								{m.performance}
-							</div>
-							<div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-3 sm:mb-4 ring-1 ring-brown-100">
-								<Image src={m.image} alt={m.name} fill className="object-cover" />
-								<div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
-							</div>
-							<h3 className="text-base sm:text-lg font-semibold text-brown-900">{m.name}</h3>
-							<p className="mt-2 text-brown-800/90 leading-relaxed text-sm sm:text-base">{m.description}</p>
-						<div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm flex-1">
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Тип</p>
-									<p className="font-medium text-brown-900">{m.type}</p>
-								</div>
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Производительность</p>
-									<p className="font-medium text-brown-900">{m.performance}</p>
-								</div>
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Габариты</p>
-									<p className="font-medium text-brown-900">{m.dimensions}</p>
-								</div>
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Вес</p>
-									<p className="font-medium text-brown-900">{m.weight}</p>
-								</div>
-								<div className="col-span-2 pt-2 border-t border-brown-100">
-									<p className="text-brown-700/80">Дополнительно</p>
-									<p className="font-medium text-brown-900">{m.notes}</p>
-								</div>
-							</div>
-							<div className="mt-4 sm:mt-5 pt-2 border-t border-brown-100">
-                                <ContactModalTrigger
-                                    label="Забронировать"
-                                    className="inline-block w-full text-center px-4 py-2.5 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors text-sm sm:text-base mt-auto"
-                                    model={m.name}
-                                    sourceTag="Аренда кофемашин"
-                                />
-							</div>
-						</div>
-					))}
+			<section id="contacts" className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 lg:py-24 scroll-mt-28">
+				<div className="relative mx-auto max-w-2xl overflow-hidden rounded-[32px] border border-[#7b5230]/35 bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)),linear-gradient(180deg,rgba(29,19,14,.94),rgba(15,10,8,.98))] p-8 text-center shadow-[0_24px_60px_rgba(0,0,0,.35),0_0_40px_rgba(214,160,91,.06)] md:p-12">
+					<div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(250,205,139,.06),transparent_30%)]" />
+					<h2
+						className="relative z-10 mb-4 text-3xl text-[#f5e8d3] md:text-4xl"
+						style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+					>
+						Нужен расчёт под ваше мероприятие?
+					</h2>
+					<p className="relative z-10 mb-8 text-lg text-[#c7a679]">
+						Оставьте заявку — перезвоним за 15 минут и подберём модель.
+					</p>
+					<ContactModalTrigger
+						label="Получить расчёт"
+						className={`relative z-10 ${ctaBtnClass} px-8 py-4 text-base`}
+						sourceTag="Аренда кофемашин — контакты"
+						theme="dark"
+					/>
 				</div>
 			</section>
 
-			<section id="espresso" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-				<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Рожковые кофемашины</h2>
-				<p className="mt-2 text-brown-800/90 max-w-3xl text-sm sm:text-base">Для работы на рожковом оборудовании нужны навыки бариста и кофемолка.</p>
-				<div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-					{espressoMachines.map((m) => (
-						<div key={m.name} className="group p-4 sm:p-6 bg-white rounded-2xl border border-brown-200 shadow-sm hover:shadow-lg transition-shadow relative overflow-hidden flex flex-col h-full">
-							<div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-3 sm:mb-4 ring-1 ring-brown-100">
-								<Image src={m.image} alt={m.name} fill className="object-cover" />
-								<div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
-							</div>
-							<h3 className="text-base sm:text-lg font-semibold text-brown-900">{m.name}</h3>
-							<p className="mt-2 text-brown-800/90 leading-relaxed text-sm sm:text-base">{m.description}</p>
-						<div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm flex-1">
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Тип</p>
-									<p className="font-medium text-brown-900">{m.type}</p>
-								</div>
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Производительность</p>
-									<p className="font-medium text-brown-900">{m.performance}</p>
-								</div>
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Габариты</p>
-									<p className="font-medium text-brown-900">{m.dimensions}</p>
-								</div>
-								<div className="space-y-1">
-									<p className="text-brown-700/80">Вес</p>
-									<p className="font-medium text-brown-900">{m.weight}</p>
-								</div>
-								<div className="col-span-2 pt-2 border-t border-brown-100">
-									<p className="text-brown-700/80">Дополнительно</p>
-									<p className="font-medium text-brown-900">{m.notes}</p>
-								</div>
-							</div>
-							<div className="mt-4 sm:mt-5 pt-2 border-t border-brown-100">
-                                <ContactModalTrigger
-                                    label="Забронировать"
-                                    className="inline-block w-full text-center px-4 py-2.5 rounded-full bg-brown-600 text-white hover:bg-brown-700 transition-colors text-sm sm:text-base mt-auto"
-                                    model={m.name}
-                                    sourceTag="Аренда кофемашин"
-                                />
-							</div>
-						</div>
-					))}
-				</div>
-			</section>
-
-			<section id="extras" className="container px-4 sm:px-6 lg:px-8 py-12">
-				<div className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl border border-brown-200 shadow-sm">
-					<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Дополнительные услуги</h2>
-					<ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 text-brown-800/90 list-disc pl-5">
-						<li>Выездные бариста и официанты на мероприятия</li>
-						<li>Выездная кофейня на мероприятия</li>
-						<li>Выездные бармены на мероприятия</li>
-						<li>Продажа кофемашин новых и б/у</li>
-						<li>Кейтеринг</li>
-					</ul>
-				</div>
-			</section>
-
-			<section id="faq" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-				<div className="p-4 sm:p-6 rounded-2xl border border-brown-200 shadow-sm bg-white/90 backdrop-blur-sm">
-					<h2 className="text-2xl md:text-3xl font-bold text-brown-900">Частые вопросы</h2>
-					<div className="mt-4 space-y-4 text-brown-900">
-						<div>
-							<h3 className="font-semibold">На какой срок сдаёте кофемашины?</h3>
-							<p className="text-brown-800/90">Чаще посуточно на 1–5 дней или на весь срок мероприятия.</p>
-						</div>
-						<div>
-							<h3 className="font-semibold">Входит ли доставка и подключение?</h3>
-							<p className="text-brown-800/90">Да. Привозим, подключаем, проверяем работу и при необходимости обучаем персонал.</p>
-						</div>
-						<div>
-							<h3 className="font-semibold">Можно ли заказать бариста и расходники?</h3>
-							<p className="text-brown-800/90">Да, есть пакет «под ключ»: бариста, кофе, молоко, сиропы, посуда.</p>
-						</div>
-						<div>
-							<h3 className="font-semibold">Как выбрать модель под мой поток?</h3>
-							<p className="text-brown-800/90">Мы подскажем по ожидаемому трафику: до 100 чашек/день или до 500+.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-
-            <Footer />
-		</main>
+			<FloatingCTA />
+			<Footer theme="dark" />
+		</div>
 	)
 }

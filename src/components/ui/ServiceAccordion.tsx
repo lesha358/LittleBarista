@@ -23,11 +23,11 @@ export default function ServiceAccordion({ headline, items, cta }: ServiceAccord
   const [openId, setOpenId] = useState<string | null>(null)
 
   return (
-    <div className="p-5 rounded-2xl border border-amber-200/20 bg-[rgba(0,0,0,0.35)] backdrop-blur shadow flex flex-col h-full">
+    <div className="flex h-full flex-col rounded-[28px] border border-[#c78149]/22 bg-[linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01)),linear-gradient(180deg,rgba(29,19,14,.94),rgba(15,10,8,.98))] p-5 shadow-[0_18px_40px_rgba(0,0,0,.28)] backdrop-blur">
       <div className="flex items-center gap-3">
-        <h3 className="text-sm tracking-wider uppercase text-white/60">{headline}</h3>
+        <h3 className="text-sm uppercase tracking-[0.22em] text-[#c78149]/72">{headline}</h3>
       </div>
-      <div className="mt-3 divide-y divide-amber-200/10">
+      <div className="mt-3 divide-y divide-[#c78149]/10">
         {items.map((item) => {
           const isOpen = openId === item.id
           return (
@@ -38,11 +38,11 @@ export default function ServiceAccordion({ headline, items, cta }: ServiceAccord
               aria-expanded={isOpen}
             >
               <div className="flex items-center justify-between gap-3">
-                <span className="text-amber-100/90 group-hover:text-amber-100 transition-colors">
+                <span className="text-[#f5eee4] transition-colors group-hover:text-white">
                   {item.title}
                 </span>
                 <span
-                  className={`shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full border border-amber-200/30 text-amber-200/80 transition-transform ${
+                  className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#c78149]/30 text-[#d7c2a7] transition-transform ${
                     isOpen ? 'rotate-45' : ''
                   }`}
                   aria-hidden
@@ -51,7 +51,7 @@ export default function ServiceAccordion({ headline, items, cta }: ServiceAccord
                 </span>
               </div>
               {isOpen && (
-                <p className="mt-2 text-sm text-amber-100/70">
+                <p className="mt-2 text-sm text-[#d7c2a7]">
                   {item.description}
                 </p>
               )}
@@ -63,7 +63,7 @@ export default function ServiceAccordion({ headline, items, cta }: ServiceAccord
         <div className="mt-4 md:mt-auto">
           <ContactModalTrigger
             label={cta.label || 'Оставить заявку'}
-            className="w-full px-4 py-2.5 rounded-full bg-amber-500 text-[#0d0a08] hover:bg-amber-400 text-sm"
+            className="w-full rounded-full border border-[#c78149]/40 bg-white/[0.04] px-4 py-2.5 text-sm text-[#e2d4c8] transition hover:border-[#c9a06c]/60 hover:bg-white/[0.08] hover:text-[#f5eee4]"
             model={headline}
             sourceTag={cta.sourceTag || headline}
             theme={cta.theme || 'dark'}

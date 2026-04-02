@@ -96,14 +96,18 @@ export default function MobileBarPage() {
   } as const
   const Divider = () => (
     <div className="mt-4 flex items-center justify-center gap-4">
-      <span className="h-px w-16 bg-amber-200/40" />
+      <span className="h-px w-16 bg-[#c78149]/35" />
       <span className="relative inline-flex h-5 w-5 items-center justify-center">
-        <span className="absolute inset-0 rotate-45 rounded-sm bg-amber-200/80" />
+        <span className="absolute inset-0 rotate-45 rounded-sm bg-[#c78149]/80" />
         <span className="absolute inset-1 rotate-45 rounded-sm bg-[#0d0a08]" />
       </span>
-      <span className="h-px w-16 bg-amber-200/40" />
+      <span className="h-px w-16 bg-[#c78149]/35" />
     </div>
   )
+  const premiumCtaClass =
+    'rounded-full border-2 border-[#c9a06c] bg-gradient-to-b from-[#faf3e8] via-[#f0e2cf] to-[#e5d0b0] px-6 py-3 text-sm font-semibold text-[#1a1008] shadow-[0_10px_36px_rgba(0,0,0,.42),inset_0_1px_0_rgba(255,255,255,.65),0_0_28px_rgba(200,150,80,.22)] transition hover:-translate-y-0.5 hover:from-[#fffaf3] hover:via-[#f7ebdc] hover:to-[#edd9be] hover:border-[#ddb66a] hover:shadow-[0_14px_44px_rgba(0,0,0,.48),0_0_36px_rgba(220,170,100,.3)]'
+  const subtleCtaClass =
+    'mt-4 inline-block rounded-full border border-[#c78149]/40 bg-white/[0.04] px-4 py-2.5 text-center text-[#e2d4c8] transition hover:border-[#c9a06c]/60 hover:bg-white/[0.08] hover:text-[#f5eee4]'
   const alcoholic = [
     'Алкогольные',
   ]
@@ -154,10 +158,10 @@ export default function MobileBarPage() {
   ]
 
   const stats = [
-    { k: '7+ лет', v: 'на рынке', icon: '⏳' },
-    { k: '100+', v: 'событий/год', icon: '🎉' },
-    { k: '4.9/5', v: 'оценка клиентов', icon: '⭐' },
-    { k: '24/7', v: 'поддержка', icon: '☎️' },
+    { k: '7+ лет', v: 'на рынке' },
+    { k: '100+', v: 'событий в год' },
+    { k: '4.9/5', v: 'оценка клиентов' },
+    { k: '24/7', v: 'поддержка' },
   ] as const
 
   const classics = [
@@ -186,10 +190,10 @@ export default function MobileBarPage() {
       <Script id="service-mobile-bar" type="application/ld+json">{JSON.stringify(jsonLdService)}</Script>
       <Script id="faq-mobile-bar" type="application/ld+json">{JSON.stringify(jsonLdFaq)}</Script>
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-24 -left-24 h-72 w-72 max-w-[100vw] rounded-full bg-gradient-to-br from-yellow-500/20 via-amber-300/10 to-transparent blur-3xl" />
-        <div className="absolute top-1/3 -right-24 h-80 w-80 max-w-[100vw] rounded-full bg-gradient-to-tr from-amber-400/20 via-yellow-300/10 to-transparent blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 right-1/4 h-48 bg-gradient-to-t from-amber-400/10 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,215,128,0.06),transparent_60%)]" />
+        <div className="absolute -top-24 -left-24 h-72 w-72 max-w-[100vw] rounded-full bg-gradient-to-br from-[#c78149]/18 via-[#5c3a24]/10 to-transparent blur-3xl" />
+        <div className="absolute top-1/3 -right-24 h-80 w-80 max-w-[100vw] rounded-full bg-gradient-to-tr from-[#c78149]/14 via-[#cc6d3c]/8 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 right-1/4 h-48 bg-gradient-to-t from-[#c78149]/8 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(199,129,73,0.05),transparent_60%)]" />
       </div>
 
       <Navigation theme="dark" />
@@ -197,22 +201,22 @@ export default function MobileBarPage() {
       <section id="intro" className="container px-4 sm:px-6 lg:px-8 pt-24 md:pt-40 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs sm:text-sm text-amber-100/80 backdrop-blur">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-400" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs sm:text-sm text-[#e2d4c8]/85 backdrop-blur">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c78149]" />
               Бар под ключ: меню, посуда, лёд, бармены
             </div>
-            <h1 className={`${cormorant.className} mt-3 sm:mt-4 text-[34px] sm:text-6xl md:text-7xl font-semibold text-amber-100 tracking-tight drop-shadow-[0_2px_12px_rgba(255,200,100,0.15)] whitespace-nowrap`}>
-              ВЫЕЗДНОЙ БАР
+            <h1 className={`${cormorant.className} mt-3 sm:mt-4 text-[34px] sm:text-6xl md:text-7xl font-semibold text-[#f5eee4] tracking-tight`}>
+              Выездной бар
             </h1>
-            <p className="mt-3 sm:mt-4 text-amber-100/80 leading-relaxed text-base sm:text-lg max-w-2xl">
+            <p className="mt-3 sm:mt-4 max-w-2xl text-base leading-relaxed text-[#d7c2a7] sm:text-lg">
               Классические и авторские коктейли, non‑alcohol и моктейли. Работаем на площадках любого формата — от офисов и квартир до выставок и больших событий.
             </p>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <ul className="divide-y divide-amber-200/10 rounded-2xl border border-amber-200/20 bg-[rgba(0,0,0,0.35)] backdrop-blur text-amber-100/85 shadow-lg">
+              <ul className="divide-y divide-[#c78149]/10 rounded-2xl border border-[#c78149]/20 bg-[rgba(0,0,0,0.35)] text-[#e2d4c8]/90 backdrop-blur shadow-lg">
                 <li className="px-4 py-3">Меню под тематику и тайминг</li>
                 <li className="px-4 py-3">Профессиональные бармены и станция</li>
               </ul>
-              <ul className="divide-y divide-amber-200/10 rounded-2xl border border-amber-200/20 bg-[rgba(0,0,0,0.35)] backdrop-blur text-amber-100/85 shadow-lg">
+              <ul className="divide-y divide-[#c78149]/10 rounded-2xl border border-[#c78149]/20 bg-[rgba(0,0,0,0.35)] text-[#e2d4c8]/90 backdrop-blur shadow-lg">
                 <li className="px-4 py-3">Стекло/эко‑посуда и лёд включены</li>
                 <li className="px-4 py-3">Быстрый расчёт за 15 минут</li>
               </ul>
@@ -220,19 +224,19 @@ export default function MobileBarPage() {
             <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2.5 sm:gap-4">
               <ContactModalTrigger
                 label="Заказать бар"
-                className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 text-[#0d0a08] hover:from-amber-400 hover:to-yellow-300 transition-colors shadow w-full sm:w-auto text-center"
+                className={`${premiumCtaClass} w-full text-center sm:w-auto`}
                 sourceTag="Выездной бар"
                 theme="dark"
               />
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/70">
-                <span className="font-semibold text-white">100+ событий</span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-[#d7c2a7]">
+                <span className="font-semibold text-[#f5eee4]">100+ событий</span>
                 <span>в портфолио</span>
               </span>
             </div>
             <Divider />
           </div>
           <div className="relative md:h-[460px] h-56 sm:h-72 rounded-2xl overflow-hidden border border-white/10 bg-black/40">
-            <div className="absolute -top-16 -right-16 h-64 w-64 rounded-full bg-amber-300/20 blur-3xl" />
+            <div className="absolute -top-16 -right-16 h-64 w-64 rounded-full bg-[#c78149]/16 blur-3xl" />
             <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-black/20" />
             <div className="relative h-full w-full">
               <Image src="/images/bar/main.webp" alt="Выездной бар" fill className="object-cover" />
@@ -248,16 +252,12 @@ export default function MobileBarPage() {
           {stats.map((s, i) => (
             <div
               key={i}
-              className="rounded-2xl border border-amber-200/20 bg-[rgba(0,0,0,0.35)] backdrop-blur px-4 py-5 text-amber-100 shadow"
+              className="rounded-2xl border border-[#c78149]/20 bg-[rgba(0,0,0,0.35)] px-4 py-5 text-[#f5eee4] shadow backdrop-blur"
             >
-              <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-amber-500/20 text-lg sm:text-xl">
-                  <span aria-hidden="true">{s.icon}</span>
-                </div>
-                <div>
-                  <div className="text-lg sm:text-xl font-extrabold tracking-tight">{s.k}</div>
-                  <div className="text-amber-100/70 text-xs sm:text-sm mt-0.5">{s.v}</div>
-                </div>
+              <div className="text-[11px] uppercase tracking-[0.22em] text-[#c78149]/75">0{i + 1}</div>
+              <div className="mt-3">
+                <div className="text-lg font-semibold tracking-tight sm:text-xl">{s.k}</div>
+                <div className="mt-0.5 text-xs text-[#d7c2a7] sm:text-sm">{s.v}</div>
               </div>
             </div>
           ))}
@@ -286,30 +286,30 @@ export default function MobileBarPage() {
       </section>
 
       <section id="why-us" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">РАБОТАЕМ ДЛЯ ВАШЕГО КОМФОРТА</h2>
+        <h2 className={`${cormorant.className} text-2xl md:text-3xl font-semibold text-[#f5eee4]`}>Работаем для вашего комфорта</h2>
         <Divider />
         <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {advantages.map((t, i) => (
             <div key={i} className="p-5 rounded-2xl border border-amber-200/20 bg-[rgba(0,0,0,0.35)] backdrop-blur shadow">
               <div className="flex items-start gap-3">
-                <div className="w-7 h-7 rounded-full bg-amber-500 text-[#0d0a08] flex items-center justify-center text-sm font-bold">{i+1}</div>
-                <p className="text-amber-100/85 text-sm sm:text-base">{t}</p>
+                <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#c78149]/45 bg-black/20 text-sm font-medium text-[#d7c2a7]">{i+1}</div>
+                <p className="text-[#e2d4c8]/88 text-sm sm:text-base">{t}</p>
               </div>
             </div>
           ))}
         </div>
-        <p className="mt-4 text-amber-100/80">Результат: ваши гости довольны, а праздник бьёт все рекорды.</p>
+        <p className="mt-4 text-[#d7c2a7]">Результат: ваши гости довольны, а праздник выглядит как продуманная premium-зона.</p>
       </section>
       {/* Галерея временно скрыта */}
       <section id="themes" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Тематические бары</h2>
+        <h2 className={`${cormorant.className} text-2xl md:text-3xl font-semibold text-[#f5eee4]`}>Тематические бары</h2>
         <Divider />
         <p className="mt-2 text-white/70 max-w-3xl text-sm sm:text-base">Оформим стойку, подачу и меню под конкретный сценарий мероприятия.</p>
 
         <div className="mt-5 sm:mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           <div className="p-5 rounded-2xl border border-white/10 bg-white/5 flex flex-col">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center">🏢</div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#c78149]/35 bg-black/20 text-sm font-medium text-[#d7c2a7]">01</div>
               <h3 className="text-lg font-semibold text-white">Офис и бизнес</h3>
             </div>
             <ul className="mt-3 space-y-2 list-disc pl-5 text-white/80 text-sm sm:text-base">
@@ -326,7 +326,7 @@ export default function MobileBarPage() {
 
           <div className="p-5 rounded-2xl border border-white/10 bg-white/5 flex flex-col">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center">🎉</div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#c78149]/35 bg-black/20 text-sm font-medium text-[#d7c2a7]">02</div>
               <h3 className="text-lg font-semibold text-white">Праздники и сезоны</h3>
             </div>
             <ul className="mt-3 space-y-2 list-disc pl-5 text-white/80 text-sm sm:text-base">
@@ -342,7 +342,7 @@ export default function MobileBarPage() {
 
           <div className="p-5 rounded-2xl border border-white/10 bg-white/5 flex flex-col">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center">💍</div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#c78149]/35 bg-black/20 text-sm font-medium text-[#d7c2a7]">03</div>
               <h3 className="text-lg font-semibold text-white">Свадьбы и вечеринки</h3>
             </div>
             <ul className="mt-3 space-y-2 list-disc pl-5 text-white/80 text-sm sm:text-base">
@@ -359,7 +359,7 @@ export default function MobileBarPage() {
       </section>
 
       <section id="benefits" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Чем интересен выездной коктейль‑бар</h2>
+        <h2 className={`${cormorant.className} text-2xl md:text-3xl font-semibold text-[#f5eee4]`}>Чем интересен выездной коктейль-бар</h2>
         <Divider />
         <p className="mt-2 text-white/70 max-w-3xl text-sm sm:text-base">Это универсальное решение для событий разного формата.</p>
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -377,7 +377,7 @@ export default function MobileBarPage() {
       </section>
 
       <section id="menu-list" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Примеры коктейлей</h2>
+        <h2 className={`${cormorant.className} text-2xl md:text-3xl font-semibold text-[#f5eee4]`}>Примеры коктейлей</h2>
         <Divider />
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
@@ -420,7 +420,7 @@ export default function MobileBarPage() {
       </section>
 
       <section id="packages" className="container px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Пакеты обслуживания</h2>
+        <h2 className={`${cormorant.className} text-2xl md:text-3xl font-semibold text-[#f5eee4]`}>Пакеты обслуживания</h2>
         <Divider />
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           <div className="p-6 rounded-2xl border border-white/10 bg-white/5 flex flex-col">
@@ -428,7 +428,7 @@ export default function MobileBarPage() {
             <p className="mt-2 text-white/70">Безалкогольные коктейли • бармен • посуда • лёд • сиропы.</p>
             <ContactModalTrigger
               label="Запросить расчёт"
-              className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors"
+              className={subtleCtaClass}
               sourceTag="Выездной бар — пакет Light"
               theme="dark"
             />
@@ -438,7 +438,7 @@ export default function MobileBarPage() {
             <p className="mt-2 text-white/70">Классические коктейли • 2 бармена • барная станция • гарниши.</p>
             <ContactModalTrigger
               label="Запросить расчёт"
-              className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors"
+              className={subtleCtaClass}
               sourceTag="Выездной бар — пакет Classic"
               theme="dark"
             />
@@ -448,7 +448,7 @@ export default function MobileBarPage() {
             <p className="mt-2 text-white/70">Авторское меню • бар‑менеджер • декор • брендирование стойки.</p>
             <ContactModalTrigger
               label="Запросить расчёт"
-              className="mt-4 inline-block text-center px-4 py-2.5 rounded-full border border-amber-500/50 text-amber-300 hover:bg-amber-500 hover:text-[#0d0a08] transition-colors"
+              className={subtleCtaClass}
               sourceTag="Выездной бар — пакет Pro"
               theme="dark"
             />
@@ -461,7 +461,7 @@ export default function MobileBarPage() {
 
       <section className="container px-4 sm:px-6 lg:px-8 py-12" id="order-form">
         <div className="p-6 bg-black/30 backdrop-blur-sm rounded-2xl border border-amber-500/20 shadow-sm">
-          <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100">Как это работает</h2>
+          <h2 className={`${cormorant.className} text-2xl md:text-3xl font-semibold text-[#f5eee4]`}>Как это работает</h2>
           <div className="mt-5 flex flex-col md:flex-row md:items-center gap-4 md:gap-3">
             {[
               'Оставляете заявку — перезвоним за 15 минут',
