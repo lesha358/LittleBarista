@@ -10,7 +10,12 @@ interface FormData {
   model?: string;
 }
 
-export default function ContactFormStatic() {
+interface ContactFormStaticProps {
+  /** Подпись в Telegram, откуда заявка */
+  source?: string;
+}
+
+export default function ContactFormStatic({ source = 'Форма: Статическая карточка' }: ContactFormStaticProps) {
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -42,7 +47,7 @@ export default function ContactFormStatic() {
         name: formData.name,
         phone: formData.phone,
         model: formData.model,
-        source: 'Форма: Статическая карточка',
+        source,
       });
 
       if (!tg.ok) {

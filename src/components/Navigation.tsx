@@ -105,6 +105,16 @@ export default function Navigation({ theme = 'dark' }: { theme?: 'light' | 'dark
         { label: 'Заказать', onClick: handleOrder },
       ];
     }
+    if (pathname === '/' || pathname === '') {
+      return [
+        { label: 'Выездная кофейня', href: '/services/mobile-coffee' },
+        { label: 'Выездной бар', href: '/services/mobile-bar' },
+        { label: 'Аренда кофемашин', href: '/services/coffee-machines' },
+        { label: 'Персонал', href: '/services/personnel' },
+        { label: 'Контакты', sectionId: 'contact-form' },
+        { label: 'Заказать', onClick: handleOrder },
+      ];
+    }
     return [
       { label: 'Выездная кофейня', href: '/services/mobile-coffee' },
       { label: 'Выездной бар', href: '/services/mobile-bar' },

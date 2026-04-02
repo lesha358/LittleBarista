@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
+import PortfolioMasonry from '@/components/PortfolioMasonry';
+
 const PORTFOLIO_DIR = '/images/portfolio';
 
 function hashString(s: string): number {
@@ -55,6 +57,37 @@ function interleaveTwo<T>(a: T[], b: T[]): T[] {
 /** Если в имени файла есть подсказка — кадр идёт в приоритет и чаще выше в сетке. Переименуйте файлы, напр. `cocktail_01.jpg`. */
 const FILENAME_TOP_HINT =
   /cocktail|mocktail|моктейл|напит|drinks?|барная|бар-/i;
+const HOST_HINT = /host/i;
+
+/**
+ * Равномерно раскладывает специальные кадры по всей последовательности.
+ * Так `host`-фото не будут стоять подряд даже при добавлении/удалении файлов.
+ */
+function distributeAcrossList<T>(special: T[], regular: T[]): T[] {
+  if (special.length === 0) return regular;
+  if (regular.length === 0) return special;
+
+  const total = special.length + regular.length;
+  const slots = new Array<T | undefined>(total);
+
+  for (let i = 0; i < special.length; i++) {
+    let pos = Math.floor(((i + 0.5) * total) / special.length);
+    pos = Math.max(0, Math.min(total - 1, pos));
+
+    while (slots[pos] !== undefined && pos < total - 1) pos++;
+    while (slots[pos] !== undefined && pos > 0) pos--;
+    slots[pos] = special[i];
+  }
+
+  let regularIndex = 0;
+  for (let i = 0; i < total; i++) {
+    if (slots[i] === undefined) {
+      slots[i] = regular[regularIndex++];
+    }
+  }
+
+  return slots.filter((item): item is T => item !== undefined);
+}
 
 function getPortfolioFiles(): string[] {
   const dir = path.join(process.cwd(), 'public', 'images', 'portfolio');
@@ -81,7 +114,11 @@ function getPortfolioFiles(): string[] {
     mixed = interleaveHalves(seededShuffle(raw, s));
   }
 
-  return interleaveHalves(mixed);
+  const base = interleaveHalves(mixed);
+  const hostPhotos = base.filter((file) => HOST_HINT.test(file));
+  const otherPhotos = base.filter((file) => !HOST_HINT.test(file));
+
+  return distributeAcrossList(hostPhotos, otherPhotos);
 }
 
 const portfolioFiles = getPortfolioFiles();
@@ -101,25 +138,7 @@ export default function PortfolioSection() {
           <p className="services-subtitle">Фото с наших мероприятий</p>
         </div>
 
-        <div className="mt-10 columns-2 gap-3 md:columns-3 md:gap-4 lg:columns-4">
-          {photoItems.map((item, i) => (
-            <div
-              key={`${item.src}-${i}`}
-              className="group relative mb-3 break-inside-avoid overflow-hidden rounded-[22px] border border-[#6b4e2e]/35 shadow-[0_12px_40px_rgba(0,0,0,.4)] md:mb-4 md:rounded-[26px]"
-            >
-              {/* Натуральные пропорции файла — masonry без object-cover и без letterbox */}
-              {/* eslint-disable-next-line @next/next/no-img-element -- смешанные ориентации, нужен натуральный aspect ratio */}
-              <img
-                src={item.src}
-                alt={item.alt}
-                loading={i < 6 ? 'eager' : 'lazy'}
-                decoding="async"
-                className="block h-auto w-full brightness-[1.02] saturate-[1.06] contrast-[1.02] transition duration-500 group-hover:scale-[1.04]"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(7,5,4,0),rgba(7,5,4,.08)_40%,rgba(7,5,4,.22))]" />
-            </div>
-          ))}
-        </div>
+        <PortfolioMasonry items={photoItems} />
       </div>
     </section>
   );
