@@ -149,7 +149,7 @@ export default function Navigation({ theme = 'dark' }: { theme?: 'light' | 'dark
           <Link href="/" className="site-logo" aria-label="Little Barista" onClick={(e) => { goHome(); e.preventDefault(); }}>
             <span className="site-logo__inner">
               <Image
-                src="/images/hero-logo.png"
+                src="/images/white-logo.png"
                 alt="Little Barista"
                 width={280}
                 height={100}

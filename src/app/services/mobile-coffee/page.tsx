@@ -1,5 +1,6 @@
 import Navigation from '@/components/Navigation';
 import PhotoCarousel from '@/components/PhotoCarousel';
+import type { CarouselImage } from '@/components/PhotoCarousel';
 import ContactFormStatic from '@/components/ContactFormStatic';
 import FloatingCTA from '@/components/FloatingCTA';
 import Footer from '@/components/Footer';
@@ -9,6 +10,8 @@ import { generateMetadata } from '@/lib/metadata';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 export const metadata = generateMetadata({
   title: 'Выездная кофейня — Little Barista',
@@ -87,7 +90,40 @@ const projects = [
   'Конференция одного из крупнейших банков страны',
 ];
 
-export default function MobileCoffeePage() {
+const imageNameCollator = new Intl.Collator('ru', { numeric: true, sensitivity: 'base' });
+
+function formatCarouselAlt(fileName: string) {
+  const baseName = fileName.replace(/\.[^.]+$/, '');
+  const cleaned = baseName
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return cleaned ? `Выездная кофейня — ${cleaned}` : 'Выездная кофейня';
+}
+
+async function getCarouselImages(): Promise<CarouselImage[]> {
+  try {
+    const carouselDir = path.join(process.cwd(), 'public', 'images', 'carousel');
+    const entries = await fs.readdir(carouselDir, { withFileTypes: true });
+
+    return entries
+      .filter((entry) => entry.isFile() && /\.(png|jpe?g|webp)$/i.test(entry.name))
+      .map((entry) => entry.name)
+      .sort((a, b) => imageNameCollator.compare(a, b))
+      .map((fileName) => ({
+        src: `/images/carousel/${fileName}`,
+        alt: formatCarouselAlt(fileName),
+      }));
+  } catch (error) {
+    console.error('Failed to read mobile coffee carousel images:', error);
+    return [];
+  }
+}
+
+export default async function MobileCoffeePage() {
+  const carouselImages = await getCarouselImages();
+
   return (
     <div className="min-h-screen bg-[#0d0705] text-[#f3e4c8]">
       <Script id="breadcrumbs-mobile-coffee" type="application/ld+json">
@@ -246,7 +282,7 @@ export default function MobileCoffeePage() {
       <section id="gallery" className={sectionBg}>
         <div className="pointer-events-none absolute inset-0 opacity-30 bg-[linear-gradient(to_right,transparent,rgba(255,194,120,.05),transparent)]" />
         <div className="relative z-10">
-          <PhotoCarousel />
+          <PhotoCarousel images={carouselImages} />
         </div>
       </section>
 
