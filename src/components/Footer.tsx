@@ -36,7 +36,7 @@ export default function Footer({ theme = 'light' }: { theme?: 'light' | 'dark' }
                 </a>
                 <p className="flex items-start gap-2 text-sm text-[#d7c2a7]">
                   <MapPin className="w-4 h-4 shrink-0 mt-0.5" />
-                  <span>г. Москва, ул. Гаврикова, д. 2/38</span>
+                  <span>г. Москва, ул. Правды, д. 7/9к1</span>
                 </p>
               </div>
               <div className="flex gap-3 mt-5">
@@ -122,7 +122,7 @@ export default function Footer({ theme = 'light' }: { theme?: 'light' | 'dark' }
               <p className="text-sm text-[#5c3a24]"><span className="font-medium">ОГРНИП:</span> 321774600377697</p>
             </div>
             <div className="space-y-2">
-              <p className="text-sm text-[#5c3a24]"><span className="font-medium">Адрес:</span> г. Москва, ул. Гаврикова, д. 2/38</p>
+              <p className="text-sm text-[#5c3a24]"><span className="font-medium">Адрес:</span> г. Москва, ул. Правды, д. 7/9к1</p>
               <p className="text-sm text-[#5c3a24]"><span className="font-medium">Email:</span> Misha310@mail.ru</p>
             </div>
           </div>

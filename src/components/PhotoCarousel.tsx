@@ -22,10 +22,16 @@ export default function PhotoCarousel({ images }: PhotoCarouselProps) {
   }, [images.length]);
 
   useEffect(() => {
-    const el = thumbsRef.current;
-    if (!el) return;
-    const active = el.querySelector<HTMLElement>(`[data-thumb-index="${currentIndex}"]`);
-    active?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+    const container = thumbsRef.current;
+    if (!container) return;
+    const active = container.querySelector<HTMLElement>(`[data-thumb-index="${currentIndex}"]`);
+    if (!active) return;
+
+    // Только горизонтальная прокрутка ленты; scrollIntoView мог прокручивать всю страницу к «Портфолио».
+    const cRect = container.getBoundingClientRect();
+    const aRect = active.getBoundingClientRect();
+    const delta = aRect.left + aRect.width / 2 - (cRect.left + cRect.width / 2);
+    container.scrollBy({ left: delta, behavior: 'smooth' });
   }, [currentIndex]);
 
   if (images.length === 0) {

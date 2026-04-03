@@ -403,7 +403,7 @@ export default async function MobileCoffeePage() {
             <div className="mt-6 space-y-4 text-[#e8cfa3]">
               <a href="tel:+79624429794" className="block transition hover:text-[#f5e8d3]">+7 (962) 442-97-94</a>
               <a href="mailto:Misha310@mail.ru" className="block transition hover:text-[#f5e8d3]">Misha310@mail.ru</a>
-              <p className="text-[#c7a679]">г. Москва, ул. Гаврикова, д. 2/38</p>
+              <p className="text-[#c7a679]">г. Москва, ул. Правды, д. 7/9к1</p>
             </div>
             <div className="mt-8">
               <ContactModalTrigger

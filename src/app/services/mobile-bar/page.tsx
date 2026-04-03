@@ -41,7 +41,7 @@ export default function MobileBarPage() {
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Москва',
-        streetAddress: 'ул. Гаврикова, д. 2/38',
+        streetAddress: 'ул. Правды, д. 7/9к1',
         addressCountry: 'RU',
       },
     },
