@@ -13,7 +13,7 @@ export default function Hero() {
       {/* Фоновое изображение */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/images/hero-bg1.png"
+          src="/images/hero-bg1.webp"
           alt=""
           fill
           className="object-cover object-[center_top]"
