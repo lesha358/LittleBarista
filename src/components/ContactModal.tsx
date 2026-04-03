@@ -10,9 +10,23 @@ interface ContactModalProps {
   presetModel?: string;
   sourceTag?: string;
   theme?: 'light' | 'dark';
+  title?: string;
+  subtitle?: string;
+  submitText?: string;
+  onSuccess?: () => void;
 }
 
-export default function ContactModal({ isOpen, onClose, presetModel = '', sourceTag = 'Модалка', theme = 'light' }: ContactModalProps) {
+export default function ContactModal({
+  isOpen,
+  onClose,
+  presetModel = '',
+  sourceTag = 'Модалка',
+  theme = 'light',
+  title = 'Оставить заявку',
+  subtitle = 'Заполните форму, и мы свяжемся с вами в ближайшее время',
+  submitText = 'Отправить',
+  onSuccess,
+}: ContactModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -53,6 +67,7 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
         reachGoalAll('form_success')
         setSubmitStatus('success');
         setFormData({ name: '', phone: '', model: '' });
+        onSuccess?.();
         setTimeout(() => onClose(), 2000);
       } else {
         throw new Error(tg.error || 'Ошибка отправки в Telegram');
@@ -75,7 +90,7 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
   const isDark = theme === 'dark'
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pb-4 pt-24 sm:pt-28 md:pt-32">
       {/* Затемнение фона */}
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -83,7 +98,7 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
       />
 
       {/* Модальное окно */}
-      <div className={`${isDark ? 'bg-[#0d0a08] border-amber-500/30 text-amber-100' : 'bg-white border-brown-200 text-gray-900'} relative rounded-2xl p-4 sm:p-6 lg:p-8 max-w-md w-full mx-auto shadow-xl overflow-y-auto max-h-[calc(100vh-2rem)] border-2`}>
+      <div className={`${isDark ? 'bg-[#0d0a08] border-amber-500/30 text-amber-100' : 'bg-white border-brown-200 text-gray-900'} relative rounded-2xl p-4 sm:p-6 lg:p-8 max-w-md w-full mx-auto shadow-xl overflow-y-auto max-h-[calc(100vh-7rem)] sm:max-h-[calc(100vh-8rem)] md:max-h-[calc(100vh-9rem)] border-2`}>
         {/* Кнопка закрытия */}
         <button
           onClick={onClose}
@@ -96,10 +111,10 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
 
         {/* Заголовок */}
         <h2 className={`text-xl sm:text-2xl font-bold mb-1 sm:mb-2 pr-8 ${isDark ? 'text-amber-100' : 'text-gray-900'}`}>
-          Оставить заявку
+          {title}
         </h2>
         <p className={`text-sm sm:text-base mb-4 sm:mb-6 ${isDark ? 'text-amber-100/80' : 'text-gray-600'}`}>
-          Заполните форму, и мы свяжемся с вами в ближайшее время
+          {subtitle}
         </p>
 
         {/* Форма */}
@@ -176,7 +191,7 @@ export default function ContactModal({ isOpen, onClose, presetModel = '', source
                 : (isSubmitting ? 'bg-brown-400 text-white cursor-not-allowed' : 'bg-brown-600 hover:bg-brown-700 text-white')
             }`}
           >
-            {isSubmitting ? 'Отправка...' : 'Отправить'}
+            {isSubmitting ? 'Отправка...' : submitText}
           </button>
         </form>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import ContactModal from './ContactModal';
 import { usePathname, useRouter } from 'next/navigation';
@@ -147,7 +148,15 @@ export default function Navigation({ theme = 'dark' }: { theme?: 'light' | 'dark
         <div className="site-header__inner">
           <Link href="/" className="site-logo" aria-label="Little Barista" onClick={(e) => { goHome(); e.preventDefault(); }}>
             <span className="site-logo__inner">
-              <img src="/images/Logo-horisontal.png" alt="Little Barista" />
+              <Image
+                src="/images/hero-logo.png"
+                alt="Little Barista"
+                width={280}
+                height={100}
+                className="site-logo__image"
+                priority
+                unoptimized
+              />
             </span>
           </Link>
 

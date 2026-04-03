@@ -6,11 +6,13 @@ import ServiceTriad from '@/components/ServiceTriad';
 import PortfolioSection from '@/components/PortfolioSection';
 import FloatingCTA from '@/components/FloatingCTA';
 import ContactFormStatic from '@/components/ContactFormStatic';
+import HomeDiscountPopup from '@/components/HomeDiscountPopup';
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden">
       <Navigation theme="dark" />
+      <HomeDiscountPopup />
       <section id="hero">
         <Hero />
       </section>

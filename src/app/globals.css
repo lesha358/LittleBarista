@@ -200,7 +200,7 @@
   .site-header__inner {
     width: min(1400px, 100%);
     margin: 0 auto;
-    height: 86px;
+    height: 90px;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
@@ -245,7 +245,7 @@
   }
 
   .site-header.is-scrolled .site-header__inner {
-    height: 72px;
+    height: 76px;
     background:
       linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012)),
       var(--header-bg-scrolled);
@@ -268,44 +268,51 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    /* чуть ниже оптического центра шапки */
+    margin-top: 5px;
   }
 
-  /* У картинки ~70% пустых полей — масштабируем и обрезаем, чтобы логотип был крупным */
+  /*
+   * hero-logo.png с большими полями — высота шапки не тянем: слот компактный,
+   * картинка масштабируется, лишние поля обрезаются (overflow hidden).
+   */
   .site-logo__inner {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 260px;
-    height: 68px;
+    justify-content: flex-start;
+    width: auto;
+    max-width: 520px;
+    height: 72px;
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
-    transition: width 0.35s ease, height 0.35s ease;
+    transition: max-width 0.35s ease, height 0.35s ease;
   }
 
-  .site-logo img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 260px;
-    height: 68px;
+  .site-logo__image {
+    display: block;
+    width: auto !important;
+    height: 100% !important;
     max-width: none;
+    max-height: none;
     object-fit: contain;
-    object-position: center 58%;
-    transform: translate(-50%, calc(-50% + 14px)) scale(2.8);
-    transform-origin: center center;
+    object-position: left center;
+    transform: scale(1.32);
+    transform-origin: left center;
     transition: transform 0.35s ease;
   }
 
   .site-header.is-scrolled .site-logo__inner {
-    width: 218px;
-    height: 56px;
+    max-width: 420px;
+    height: 58px;
   }
 
-  .site-header.is-scrolled .site-logo img {
-    width: 218px;
-    height: 56px;
-    transform: translate(-50%, calc(-50% + 11px)) scale(2.8);
+  .site-header.is-scrolled .site-logo__image {
+    transform: scale(1.28);
+  }
+
+  .site-header.is-scrolled .site-logo {
+    margin-top: 4px;
   }
 
   .site-nav {
@@ -614,15 +621,17 @@
       gap: 12px;
     }
 
-    .site-logo__inner {
-      width: 195px;
-      height: 50px;
+    .site-logo {
+      margin-top: 4px;
     }
 
-    .site-logo img {
-      width: 195px;
-      height: 50px;
-      transform: translate(-50%, calc(-50% + 11px)) scale(2.8);
+    .site-logo__inner {
+      max-width: 300px;
+      height: 54px;
+    }
+
+    .site-logo__image {
+      transform: scale(1.26);
     }
 
     .site-header.is-scrolled .site-header__inner {
@@ -630,14 +639,16 @@
     }
 
     .site-header.is-scrolled .site-logo__inner {
-      width: 175px;
-      height: 44px;
+      max-width: 258px;
+      height: 48px;
     }
 
-    .site-header.is-scrolled .site-logo img {
-      width: 175px;
-      height: 44px;
-      transform: translate(-50%, calc(-50% + 9px)) scale(2.8);
+    .site-header.is-scrolled .site-logo__image {
+      transform: scale(1.22);
+    }
+
+    .site-header.is-scrolled .site-logo {
+      margin-top: 3px;
     }
 
     .mobile-menu {
@@ -659,24 +670,30 @@
       display: none !important;
     }
 
-    .site-logo__inner {
-      width: 160px;
-      height: 44px;
+    .site-logo {
+      margin-top: 3px;
     }
 
-    .site-logo img {
-      width: 160px;
-      height: 44px;
+    .site-logo__inner {
+      max-width: 248px;
+      height: 50px;
+    }
+
+    .site-logo__image {
+      transform: scale(1.22);
     }
 
     .site-header.is-scrolled .site-logo__inner {
-      width: 145px;
-      height: 40px;
+      max-width: 218px;
+      height: 44px;
     }
 
-    .site-header.is-scrolled .site-logo img {
-      width: 145px;
-      height: 40px;
+    .site-header.is-scrolled .site-logo__image {
+      transform: scale(1.18);
+    }
+
+    .site-header.is-scrolled .site-logo {
+      margin-top: 2px;
     }
 
     .mobile-menu {
