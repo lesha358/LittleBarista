@@ -5,6 +5,7 @@ import ContactFormStatic from '@/components/ContactFormStatic';
 import FloatingCTA from '@/components/FloatingCTA';
 import Footer from '@/components/Footer';
 import ContactModalTrigger from '@/components/ContactModalTrigger';
+import Calculator from '@/components/Calculator';
 import { Suspense } from 'react';
 import { generateMetadata } from '@/lib/metadata';
 import Image from 'next/image';
@@ -375,6 +376,28 @@ export default async function MobileCoffeePage() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="pricing" className={`${sectionBg} scroll-mt-28`}>
+        <div className="pointer-events-none absolute inset-0 opacity-30 bg-[linear-gradient(to_right,transparent,rgba(255,194,120,.05),transparent)]" />
+        <div className="relative z-10 mx-auto max-w-3xl px-6 md:px-10">
+          <div className="mb-10 text-center">
+            <div className="text-xs uppercase tracking-[0.28em] text-[#9f7b52]">Смета</div>
+            <h2
+              className="mt-3 text-4xl text-[#f5e8d3] md:text-5xl"
+              style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
+            >
+              Ориентировочный расчёт
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[#c7a679]">
+              Подвиньте ползунки — увидите примерную структуру затрат на заказное обслуживание. Итоговую смету согласуем после уточнения деталей.
+            </p>
+          </div>
+          <Calculator variant="dark" />
+          <p className="mt-8 text-center text-sm leading-relaxed text-[#9f7b52]">
+            Расчёт ознакомительный: финальная стоимость зависит от площадки, меню, времени работы и логистики.
+          </p>
         </div>
       </section>
 
