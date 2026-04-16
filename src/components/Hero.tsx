@@ -43,14 +43,14 @@ export default function Hero() {
 
         {/* Заголовок — небольшой зазор после логотипа */}
         <h1
-          className={`${cormorant.className} mt-0 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-amber-50 leading-[1.08] max-w-6xl mx-auto tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]`}
+          className={`${cormorant.className} mt-0 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-amber-50 leading-[1.12] max-w-5xl mx-auto tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]`}
         >
-          Сделаем ваше мероприятие точкой притяжения
+          Кофе-бар под ключ для выставок и деловых мероприятий в Москве!
         </h1>
 
         {/* Подзаголовок — отступ от h1 сильно больше, чем между подзаголовком и CTA */}
-        <p className="mt-10 sm:mt-12 md:mt-14 text-lg sm:text-xl md:text-2xl text-amber-100/90 max-w-3xl mx-auto font-medium leading-relaxed tracking-wide mb-10 md:mb-12 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">
-          Форумы, конференции, выставки, корпоративы и любые другие мероприятия
+        <p className="mt-10 sm:mt-12 md:mt-14 text-base sm:text-lg md:text-xl text-amber-100/90 max-w-4xl mx-auto font-medium leading-relaxed tracking-wide mb-10 md:mb-12 drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]">
+          Выездная кофейня для стендов, форумов и конференций: бариста, оборудование, расходники, брендирование.
         </p>
 
         {/* Кнопка CTA */}
