@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import ContactModal from './ContactModal';
-import { cormorant } from '@/lib/fonts';
+import { cormorant, inter } from '@/lib/fonts';
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +45,7 @@ export default function Hero() {
         <h1
           className={`${cormorant.className} mt-0 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-amber-50 leading-[1.12] max-w-5xl mx-auto tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]`}
         >
-          Кофе-бар под ключ для выставок и деловых мероприятий в Москве!
+          Кофе<span className={`${inter.className} inline-block translate-y-[0.11em] font-semibold leading-none`}>-</span>бар под ключ для выставок и деловых мероприятий в Москве!
         </h1>
 
         {/* Подзаголовок — отступ от h1 сильно больше, чем между подзаголовком и CTA */}
