@@ -50,6 +50,7 @@ export default function Contacts() {
               alt="Наша команда"
               fill
               className="object-cover"
+              loading="lazy"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>

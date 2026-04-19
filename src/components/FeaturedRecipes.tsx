@@ -37,6 +37,7 @@ export default function FeaturedRecipes() {
                   alt={recipe.title}
                   fill
                   className="object-cover"
+                  loading="lazy"
                 />
               </div>
               <div className="p-6">

@@ -239,7 +239,14 @@ export default function MobileBarPage() {
             <div className="absolute -top-16 -right-16 h-64 w-64 rounded-full bg-[#c78149]/16 blur-3xl" />
             <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-black/20" />
             <div className="relative h-full w-full">
-              <Image src="/images/bar/main.webp" alt="Выездной бар" fill className="object-cover" />
+              <Image
+                src="/images/bar/main.webp"
+                alt="Выездной бар"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>
@@ -386,7 +393,7 @@ export default function MobileBarPage() {
               {classics.map(i => <li key={i}>{i}</li>)}
             </ul>
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
-              <Image src="/images/bar/mohito.jpg" alt="Мохито" fill className="object-cover" />
+              <Image src="/images/bar/mohito.jpg" alt="Мохито" fill className="object-cover" loading="lazy" sizes="192px" />
             </div>
           </div>
           <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
@@ -395,7 +402,7 @@ export default function MobileBarPage() {
               {freshBerry.map(i => <li key={i}>{i}</li>)}
             </ul>
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
-              <Image src="/images/bar/Bramble.jpg" alt="Брамбл" fill className="object-cover" />
+              <Image src="/images/bar/Bramble.jpg" alt="Брамбл" fill className="object-cover" loading="lazy" sizes="192px" />
             </div>
           </div>
           <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
@@ -404,7 +411,7 @@ export default function MobileBarPage() {
               {trendy.map(i => <li key={i}>{i}</li>)}
             </ul>
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
-              <Image src="/images/bar/espresso-martini.jpg" alt="Эспрессо Мартини" fill className="object-cover" />
+              <Image src="/images/bar/espresso-martini.jpg" alt="Эспрессо Мартини" fill className="object-cover" loading="lazy" sizes="192px" />
             </div>
           </div>
           <div className="relative p-5 pr-24 sm:pr-28 md:pr-36 lg:pr-48 rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
@@ -413,7 +420,7 @@ export default function MobileBarPage() {
               {zeroProof.map(i => <li key={i}>{i}</li>)}
             </ul>
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-28 md:w-36 lg:w-48">
-              <Image src="/images/bar/ShirleyTemple.jpg" alt="Shirley Temple" fill className="object-cover" />
+              <Image src="/images/bar/ShirleyTemple.jpg" alt="Shirley Temple" fill className="object-cover" loading="lazy" sizes="192px" />
             </div>
           </div>
         </div>

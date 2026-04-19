@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import PortfolioMasonry from '@/components/PortfolioMasonry';
+import PortfolioWithLimit from '@/components/PortfolioWithLimit';
 
 const PORTFOLIO_DIR = '/images/portfolio';
 
@@ -138,7 +138,7 @@ export default function PortfolioSection() {
           <p className="services-subtitle">Фото с наших мероприятий</p>
         </div>
 
-        <PortfolioMasonry items={photoItems} />
+        <PortfolioWithLimit items={photoItems} />
       </div>
     </section>
   );

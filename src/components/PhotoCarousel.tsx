@@ -93,7 +93,9 @@ export default function PhotoCarousel({ images }: PhotoCarouselProps) {
                 alt={currentImage.alt}
                 fill
                 className="object-contain p-3 sm:p-5"
-                priority
+                priority={currentIndex === 0}
+                loading={currentIndex === 0 ? undefined : 'lazy'}
+                fetchPriority={currentIndex === 0 ? 'high' : 'low'}
                 unoptimized
                 sizes="(max-width: 768px) 100vw, 1200px"
               />
@@ -146,6 +148,8 @@ export default function PhotoCarousel({ images }: PhotoCarouselProps) {
                     alt={image.alt}
                     fill
                     className="object-cover"
+                    loading="lazy"
+                    fetchPriority="low"
                     unoptimized
                     sizes="112px"
                   />

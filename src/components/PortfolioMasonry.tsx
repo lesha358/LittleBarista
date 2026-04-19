@@ -92,7 +92,7 @@ function GridView({
               <img
                 src={item.src}
                 alt={item.alt}
-                loading={index < 8 ? 'eager' : 'lazy'}
+                loading="lazy"
                 decoding="async"
                 className={imgClass}
               />
@@ -117,7 +117,7 @@ export default function PortfolioMasonry({ items }: { items: PortfolioItem[] }) 
             <img
               src={item.src}
               alt={item.alt}
-              loading={index < 4 ? 'eager' : 'lazy'}
+              loading="lazy"
               decoding="async"
               className={imgClass}
             />

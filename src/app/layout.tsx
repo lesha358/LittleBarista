@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import ScrollToTop from "@/components/ScrollToTop";
 import YMHits from "@/components/YMHits";
-import { useEffect } from "react";
-import { parseUtmFromLocation, saveUtmOnce } from "@/lib/utm";
 import { inter, cormorant } from "@/lib/fonts";
 import "./globals.css";
 
@@ -77,7 +75,7 @@ export default function RootLayout({
         <meta name="yandex-verification" content="512bc29e8533e8e3" />
         <link rel="icon" href="https://littlebarista.ru/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="https://littlebarista.ru/favicon.ico" type="image/x-icon" />
-        <Script id="yandex-metrika" strategy="afterInteractive">
+        <Script id="yandex-metrika" strategy="lazyOnload">
           {`
             (function(m,e,t,r,i,k,a){
               m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -94,7 +92,7 @@ export default function RootLayout({
             });
           `}
         </Script>
-        <Script id="utm-capture" strategy="afterInteractive">
+        <Script id="utm-capture" strategy="lazyOnload">
           {`
             try {
               var params = new URLSearchParams(window.location.search);
@@ -110,7 +108,7 @@ export default function RootLayout({
             } catch(e) {}
           `}
         </Script>
-        <Script id="ym-events" strategy="afterInteractive">
+        <Script id="ym-events" strategy="lazyOnload">
           {`
             (function () {
               // Отправка любой формы

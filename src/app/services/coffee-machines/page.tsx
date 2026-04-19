@@ -370,7 +370,7 @@ export default function CoffeeMachinesRentPage() {
 									{m.performance}
 								</div>
 								<div className="relative -mx-6 -mt-6 mb-4 aspect-[4/3] overflow-hidden rounded-t-[28px] border-b border-[#7b5230]/25">
-									<Image src={m.image} alt={m.name} fill className="object-cover brightness-[0.85]" unoptimized />
+									<Image src={m.image} alt={m.name} fill className="object-cover brightness-[0.85]" loading="lazy" unoptimized />
 									<div className="absolute inset-0 bg-gradient-to-t from-[#0d0806]/80 to-transparent" />
 								</div>
 								<h3
@@ -437,7 +437,7 @@ export default function CoffeeMachinesRentPage() {
 						{espressoMachines.map((m) => (
 							<article key={m.name} className={cardClass}>
 								<div className="relative -mx-6 -mt-6 mb-4 aspect-[4/3] overflow-hidden rounded-t-[28px] border-b border-[#7b5230]/25">
-									<Image src={m.image} alt={m.name} fill className="object-cover brightness-[0.85]" unoptimized />
+									<Image src={m.image} alt={m.name} fill className="object-cover brightness-[0.85]" loading="lazy" unoptimized />
 									<div className="absolute inset-0 bg-gradient-to-t from-[#0d0806]/80 to-transparent" />
 								</div>
 								<h3

@@ -19,6 +19,7 @@ export default function Footer({ theme = 'light' }: { theme?: 'light' | 'dark' }
                   width={280}
                   height={100}
                   className="h-10 w-auto max-w-[140px] object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]"
+                  loading="lazy"
                   unoptimized
                 />
               </Link>
@@ -51,7 +52,7 @@ export default function Footer({ theme = 'light' }: { theme?: 'light' | 'dark' }
                   </svg>
                 </a>
                 <a href="https://vk.com/littlebarista_coffee" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#c78149]/38 transition-colors hover:border-[#c9a06c]/65 hover:bg-white/10">
-                  <Image src="/images/icon-vk.png" alt="VK" width={18} height={18} className="opacity-80" unoptimized />
+                  <Image src="/images/icon-vk.png" alt="VK" width={18} height={18} className="opacity-80" loading="lazy" unoptimized />
                 </a>
               </div>
             </div>

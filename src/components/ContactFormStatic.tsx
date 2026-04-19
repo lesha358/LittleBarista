@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
 
 interface FormData {
   name: string;
@@ -16,7 +15,6 @@ interface ContactFormStaticProps {
 }
 
 export default function ContactFormStatic({ source = 'Форма: Статическая карточка' }: ContactFormStaticProps) {
-  const searchParams = useSearchParams();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
@@ -25,16 +23,21 @@ export default function ContactFormStatic({ source = 'Форма: Статиче
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // Получаем модель из URL параметров
+  // Читаем модель из query-параметра уже после монтирования,
+  // чтобы сервер сразу отдал полноценную HTML-форму, а не Suspense-заглушку.
   useEffect(() => {
-    const model = searchParams.get('model');
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const model = new URLSearchParams(window.location.search).get('model');
     if (model) {
       setFormData(prev => ({
         ...prev,
         model: decodeURIComponent(model)
       }));
     }
-  }, [searchParams]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

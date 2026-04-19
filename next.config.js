@@ -22,7 +22,7 @@ const nextConfig = {
   },
   trailingSlash: true,
   experimental: {
-    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react', 'framer-motion'],
   },
   output: 'export',
   ...(isProd

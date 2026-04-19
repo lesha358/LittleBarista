@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { reachGoalAll } from '@/lib/analytics';
 
 // Типизация для window.ym берётся из утилиты analytics, здесь декларация не нужна
@@ -13,9 +12,7 @@ type ContactFormProps = {
   presetModel?: string;
 };
 
-// Компонент формы с использованием useSearchParams
-function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: ContactFormProps) {
-  const searchParams = useSearchParams();
+function ContactFormBody({ title, subtitle, ctaText, presetModel }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -26,12 +23,15 @@ function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: 
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const modelFromQuery = searchParams?.get('model') || '';
+    const modelFromQuery =
+      typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search).get('model') || ''
+        : '';
     const initialModel = presetModel || modelFromQuery;
     if (initialModel) {
       setFormData(prev => ({ ...prev, model: initialModel }));
     }
-  }, [searchParams, presetModel]);
+  }, [presetModel]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -166,7 +166,6 @@ function ContactFormWithSearchParams({ title, subtitle, ctaText, presetModel }: 
   );
 }
 
-// Основной компонент с Suspense boundary
 export default function ContactForm({ title = 'Оставить заявку', subtitle = 'Заполните форму, и мы свяжемся с вами в ближайшее время', ctaText = 'Отправить заявку', presetModel = '' }: ContactFormProps) {
   return (
     <section className="section-container section-padding gradient-section">
@@ -175,27 +174,12 @@ export default function ContactForm({ title = 'Оставить заявку', s
           <h2>{title}</h2>
           <p>{subtitle}</p>
         </div>
-
-        <Suspense fallback={
-          <div className="max-w-2xl mx-auto">
-            <div className="space-y-6 bg-cream-50 p-8 rounded-2xl shadow-xl border-2 border-brown-200 relative overflow-hidden">
-              <div className="animate-pulse">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="h-12 bg-gray-200 rounded-lg"></div>
-                  <div className="h-12 bg-gray-200 rounded-lg"></div>
-                </div>
-                <div className="mt-6 h-12 bg-gray-200 rounded-lg"></div>
-              </div>
-            </div>
-          </div>
-        }>
-          <ContactFormWithSearchParams 
-            title={title}
-            subtitle={subtitle}
-            ctaText={ctaText}
-            presetModel={presetModel}
-          />
-        </Suspense>
+        <ContactFormBody
+          title={title}
+          subtitle={subtitle}
+          ctaText={ctaText}
+          presetModel={presetModel}
+        />
       </div>
     </section>
   );

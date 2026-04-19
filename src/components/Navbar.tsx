@@ -18,6 +18,7 @@ export default function Navbar() {
               width={40}
               height={40}
               className="w-10 h-10"
+              loading="lazy"
             />
             <span className="ml-2 text-xl font-bold text-brown-900">Little Barista</span>
           </a>

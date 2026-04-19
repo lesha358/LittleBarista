@@ -6,7 +6,6 @@ import FloatingCTA from '@/components/FloatingCTA';
 import Footer from '@/components/Footer';
 import ContactModalTrigger from '@/components/ContactModalTrigger';
 import Calculator from '@/components/Calculator';
-import { Suspense } from 'react';
 import { generateMetadata } from '@/lib/metadata';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -411,9 +410,7 @@ export default async function MobileCoffeePage() {
             Оставьте заявку, и мы предложим формат кофейной зоны под ваш поток гостей, тайминг и площадку.
           </p>
         </div>
-        <Suspense fallback={<div className="mx-auto max-w-2xl rounded-[28px] border border-[#7b5230]/35 bg-[rgba(29,19,14,.92)] p-8 text-center text-[#c7a679]">Загрузка формы...</div>}>
-          <ContactFormStatic />
-        </Suspense>
+        <ContactFormStatic />
       </section>
 
       <section id="contacts" className="relative mx-auto max-w-7xl px-6 pb-16 md:px-10 lg:pb-24 scroll-mt-28">
@@ -444,6 +441,7 @@ export default async function MobileCoffeePage() {
                 alt="Команда Little Barista"
                 fill
                 className="object-cover brightness-[0.72] saturate-[0.82]"
+                loading="lazy"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 unoptimized
               />

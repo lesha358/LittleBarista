@@ -59,6 +59,7 @@ export default function ServiceTriad() {
                   alt={card.alt}
                   fill
                   className="object-cover"
+                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   unoptimized
                 />

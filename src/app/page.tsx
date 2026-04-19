@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
@@ -27,15 +26,7 @@ export default function Home() {
               Оставьте заявку — предложим формат под ваш поток гостей, тайминг и площадку.
             </p>
           </div>
-          <Suspense
-            fallback={
-              <div className="mx-auto max-w-2xl rounded-[28px] border border-[#7b5230]/35 bg-[rgba(29,19,14,.92)] p-8 text-center text-[#c7a679]">
-                Загрузка формы...
-              </div>
-            }
-          >
-            <ContactFormStatic source="Главная: форма внизу" />
-          </Suspense>
+        <ContactFormStatic source="Главная: форма внизу" />
         </div>
       </section>
       <FloatingCTA />

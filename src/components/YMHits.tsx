@@ -1,23 +1,16 @@
 "use client";
-import { useEffect, Suspense } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-
-function YMHitsInner() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  
-  useEffect(() => {
-    const url = pathname + (searchParams?.toString() ? `?${searchParams}` : "");
-    (window as any).ym?.(104587269, 'hit', url);
-  }, [pathname, searchParams]);
-  
-  return null;
-}
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function YMHits() {
-  return (
-    <Suspense fallback={null}>
-      <YMHitsInner />
-    </Suspense>
-  );
+  const pathname = usePathname();
+  
+  useEffect(() => {
+    const url =
+      pathname + (typeof window !== "undefined" ? window.location.search : "");
+
+    (window as any).ym?.(104587269, 'hit', url);
+  }, [pathname]);
+  
+  return null;
 }
