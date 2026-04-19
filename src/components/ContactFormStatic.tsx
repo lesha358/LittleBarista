@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 interface FormData {
   name: string;
@@ -76,12 +75,7 @@ export default function ContactFormStatic({ source = 'Форма: Статиче
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="mx-auto max-w-2xl rounded-[30px] border border-[#7b5230]/35 bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)),linear-gradient(180deg,rgba(29,19,14,.94),rgba(15,10,8,.98))] p-8 shadow-[0_24px_60px_rgba(0,0,0,.35),0_0_40px_rgba(214,160,91,.06)]"
-    >
+    <div className="mx-auto max-w-2xl rounded-[30px] border border-[#7b5230]/35 bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)),linear-gradient(180deg,rgba(29,19,14,.94),rgba(15,10,8,.98))] p-8 shadow-[0_24px_60px_rgba(0,0,0,.35),0_0_40px_rgba(214,160,91,.06)]">
       <h2
         className="mb-6 text-center text-3xl text-[#f5e8d3]"
         style={{ fontFamily: 'var(--font-cormorant), Cormorant Garamond, serif' }}
@@ -155,6 +149,6 @@ export default function ContactFormStatic({ source = 'Форма: Статиче
           {isSubmitting ? 'Отправляем...' : 'Отправить заявку'}
         </button>
       </form>
-    </motion.div>
+    </div>
   );
 }
