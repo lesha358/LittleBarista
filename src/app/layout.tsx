@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import ScrollToTop from "@/components/ScrollToTop";
 import YMHits from "@/components/YMHits";
+import { YM_COUNTERS } from "@/lib/analytics";
 import { inter, cormorant } from "@/lib/fonts";
 import "./globals.css";
 
@@ -80,11 +81,14 @@ export default function RootLayout({
               k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
             })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-            ym(104587269, 'init', {
-              webvisor: true,
-              clickmap: true,
-              accurateTrackBounce: true,
-              trackLinks: true
+            var ymIds = ${JSON.stringify(YM_COUNTERS)};
+            ymIds.forEach(function (id) {
+              ym(id, 'init', {
+                webvisor: true,
+                clickmap: true,
+                accurateTrackBounce: true,
+                trackLinks: true
+              });
             });
           `}
         </Script>
@@ -107,21 +111,27 @@ export default function RootLayout({
         <Script id="ym-events" strategy="afterInteractive">
           {`
             (function () {
+              var ymIds = ${JSON.stringify(YM_COUNTERS)};
+              function reachAll(goal) {
+                try {
+                  ymIds.forEach(function (id) { ym(id, 'reachGoal', goal); });
+                } catch(e) {}
+              }
               // Отправка любой формы
               document.addEventListener('submit', function () {
-                try { ym(104587269, 'reachGoal', 'form_submit'); } catch(e) {}
+                reachAll('form_submit');
               }, true);
 
               // Клик по номеру телефона (tel:)
               document.addEventListener('click', function (e) {
                 var a = e.target.closest('a[href^="tel:"]');
-                if (a) { try { ym(104587269, 'reachGoal', 'phone_click'); } catch(e) {} }
+                if (a) reachAll('phone_click');
               }, true);
 
               // Клик по мессенджерам (WhatsApp/Telegram)
               document.addEventListener('click', function (e) {
                 var a = e.target.closest('a[href*="wa.me"],a[href*="whatsapp"],a[href*="t.me"],a[href*="telegram"]');
-                if (a) { try { ym(104587269, 'reachGoal', 'messenger_click'); } catch(e) {} }
+                if (a) reachAll('messenger_click');
               }, true);
             })();
           `}

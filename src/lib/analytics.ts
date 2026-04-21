@@ -11,7 +11,13 @@ export function reachGoal(counterId: number, target: string, params?: Record<str
   } catch {}
 }
 
-export const YM_COUNTERS = [101109907, 101983555, 101984487, 101111714]
+export const YM_COUNTERS = [
+  101109907,
+  101983555,
+  101984487,
+  101111714,
+  104587269,
+]
 
 export function reachGoalAll(target: string, params?: Record<string, any>) {
   YM_COUNTERS.forEach((id) => reachGoal(id, target, params))
